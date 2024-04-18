@@ -20,7 +20,7 @@ const Cart = () => {
     const token = localStorage.getItem("token");
     console.log(id);
     const res = await axios.put(
-      "https://atombackend.vercel.app/api/appuser/removefromcart",
+      "http://localhost:8080/api/appuser/removefromcart",
       {
         productId: id,
       },
@@ -42,22 +42,19 @@ const Cart = () => {
     const YOUR_TOKEN = localStorage.getItem("token");
 
     // const response = await axios.post(
-    //     "https://atombackend.vercel.app/api/appuser/emptycart",
+    //     "http://localhost:8080/api/appuser/emptycart",
     //     {
     //         headers: {
     //             Authorization: `Bearer ${YOUR_TOKEN}`,
     //         },
     //     }
     // );
-    const res = await fetch(
-      "https://atombackend.vercel.app/api/appuser/emptycart",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${YOUR_TOKEN}`,
-        },
-      }
-    );
+    const res = await fetch("http://localhost:8080/api/appuser/emptycart", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${YOUR_TOKEN}`,
+      },
+    });
     console.log(res);
     setCartItems([]);
   };
@@ -78,14 +75,14 @@ const Cart = () => {
 
   const incrementQuantity = async (id) => {
     const token = localStorage.getItem("token");
-    // const res = await fetch("https://atombackend.vercel.app/api/appuser/incquantity", {
+    // const res = await fetch("http://localhost:8080/api/appuser/incquantity", {
     //   method: "PUT",
     //   headers: {
     //     Authorization: `Bearer ${YOUR_TOKEN}`,
     //   },
     // });
     const res = await axios.put(
-      "https://atombackend.vercel.app/api/appuser/incquantity",
+      "http://localhost:8080/api/appuser/incquantity",
       {
         productId: id,
       },
@@ -103,14 +100,14 @@ const Cart = () => {
 
   const decrementQuantity = async (id) => {
     const token = localStorage.getItem("token");
-    // const res = await fetch("https://atombackend.vercel.app/api/appuser/decquantity", {
+    // const res = await fetch("http://localhost:8080/api/appuser/decquantity", {
     //   method: "PUT",
     //   headers: {
     //     Authorization: `Bearer ${YOUR_TOKEN}`,
     //   },
     // });
     const res = await axios.put(
-      "https://atombackend.vercel.app/api/appuser/decquantity",
+      "http://localhost:8080/api/appuser/decquantity",
       {
         productId: id,
       },
@@ -131,7 +128,7 @@ const Cart = () => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const myCart = await axios.get(
-            "https://atombackend.vercel.app/api/appuser/getcartitem",
+            "http://localhost:8080/api/appuser/getcartitem",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token
@@ -162,7 +159,7 @@ const Cart = () => {
   //             const YOUR_TOKEN = localStorage.getItem("token");
   //             if (YOUR_TOKEN) {
   //                 const user = await axios.get(
-  //                     "https://atombackend.vercel.app/api/user/fetchuser",
+  //                     "http://localhost:8080/api/user/fetchuser",
   //                     {
   //                         headers: {
   //                             Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token

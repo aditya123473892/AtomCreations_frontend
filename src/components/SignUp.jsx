@@ -44,7 +44,7 @@ const SignupPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://atombackend.vercel.app/api/user/register",
+          "http://localhost:8080/api/user/register",
           {
             name,
             email,
