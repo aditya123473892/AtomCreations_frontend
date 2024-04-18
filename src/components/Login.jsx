@@ -38,7 +38,7 @@ const LoginPage = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://atombackend.vercel.app/api/user/login",
+          "http://localhost:8080/api/user/login",
           {
             email,
             password,

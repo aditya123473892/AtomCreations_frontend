@@ -30,7 +30,7 @@ const ProductDetails = () => {
       try {
         // const data = await getProductById(id);
         const getMyProduct = await axios.get(
-          `https://atombackend.vercel.app/api/products/${id}`
+          `http://localhost:8080/api/products/${id}`
         );
         // console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
