@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'font1';
+    src: url('/src/assets/ArchivoBlack-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'font2';
+    src: url('/src/assets/QanelasSoftDEMO-UltraLight.otf') format('opentype');
+}
+.bg-image{
+   
+    height: 60vh;
+    overflow-y: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+    position: relative;
+}
+.bg-image::after{
+    content: "";
+    background: url("../src/assets/home.jpg");
+    background: linear-gradient(180deg, hsla(0, 0%, 5%, 0.4) 29.9%, #0e0e0e), url("../src/assets/home.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom:0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    overflow-y: hidden;
+    
+}
+
+.swiper-pagination-bullet {
+    background-color: black; 
+    transition: transform 0.3s ease;
+}
+:root {
+    --swiper-theme-color: #000;
+    --swiper-navigation-size:1.2rem;
+    --swiper-navigation-font-weight:'bold';
+}
+.swiper-button-next,.swiper-button-prev{
+    margin: -40px 0;
+    font-weight: bolder;
+}
+
+/* custom-toast.css */
+
+.Toastify__toast--warning {
+    color: black;
+  }
+.Toastify__progress-bar {
+    background-color: black; /* Replace 'your-color-here' with your desired color */
+}
+  .Toastify__toast-body .Toastify__spinner path {
+    fill: white; /* Replace 'your-color-here' with your desired color */
+  }
