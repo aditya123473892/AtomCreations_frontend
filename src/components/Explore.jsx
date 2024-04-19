@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import ProductCard from "./Productcard";
 import axios from "axios";
 import CollectionSlider from "./Home/FeaturedCollection/CollectionSlider";
+import { FaSearch } from "react-icons/fa";
 
 let products = [
   {
@@ -98,7 +99,7 @@ const ExploreSection = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl font-bold text-center mb-8"
+          className="text-4xl font-bold font-heading text-center mb-8"
         >
           Explore Our Products
         </motion.h1>
@@ -115,7 +116,7 @@ const ExploreSection = () => {
               onChange={handleSearchChange}
               onKeyPress={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Search products..."
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-grey-300 font-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {suggestions.length > 0 && (
               <motion.ul
@@ -137,14 +138,16 @@ const ExploreSection = () => {
             )}
           </motion.div>
         </div>
-        <div className="flex justify-center mb-8">
+        <div className="w-full flex justify-center">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSearch}
-            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
+            className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center">
             Search
+            <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center hover:rotate-0 transition duratuion-75">
+              <FaSearch className="text-2xl" />
+            </div>
           </motion.button>
         </div>
         {searchResults.length > 0 ? (
@@ -167,7 +170,7 @@ const ExploreSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="text-center text-gray-600 text-xl"
+              className="text-center font-base py-8 text-gray-600 text-xl"
           >
             No products found.
           </motion.p>
@@ -176,7 +179,7 @@ const ExploreSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="text-center text-gray-600 text-xl"
+                className="text-center font-base text-gray-600 py-8 text-xl"
           >
             Start exploring by searching for a product.
           </motion.p>

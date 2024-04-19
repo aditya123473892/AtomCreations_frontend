@@ -41,9 +41,6 @@ const CollectionSlider = () => {
                 alt={item.title}
               />
               <div className="absolute h-full w-full flex items-start justify-end">
-                <div className="h-14 w-14 bg-white text-black m-2 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duration-75">
-                  <FaArrowRight className="text-2xl" />
-                </div>
               </div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-75 bg-black bg-opacity-20">
               </div>

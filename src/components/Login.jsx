@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaArrowRight } from "react-icons/fa";
 // import { AuthContext } from "./ContextProvider/AuthContext";
 const LoginPage = () => {
   const [inputValue, setInputValue] = useState({
@@ -76,16 +77,16 @@ const LoginPage = () => {
       <ToastContainer />
 
       <Background />
-      <div className="bg-white p-10 rounded-lg shadow-lg max-w-md w-full m-8">
+      <div className="bg-white p-10 font-base shadow-lg max-w-md w-full m-8">
         <div className="flex justify-center mb-8">
           <img src={icon} alt="Company Icon" className="w-33 h-24" />
         </div>
-        <h2 className="text-3xl font-bold mb-6 text-center">Welcome Back</h2>
+        <h2 className="text-3xl font-bold font-heading mb-6 text-center">Welcome Back</h2>
         <form className="w-full">
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 font-medium mb-2"
             >
               Email
             </label>
@@ -95,14 +96,14 @@ const LoginPage = () => {
               value={inputValue.email}
               type="email"
               id="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter Email"
             />
           </div>
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 font-medium mb-2"
             >
               Password
             </label>
@@ -112,7 +113,7 @@ const LoginPage = () => {
               value={inputValue.password}
               type="password"
               id="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Password"
             />
           </div>
@@ -134,18 +135,25 @@ const LoginPage = () => {
               Forgot Password?
             </a>
           </div>
-          <button
-            onClick={userLogin}
-            type="submit"
-            className="w-full bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
-          >
-            Sign in
+          <div className="w-full flex justify-center">
+            <button
+              onClick={userLogin}
+              type="submit" 
+              className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center">
+              Sign In
+              <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
+                <FaArrowRight className="text-2xl" />
+              </div>
           </button>
+          </div>
         </form>
         {/* Sign in with Google button */}
-        <div className="mt-6 text-center">
-          <button className="bg-red-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-600 transition duration-300">
+        <div className="w-full flex justify-center">
+          <button className="pl-8 my-4 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center">
             Sign in with Google
+            <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
+              <FaArrowRight className="text-2xl" />
+            </div>
           </button>
         </div>
         {/* Sign up link */}
