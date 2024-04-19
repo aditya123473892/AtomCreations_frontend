@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, useCycle } from "framer-motion";
 import icon from "../../assets/new_logo.png";
-import { FaUser, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { AuthContext } from "../ContextProvider/AuthContext";
 import { Avatar } from "@mui/material";
 import axios from "axios";
@@ -62,7 +62,7 @@ const Navbar = () => {
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white text-black"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
             >
               <FaUser className="text-xl" />
             </motion.div>
@@ -113,6 +113,15 @@ const Navbar = () => {
             <FaShoppingCart className="text-xl" />
           </motion.div>
         </Link>
+        <Link to="/cart" className="relative button-link">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
+          >
+            <FaSearch className="text-xl" />
+          </motion.div>
+        </Link>
         <div>
           <motion.div
             initial={false}
@@ -130,7 +139,7 @@ const Navbar = () => {
         initial={false}
         animate={isOpen ? "open" : "closed"}
         variants={sideVariants}
-        className={`bg-black text-white fixed w-full top-16 md:top-[5rem] left-0 overflow-y-auto bottom-0 py-6 pl-4 ${
+        className={`bg-black text-white fixed w-96 top-16 right-0 overflow-y-auto bottom-0 py-6 px-8 text-right ${
           isOpen ? "block" : "hidden"
         }`}
       >
