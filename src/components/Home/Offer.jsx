@@ -4,10 +4,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import Offer1 from "../../assets/offers.jpg"
+import Offer1 from "../../assets/offers.png"
 import Offer2 from "../../assets/offers2.jpg"
 import OfferMobile1 from "../../assets/offers-mobile.jpg"
-import OfferMobile2 from "../../assets/offers2-mobile.jpg"
+import OfferMobile2 from "../../assets/offers2-mobile.png"
 
 const OfferCarousel = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
