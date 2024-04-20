@@ -38,13 +38,12 @@ const LoginPage = () => {
       });
     } else {
       try {
-        const res = await axios.post(
-          "http://localhost:8080/api/user/login",
-          {
-            email,
-            password,
-          }
-        );
+
+        const res = await axios.post("http://localhost:8080/api/user/login", {
+          email,
+          password,
+        });
+
         console.log(res.data);
         const storageToken = res.data.token;
         localStorage.setItem("token", storageToken);

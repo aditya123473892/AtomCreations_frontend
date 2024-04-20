@@ -41,16 +41,22 @@ const Cart = () => {
   const clearCart = async () => {
     const YOUR_TOKEN = localStorage.getItem("token");
 
-    
-    const res = await fetch(
-      "http://localhost:8080/api/appuser/emptycart",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${YOUR_TOKEN}`,
-        },
-      }
-    );
+
+    // const response = await axios.post(
+    //     "http://localhost:8080/api/appuser/emptycart",
+    //     {
+    //         headers: {
+    //             Authorization: `Bearer ${YOUR_TOKEN}`,
+    //         },
+    //     }
+    // );
+    const res = await fetch("http://localhost:8080/api/appuser/emptycart", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${YOUR_TOKEN}`,
+      },
+    });
+
     console.log(res);
     setCartItems([]);
   };
@@ -71,7 +77,14 @@ const Cart = () => {
 
   const incrementQuantity = async (id) => {
     const token = localStorage.getItem("token");
-   
+
+    // const res = await fetch("http://localhost:8080/api/appuser/incquantity", {
+    //   method: "PUT",
+    //   headers: {
+    //     Authorization: `Bearer ${YOUR_TOKEN}`,
+    //   },
+    // });
+
     const res = await axios.put(
       "http://localhost:8080/api/appuser/incquantity",
       {
@@ -91,7 +104,14 @@ const Cart = () => {
 
   const decrementQuantity = async (id) => {
     const token = localStorage.getItem("token");
-    
+
+    // const res = await fetch("http://localhost:8080/api/appuser/decquantity", {
+    //   method: "PUT",
+    //   headers: {
+    //     Authorization: `Bearer ${YOUR_TOKEN}`,
+    //   },
+    // });
+
     const res = await axios.put(
       "http://localhost:8080/api/appuser/decquantity",
       {
@@ -145,7 +165,7 @@ const Cart = () => {
   //             const YOUR_TOKEN = localStorage.getItem("token");
   //             if (YOUR_TOKEN) {
   //                 const user = await axios.get(
-  //                     "https://atombackend.vercel.app/api/user/fetchuser",
+  //                     "http://localhost:8080/api/user/fetchuser",
   //                     {
   //                         headers: {
   //                             Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token
