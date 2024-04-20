@@ -49,13 +49,13 @@ const CollectionSlider = () => {
                 alt={item.title}
               />
               <div className="absolute h-full w-full flex items-start justify-end">
-                <div className="h-14 w-14 bg-white text-black m-2 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duration-75">
+                <div className="h-14 w-14 bg-white text-black m-4 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duration-75">
                   <FaArrowRight className="text-2xl" />
                 </div>
               </div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-75 bg-black bg-opacity-20">
                 <button
-                  className="px-6 py-2 text-white text-lg font-semibold bg-transparent border border-white rounded-full hover:bg-white hover:text-black transition duration-75"
+                  className="px-6 py-2 text-white text-lg font-semibold font-base bg-transparent border border-white rounded-full hover:bg-white hover:text-black transition duration-75"
                   onClick={() => handleBuyNowClick(item)}
                 >
                   Buy Now
