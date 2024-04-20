@@ -12,7 +12,9 @@ import { CartContext } from "./CartContext";
 import LoadingSpinner from "./LoadingSpinner";
 import { motion } from "framer-motion";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "./ContextProvider/AuthContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,7 +25,8 @@ const ProductDetails = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
-
+  const [isAdded, setIsAdded] = useState(false);
+  const { logindata } = useContext(AuthContext);
   useEffect(() => {
     const fetchProduct = async () => {
       setIsLoading(true);
@@ -79,18 +82,69 @@ const ProductDetails = () => {
     );
   };
 
-  const handleAddToCart = () => {
-    const cartItem = {
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      image: product.images,
-      size: selectedSize,
-      color: selectedColor,
-      quantity: 1,
-    };
-    addToCart(cartItem);
+  // const handleAddToCart = () => {
+  //   const cartItem = {
+  //     id: product.id,
+  //     title: product.title,
+  //     price: product.price,
+  //     image: product.images,
+  //     size: selectedSize,
+  //     color: selectedColor,
+  //     quantity: 1,
+  //   };
+  //   addToCart(cartItem);
+  // };
+  const handleAddToCart = async (event) => {
+    console.log(logindata);
+    event.stopPropagation();
+    if (!logindata) {
+      toast.warning("Please login to add items to the cart", {
+        position: "top-center",
+      });
+    } else {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/appuser/addtocart",
+          {
+            productId: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const message = res.data.message;
+        console.log(message);
+        if (message === "Product already exists in the cart") {
+          toast.warning("Product already exists", {
+            position: "top-center",
+          });
+          // alert(message);
+        } else {
+          setIsAdded(true);
+          setTimeout(() => {
+            setIsAdded(false);
+          }, 1500);
+        }
+        // setLoginData(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // const cartItem = {
+    //   id: product._id,
+    //   title: product.title,
+    //   price: product.price,
+    //   image: product.images[0],
+    //   quantity: 1,
+    // };
+    // addToCart(cartItem);
   };
+
 
   const handleBuyNow = () => {
     const cartItem = {
@@ -116,6 +170,7 @@ const ProductDetails = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row">
+        <ToastContainer />
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}

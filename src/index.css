@@ -62,8 +62,8 @@
     color: black;
   }
 .Toastify__progress-bar {
-    background-color: black; /* Replace 'your-color-here' with your desired color */
+    background-color: black; 
 }
   .Toastify__toast-body .Toastify__spinner path {
-    fill: white; /* Replace 'your-color-here' with your desired color */
+    fill: white; 
   }
