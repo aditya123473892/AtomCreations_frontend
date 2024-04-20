@@ -44,7 +44,7 @@ const SignupPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/user/register",
+          "http://localhost:8080/api/user/send-otp",
           {
             name,
             email,
@@ -52,11 +52,12 @@ const SignupPage = () => {
             mobile,
           }
         );
-        const storageToken = response.data.token;
-        localStorage.setItem("token", storageToken);
-        console.log(response);
-        navigate("/");
-        window.location.reload();
+        console.log(response)
+        // const storageToken = response.data.token;
+        // localStorage.setItem("token", storageToken);
+        // console.log(response);
+        // navigate("/");
+        // window.location.reload();
         // window.location.reload();
         // setTimeout(()=>{
         //     navigate("/")

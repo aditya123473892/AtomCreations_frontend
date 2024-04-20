@@ -23,37 +23,44 @@ const ProductCard = ({ product, id }) => {
   const handleAddToCart = async (event) => {
     console.log(logindata);
     event.stopPropagation();
-    const token = localStorage.getItem("token");
-    console.log(token);
-    try {
-      const res = await axios.post(
-        "http://localhost:8080/api/appuser/addtocart",
-        {
-          productId: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    if (!logindata) {
+      toast.warning("Please login to add items to the cart", {
+        position: "top-center",
+      });
+    } else {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/appuser/addtocart",
+          {
+            productId: id,
           },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const message = res.data.message;
+        console.log(message);
+        if (message === "Product already exists in the cart") {
+          toast.warning("Product already exists", {
+            position: "top-center",
+          });
+          // alert(message);
+        } else {
+          setIsAdded(true);
+          setTimeout(() => {
+            setIsAdded(false);
+          }, 1500);
         }
-      );
-      const message = res.data.message;
-      console.log(message);
-      if (message === "Product already exists in the cart") {
-        toast.warning("Product already exists", {
-          position: "top-center",
-        });
-        // alert(message);
-      } else {
-        setIsAdded(true);
-        setTimeout(() => {
-          setIsAdded(false);
-        }, 1500);
+        // setLoginData(res.data)
+      } catch (error) {
+        console.log(error);
       }
-      // setLoginData(res.data)
-    } catch (error) {
-      console.log(error);
     }
+
     // const cartItem = {
     //   id: product._id,
     //   title: product.title,
