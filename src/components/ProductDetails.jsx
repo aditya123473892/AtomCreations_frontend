@@ -28,6 +28,7 @@ const ProductDetails = () => {
   const [isAdded, setIsAdded] = useState(false);
   const { logindata } = useContext(AuthContext);
   useEffect(() => {
+    console.log(id)
     const fetchProduct = async () => {
       setIsLoading(true);
       try {
@@ -35,7 +36,7 @@ const ProductDetails = () => {
         const getMyProduct = await axios.get(
           `http://localhost:8080/api/products/${id}`
         );
-        // console.log(getMyProduct.data);
+        console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
         console.log("Product: ", product);
         // console.log(getMyProduct.data);
@@ -55,8 +56,18 @@ const ProductDetails = () => {
     return <LoadingSpinner />;
   }
 
-  const { title, producer, type, price, images, size, color, rating, reviews } =
-    product;
+  const {
+    title,
+    producer,
+    type,
+    price,
+    images,
+    size,
+    color,
+    rating,
+    reviews,
+    description,
+  } = product;
   console.log(images[0]);
   const handleSizeClick = (size) => {
     setSelectedSize(size);
@@ -145,7 +156,6 @@ const ProductDetails = () => {
     // addToCart(cartItem);
   };
 
-
   const handleBuyNow = () => {
     const cartItem = {
       id: product.id,
@@ -159,6 +169,13 @@ const ProductDetails = () => {
     addToCart(cartItem);
     navigate("/cart");
   };
+  const formatKey = (key) => {
+    // Split the key by uppercase letters and join with space
+    return key
+      .split(/(?=[A-Z])/)
+      .join(" ")
+      .replace(/^\w/, (c) => c.toUpperCase());
+  };
 
   return (
     <motion.div
@@ -170,7 +187,7 @@ const ProductDetails = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row">
-        <ToastContainer />
+          <ToastContainer />
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -178,7 +195,7 @@ const ProductDetails = () => {
             className="md:w-1/2 mb-8 md:mb-0"
           >
             <div className="relative">
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
@@ -187,7 +204,7 @@ const ProductDetails = () => {
                 onClick={handleFavoriteClick}
               >
                 <FaHeart size={24} />
-              </motion.button>
+              </motion.button> */}
               <img
                 src={images[currentImageIndex]}
                 alt={title}
@@ -248,7 +265,7 @@ const ProductDetails = () => {
             >
               {producer} - {type}
             </motion.p>
-            <motion.div
+            {/* <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
@@ -263,7 +280,7 @@ const ProductDetails = () => {
                 />
               ))}
               <span className="ml-2 text-gray-600">{reviews} reviews</span>
-            </motion.div>
+            </motion.div> */}
             <motion.p
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -352,10 +369,20 @@ const ProductDetails = () => {
             >
               <h3 className="text-lg font-semibold mb-2">Product Details</h3>
               <ul className="list-disc pl-4">
-                <li>Material: 100% Cotton</li>
+                {/* <li>Material: 100% Cotton</li>
                 <li>Fit Type: Regular Fit</li>
                 <li>Care Instructions: Machine wash cold, tumble dry low</li>
-                <li>Imported</li>
+                <li>Imported</li> */}
+
+                {/* {Object.entries(description).map(([key, value]) => (
+                  <li key={key}>{`${key}: ${value}`}</li>
+                ))} */}
+              </ul>
+
+              <ul className="list-none pl-4">
+                {Object.entries(description).map(([key, value]) => (
+                  <li key={key}>{`${formatKey(key)} : ${value}`}</li>
+                ))}
               </ul>
             </motion.div>
           </motion.div>

@@ -11,24 +11,23 @@ import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const CollectionSlider = () => {
-  const [products,setProducts] = useState([])
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   const handleBuyNowClick = (item) => {
-    navigate(`/checkout/${item._id}`);
+    navigate(`/product/${item._id}`);
   };
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get("http://localhost:8080/api/products/");
         console.log(res.data);
-        setProducts(()=>res.data)
-
+        setProducts(() => res.data);
       } catch (error) {
         console.log(error);
       }
     };
-   fetchProducts()
+    fetchProducts();
   }, []);
 
   return (
