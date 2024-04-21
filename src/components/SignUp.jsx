@@ -12,7 +12,7 @@ const SignupPage = () => {
     name: "",
     email: "",
     password: "",
-    mobile: "",
+    // mobile: "",
   });
   const navigate = useNavigate();
   const setValue = (e) => {
@@ -28,18 +28,14 @@ const SignupPage = () => {
   const addUser = async (e) => {
     e.preventDefault();
 
-    const { name, email, password, mobile } = inputValue;
-    if (name === "" || email === "" || password === "" || mobile === "") {
+    const { name, email, password } = inputValue;
+    if (name === "" || email === "" || password === "") {
       toast.warning("All fields are required!", {
         position: "top-center",
         autoClose: 2000,
       });
     } else if (!email.includes("@")) {
       toast.warning("email must include @", {
-        position: "top-center",
-      });
-    } else if (mobile.length != 10) {
-      toast.warning("Mobile must be of 10 digits", {
         position: "top-center",
       });
     } else {
@@ -50,10 +46,13 @@ const SignupPage = () => {
             name,
             email,
             password,
-            mobile,
+            // mobile,
           }
         );
-        console.log(response)
+        console.log(response);
+        navigate(`/verify-otp?email=${email}`);
+
+        // navigate("/verify-otp");
         // const storageToken = response.data.token;
         // localStorage.setItem("token", storageToken);
         // console.log(response);
@@ -72,7 +71,7 @@ const SignupPage = () => {
         name: "",
         email: "",
         password: "",
-        mobile: "",
+        // mobile: "",
       });
     }
   };
@@ -92,7 +91,7 @@ const SignupPage = () => {
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block font-bold text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 mb-2"
             >
               Full Name
             </label>
@@ -109,7 +108,7 @@ const SignupPage = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block font-bold text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 mb-2"
             >
               Email
             </label>
@@ -126,7 +125,7 @@ const SignupPage = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block font-bold text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 mb-2"
             >
               Password
             </label>
@@ -140,10 +139,10 @@ const SignupPage = () => {
               placeholder="Enter a password"
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label
               htmlFor="mobile"
-              className="block font-bold text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 mb-2"
             >
               Mobile No.
             </label>
@@ -156,7 +155,7 @@ const SignupPage = () => {
               className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter contact number"
             />
-          </div>
+          </div> */}
           {/* <div className="mb-6">
             <label htmlFor="confirmPassword" className="block text-gray-700 font-medium mb-2">
               Confirm Password
@@ -172,8 +171,9 @@ const SignupPage = () => {
             <button
               onClick={addUser}
               type="submit"
-              className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center">
-              Sign In
+              className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center"
+            >
+              Sign Up
               <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
                 <FaArrowRight className="text-2xl" />
               </div>

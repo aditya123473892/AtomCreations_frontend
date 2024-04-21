@@ -85,7 +85,7 @@ const LoginPage = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block font-bold text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 mb-2"
             >
               Email
             </label>
@@ -102,7 +102,7 @@ const LoginPage = () => {
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block font-bold text-gray-700 font-medium mb-2"
+              className="block font-bold text-gray-700 mb-2"
             >
               Password
             </label>
@@ -147,14 +147,14 @@ const LoginPage = () => {
           </div>
         </form>
         {/* Sign in with Google button */}
-        <div className="w-full flex justify-center">
+        {/* <div className="w-full flex justify-center">
           <button className="pl-8 my-4 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center">
             Sign in with Google
             <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
               <FaArrowRight className="text-2xl" />
             </div>
           </button>
-        </div>
+        </div> */}
         {/* Sign up link */}
         <p className="mt-8 text-center text-gray-700 font-medium">
           Don't have an account?{" "}

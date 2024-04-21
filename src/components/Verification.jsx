@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import icon from "../assets/i.png";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const Verification = ({ email }) => {
+// import { useLocation } from "react-router-dom";
+const Verification = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const email = searchParams.get("email");
+  console.log(email)
   const [otp, setOTP] = useState("");
   const navigate = useNavigate();
 
@@ -19,10 +23,13 @@ const Verification = ({ email }) => {
       });
     } else {
       try {
-        const res = await axios.post("http://localhost:8080/api/user/verify-otp", {
-          email,
-          otp,
-        });
+        const res = await axios.post(
+          "http://localhost:8080/api/user/verify-otp",
+          {
+            email,
+            otp,
+          }
+        );
 
         console.log(res.data);
         const storageToken = res.data.token;
@@ -36,7 +43,6 @@ const Verification = ({ email }) => {
           position: "top-center",
           autoClose: 3000,
         });
-
       } catch (error) {
         console.log(error);
         toast.error("Invalid OTP", {
@@ -57,7 +63,9 @@ const Verification = ({ email }) => {
         <div className="flex justify-center mb-8">
           <img src={icon} alt="Company Icon" className="w-33 h-24" />
         </div>
-        <h2 className="text-3xl font-bold mb-6 text-center">OTP Verification</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          OTP Verification
+        </h2>
         <form className="w-full" onSubmit={handleVerification}>
           <div className="mb-6">
             <label

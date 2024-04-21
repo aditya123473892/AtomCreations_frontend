@@ -23,6 +23,7 @@ import UserProfile from "./components/UserProfile";
 import CheckoutPage from "./components/CheckoutPage";
 import RefundAndCancellation from "./components/RefundandCancellation"
 import ShippingPolicy from "./components/ShippingPolicy"
+import Verification from "./components/Verification";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/explore" element={<Explore />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/verify-otp" element={<Verification/>}/>
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/" element={<ExploreSection />} />
           <Route path="/product/:id" element={<ProductDetails />} />
