@@ -13,6 +13,7 @@ const CheckoutPage = () => {
     name: "",
     email: "",
     address: "",
+    phoneNo: "",
     city: "",
     state: "",
     pinCode: "",
@@ -24,27 +25,53 @@ const CheckoutPage = () => {
   const [orderPlaced, setOrderPlaced] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData(() => {
+      return {
+        ...formData,
+        [name]: value,
+      };
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+    const { name, email, address, city, state, pinCode, phoneNo } = formData;
+    console.log(formData);
+
     // Process the form submission (e.g., send data to server)
-    console.log("Form submitted:", formData);
-    // Reset the form after submission
-    setFormData({
-      name: "",
-      email: "",
-      address: "",
-      city: "",
-      state: "",
-      pinCode: "",
-      country: "",
-      couponCode: "",
-      paymentMethod: "cashOnDelivery",
-    });
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/appuser/placeorder",
+        {
+          address,
+          city,
+          state,
+          pinCode,
+          phoneNo,
+          orderItems: [
+            {
+              product: item._id,
+              quantity: 1,
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setOrderPlaced(true);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+
     setDiscountPercentage(0);
-    setOrderPlaced(true);
+    // setOrderPlaced(true);
   };
 
   const handleApplyCoupon = () => {
@@ -184,7 +211,7 @@ const CheckoutPage = () => {
                     <h2 className="text-2xl font-bold mb-4">
                       Billing Information
                     </h2>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                       <div className="mb-4">
                         <label htmlFor="name" className="block mb-2 font-bold">
                           Full Name:
@@ -286,16 +313,16 @@ const CheckoutPage = () => {
                         </div>
                         <div>
                           <label
-                            htmlFor="country"
+                            htmlFor="phoneNo"
                             className="block mb-2 font-bold"
                           >
-                            Country:
+                            phoneNo:
                           </label>
                           <input
                             type="text"
-                            id="country"
-                            name="country"
-                            value={formData.country}
+                            id="phoneNo"
+                            name="phoneNo"
+                            value={formData.phoneNo}
                             onChange={handleChange}
                             required
                             className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -370,6 +397,7 @@ const CheckoutPage = () => {
                       </div>
                       <button
                         type="submit"
+                        onClick={handleSubmit}
                         className="px-6 py-2 text-white text-lg font-semibold bg-blue-500 rounded-full hover:bg-blue-600 transition duration-75"
                       >
                         Place Order
