@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import icon from "../assets/i.png";
 import Background from "../background";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
+import { AuthContext } from "./ContextProvider/AuthContext";
 
 const ChangePassword = () => {
+  const { logindata,setLoginData } = useContext(AuthContext);
+
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +44,7 @@ const ChangePassword = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-          "http://localhost:8080/api/user/change-password",
+          "http://localhost:8080/api/user/password",
           { currentPassword, newPassword },
           {
             headers: {
@@ -47,8 +52,9 @@ const ChangePassword = () => {
             },
           }
         );
-
-        console.log(response.data);
+        console.log(response.data)
+        localStorage.removeItem(token)
+        setLoginData("")
         toast.success("Password changed successfully!", {
           position: "top-center",
           autoClose: 2000,
@@ -59,6 +65,8 @@ const ChangePassword = () => {
           newPassword: "",
           confirmPassword: "",
         });
+        localStorage.removeItem("token")
+        navigate("/login")
       } catch (error) {
         console.log(error);
         toast.error("Failed to change password. Please try again.", {
