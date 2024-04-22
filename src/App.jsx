@@ -21,9 +21,14 @@ import CodeofConduct from "./components/CodeofConduct";
 import { AuthProvider } from "./components/ContextProvider/AuthContext";
 import UserProfile from "./components/UserProfile";
 import CheckoutPage from "./components/CheckoutPage";
-import RefundAndCancellation from "./components/RefundandCancellation"
-import ShippingPolicy from "./components/ShippingPolicy"
+import RefundAndCancellation from "./components/RefundandCancellation";
+import ShippingPolicy from "./components/ShippingPolicy";
 import Verification from "./components/Verification";
+import MyAccount from "./components/Account";
+import ChangePassword from "./components/ChangePassword";
+import Wishlist from "./components/Wishlist";
+import Orders from "./components/Orders";
+import AddressManagement from "./components/Address";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -45,8 +50,8 @@ const App = () => {
           <Route path="/explore" element={<Explore />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/verify-otp" element={<Verification/>}/>
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/verify-otp" element={<Verification />} />
+          {/* <Route path="/profile" element={<UserProfile />} /> */}
           <Route path="/" element={<ExploreSection />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
@@ -57,8 +62,16 @@ const App = () => {
           <Route path="/T&C" element={<TermsCondition />} />
           <Route path="/codeofconduct" element={<CodeofConduct />} />
           <Route path="/checkout/:itemId" element={<CheckoutPage />} />
-          <Route path="/refundandcancellation" element={<RefundAndCancellation />} />
+          <Route
+            path="/refundandcancellation"
+            element={<RefundAndCancellation />}
+          />
           <Route path="/shippingpolicy" element={<ShippingPolicy />} />
+          <Route path="/profile" element={<MyAccount />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="addresses" element={<AddressManagement />} />
         </Routes>
         <Footer />
       </CartProvider>

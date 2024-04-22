@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const MyAccount = () => {
+const ChangePassword = () => {
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -143,4 +143,4 @@ const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default ChangePassword;

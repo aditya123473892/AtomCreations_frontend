@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaMapMarkerAlt, FaHeart, FaSignOutAlt } from "react-icons/fa";
+import { AuthContext } from "./ContextProvider/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const MyAccount = () => {
-  const [user, setUser] = useState({
-    name: "John Doe",
-    email: "johndoe@example.com",
-  });
+  // const [user, setUser] = useState({
+  //   name: "John Doe",
+  //   email: "johndoe@example.com",
+  // });
+  const navigate = useNavigate();
+
+  const { logindata,setLoginData } = useContext(AuthContext);
+
 
   const handleLogout = () => {
     // Perform logout logic here
+    localStorage.removeItem("token")
+    setLoginData("")
+    navigate("/")
     console.log("Logout clicked");
   };
 
@@ -23,8 +32,8 @@ const MyAccount = () => {
               <div className="flex items-center mb-4">
                 <FaUser className="text-4xl text-blue-500 mr-4" />
                 <div>
-                  <h3 className="text-xl font-bold">{user.name}</h3>
-                  <p className="text-gray-400">{user.email}</p>
+                  <h3 className="text-xl font-bold">{logindata.name}</h3>
+                  <p className="text-gray-400">{logindata.email}</p>
                 </div>
               </div>
               <button

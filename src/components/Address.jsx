@@ -1,36 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt, FaTrash } from "react-icons/fa";
-
+import axios from "axios";
 const AddressManagement = () => {
-  const [addresses, setAddresses] = useState([
-    {
-      id: 1,
-      name: "sohail khan",
-      address: "123 Main St",
-      city: "New York",
-      state: "NY",
-      zipCode: "10001",
-      country: "USA",
-      isDefault: true,
-    },
-    {
-      id: 2,
-      name: "kritika",
-      address: "456 Elm St",
-      city: "Los Angeles",
-      state: "CA",
-      zipCode: "90001",
-      country: "USA",
-      isDefault: false,
-    },
-  ]);
+  const [addresses, setAddresses] = useState([]);
 
   const [newAddress, setNewAddress] = useState({
     name: "",
     address: "",
     city: "",
     state: "",
-    zipCode: "",
+    pinCode: "",
     country: "",
   });
 
@@ -42,30 +21,72 @@ const AddressManagement = () => {
     }));
   };
 
-  const handleAddAddress = () => {
-    const { name, address, city, state, zipCode, country } = newAddress;
-    if (name && address && city && state && zipCode && country) {
+  const handleAddAddress = async () => {
+    const { name, address, city, state, pinCode, country } = newAddress;
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/appuser/addAdress",
+        {
+          address,
+          city,
+          state,
+          pinCode,
+          country,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+      setAddresses(res.data.addresses);
+    } catch (error) {
+      console.log(error);
+    }
+    if (name && address && city && state && pinCode && country) {
       const newAddressObj = {
         id: addresses.length + 1,
         ...newAddress,
         isDefault: false,
       };
-      setAddresses((prevAddresses) => [...prevAddresses, newAddressObj]);
-      setNewAddress({
-        name: "",
-        address: "",
-        city: "",
-        state: "",
-        zipCode: "",
-        country: "",
-      });
+
+      console.log(address);
+      // setNewAddress({
+      //   name: "",
+      //   address: "",
+      //   city: "",
+      //   state: "",
+      //   pinCode: "",
+      //   country: "",
+      // });
     }
   };
 
-  const handleDeleteAddress = (id) => {
-    setAddresses((prevAddresses) =>
-      prevAddresses.filter((address) => address.id !== id)
-    );
+  const handleDeleteAddress = async (id) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await axios.put(
+        "http://localhost:8080/api/appuser/deleteAddress",
+        {
+          addressId: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data.user.addresses);
+      setAddresses(res.data.user.addresses);
+    } catch (error) {
+      console.log(error);
+    }
+    // setAddresses((prevAddresses) =>
+    //   prevAddresses.filter((address) => address.id !== id)
+    // );
   };
 
   const handleSetDefault = (id) => {
@@ -77,6 +98,22 @@ const AddressManagement = () => {
     );
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    const getAddress = async () => {
+      const res = await axios.get(
+        "http://localhost:8080/api/appuser/getaddress",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setAddresses(res.data);
+    };
+    getAddress();
+  }, []);
   return (
     <div className="min-h-screen bg-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,41 +122,44 @@ const AddressManagement = () => {
 
           {/* Address List */}
           <div className="mb-8">
-            {addresses.map((address) => (
-              <div
-                key={address.id}
-                className="flex items-center justify-between bg-gray-700 rounded-lg p-4 mb-4"
-              >
-                <div className="flex items-center">
-                  <FaMapMarkerAlt className="text-2xl text-blue-500 mr-4" />
-                  <div>
-                    <h3 className="text-xl font-bold">{address.name}</h3>
-                    <p className="text-gray-400">{address.address}</p>
-                    <p className="text-gray-400">
-                      {address.city}, {address.state} {address.zipCode}
-                    </p>
-                    <p className="text-gray-400">{address.country}</p>
-                    {address.isDefault && (
-                      <span className="text-green-500 font-bold">Default</span>
-                    )}
+            {addresses &&
+              addresses.map((address) => (
+                <div
+                  key={address._id}
+                  className="flex items-center justify-between bg-gray-700 rounded-lg p-4 mb-4"
+                >
+                  <div className="flex items-center">
+                    <FaMapMarkerAlt className="text-2xl text-blue-500 mr-4" />
+                    <div>
+                      <h3 className="text-xl font-bold">{address.name}</h3>
+                      <p className="text-gray-400">{address.address}</p>
+                      <p className="text-gray-400">
+                        {address.city}, {address.state} {address.pinCode}
+                      </p>
+                      <p className="text-gray-400">{address.country}</p>
+                      {address.isDefault && (
+                        <span className="text-green-500 font-bold">
+                          Default
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <button
+                      onClick={() => handleSetDefault(address._id)}
+                      className="text-blue-400 hover:text-blue-600 mr-4"
+                    >
+                      Set as Default
+                    </button>
+                    <button
+                      onClick={() => handleDeleteAddress(address._id)}
+                      className="text-red-400 hover:text-red-600"
+                    >
+                      <FaTrash />
+                    </button>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <button
-                    onClick={() => handleSetDefault(address.id)}
-                    className="text-blue-400 hover:text-blue-600 mr-4"
-                  >
-                    Set as Default
-                  </button>
-                  <button
-                    onClick={() => handleDeleteAddress(address.id)}
-                    className="text-red-400 hover:text-red-600"
-                  >
-                    <FaTrash />
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           {/* Add New Address Form */}
@@ -183,14 +223,14 @@ const AddressManagement = () => {
                 />
               </div>
               <div>
-                <label htmlFor="zipCode" className="block mb-2 font-bold">
-                  Zip Code
+                <label htmlFor="pinCode" className="block mb-2 font-bold">
+                  Pin Code
                 </label>
                 <input
                   type="text"
-                  id="zipCode"
-                  name="zipCode"
-                  value={newAddress.zipCode}
+                  id="pinCode"
+                  name="pinCode"
+                  value={newAddress.pinCode}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter zip code"

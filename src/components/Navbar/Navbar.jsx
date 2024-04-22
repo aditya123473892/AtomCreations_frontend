@@ -33,7 +33,7 @@ const Navbar = () => {
     setLoginData("");
     console.log(logindata);
     navigate("/")
-    window.location.reload();
+    // window.location.reload();
     
   };
   useEffect(() => {
