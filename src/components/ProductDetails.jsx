@@ -28,7 +28,7 @@ const ProductDetails = () => {
   const [isAdded, setIsAdded] = useState(false);
   const { logindata } = useContext(AuthContext);
   useEffect(() => {
-    console.log(id)
+    console.log(id);
     const fetchProduct = async () => {
       setIsLoading(true);
       try {
@@ -77,8 +77,31 @@ const ProductDetails = () => {
     setSelectedColor(color);
   };
 
-  const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
+  const handleFavoriteClick = async () => {
+    const token = localStorage.getItem("token");
+    if (!logindata) {
+      toast.warning("Please login to add items to the wishlist", {
+        position: "top-center",
+      });
+    } else {
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/appuser/addToWishList",
+          {
+            productId: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+      setIsFavorite(!isFavorite);
+    }
   };
 
   const handlePrevImage = () => {
@@ -195,7 +218,7 @@ const ProductDetails = () => {
             className="md:w-1/2 mb-8 md:mb-0"
           >
             <div className="relative">
-              {/* <motion.button
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
@@ -204,7 +227,7 @@ const ProductDetails = () => {
                 onClick={handleFavoriteClick}
               >
                 <FaHeart size={24} />
-              </motion.button> */}
+              </motion.button>
               <img
                 src={images[currentImageIndex]}
                 alt={title}
