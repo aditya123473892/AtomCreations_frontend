@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const navigate = useNavigate();
-
+  
   // const { cartItems, removeFromCart, clearCart, updateQuantity } =
   //     useContext(CartContext);
   const [cartItems, setCartItems] = useState([]);
@@ -83,7 +83,7 @@ const Cart = () => {
   };
   const handleCheckout = () => {
     if (cartItems.length > 0) {
-      navigate("/checkout");
+      navigate(`/checkout?cart=${true}`);
     } else {
       toast.warning("Your cart is empty. Please add items to proceed to checkout.");
     }

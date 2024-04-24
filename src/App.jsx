@@ -54,7 +54,7 @@ const App = () => {
           <Route path="/verify-otp" element={<Verification />} />
           {/* <Route path="/profile" element={<UserProfile />} /> */}
           <Route path="/" element={<ExploreSection />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/product" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/joinus" element={<JoinUs />} />
@@ -62,7 +62,7 @@ const App = () => {
           <Route path="/help&support" element={<HelpSupport />} />
           <Route path="/T&C" element={<TermsCondition />} />
           <Route path="/codeofconduct" element={<CodeofConduct />} />
-          <Route path="/checkout/:itemId" element={<CheckoutPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route
             path="/refundandcancellation"
             element={<RefundAndCancellation />}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getProductById } from "./api";
 import {
   FaStar,
@@ -16,7 +16,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./ContextProvider/AuthContext";
 const ProductDetails = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get("id");
+  console.log(id)
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
@@ -197,7 +201,8 @@ const ProductDetails = () => {
         position: "top-center",
       });
     } else {
-      navigate(`/checkout/${id}`);
+      // navigate(`/checkout/${id}`);
+      navigate(`/checkout/?id=${id}?size=${selectedSize}`);
     }
   };
   const formatKey = (key) => {

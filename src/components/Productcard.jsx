@@ -17,7 +17,8 @@ const ProductCard = ({ product, id }) => {
   const { logindata } = useContext(AuthContext);
 
   const handleClick = () => {
-    navigate(`/product/${product._id}`);
+    navigate(`/product/?id=${product._id}`);
+    // /verify-otp?email=${email}
   };
 
   const handleAddToCart = async (event) => {
@@ -91,7 +92,7 @@ const ProductCard = ({ product, id }) => {
           <p className="text-gray-900 font-bold mb-4">
             Price: ₹{product.price.toLocaleString("en-IN")}
           </p>
-          <button
+          {/* <button
             className={`w-full px-4 py-2 text-white font-semibold rounded-lg focus:outline-none ${
               isAdded ? "bg-black" : "bg-black hover:bg-gray-800"
             }`}
@@ -105,7 +106,7 @@ const ProductCard = ({ product, id }) => {
             ) : (
               "Add to Cart"
             )}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
