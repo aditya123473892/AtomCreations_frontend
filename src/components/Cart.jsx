@@ -16,13 +16,16 @@ const Cart = () => {
       0
     );
   };
-  const removeFromCart = async (id) => {
+  const removeFromCart = async (id,size) => {
+    console.log(size)
+    console.log(id)
     const token = localStorage.getItem("token");
     console.log(id);
     const res = await axios.put(
       "http://localhost:8080/api/appuser/removefromcart",
       {
         productId: id,
+        size:size,
       },
       {
         headers: {
@@ -31,7 +34,7 @@ const Cart = () => {
       }
     );
     if (res.status === 200) {
-      setCartItems(cartItems.filter((item) => item.productId._id !== id));
+      setCartItems(cartItems.filter((item) => item.productId !== id));
       toast.success("Item removed from cart.");
       console.log(cartItems);
     }
@@ -75,7 +78,7 @@ const Cart = () => {
     }
   };
 
-  const incrementQuantity = async (id) => {
+  const incrementQuantity = async (id,size) => {
     const token = localStorage.getItem("token");
 
     // const res = await fetch("http://localhost:8080/api/appuser/incquantity", {
@@ -89,6 +92,7 @@ const Cart = () => {
       "http://localhost:8080/api/appuser/incquantity",
       {
         productId: id,
+        size:size,
       },
       {
         headers: {
@@ -102,7 +106,7 @@ const Cart = () => {
     window.location.reload();
   };
 
-  const decrementQuantity = async (id) => {
+  const decrementQuantity = async (id,size) => {
     const token = localStorage.getItem("token");
 
     // const res = await fetch("http://localhost:8080/api/appuser/decquantity", {
@@ -116,6 +120,7 @@ const Cart = () => {
       "http://localhost:8080/api/appuser/decquantity",
       {
         productId: id,
+        size:size,
       },
       {
         headers: {
@@ -207,6 +212,9 @@ const Cart = () => {
                       <p className="text-gray-400">
                         Price: ₹ {item.productDetails.price}
                       </p>
+                      <p className="text-gray-400">
+                        Size: {item.size}
+                      </p>
                       <div className="flex items-center mt-2">
                         <button
                           className="text-gray-400 hover:text-gray-200 focus:outline-none"
@@ -216,12 +224,12 @@ const Cart = () => {
                           //         item.quantity - 1
                           //     )
                           // }
-                          onClick={() => decrementQuantity(item.productId._id)}
+                          onClick={() => decrementQuantity(item.productId,item.size)}
                         >
                           <FaMinus className="w-4 h-4" />
                         </button>
                         <span className="mx-2 text-lg">
-                          {item.productId.quantity}
+                          {item.quantity}
                         </span>
                         <button
                           className="text-gray-400 hover:text-gray-200 focus:outline-none"
@@ -231,14 +239,14 @@ const Cart = () => {
                           //         item.quantity + 1
                           //     )
                           // }
-                          onClick={() => incrementQuantity(item.productId._id)}
+                          onClick={() => incrementQuantity(item.productId,item.size)}
                         >
                           <FaPlus className="w-4 h-4" />
                         </button>
                       </div>
                       <button
                         className="text-red-600 hover:text-red-800 mt-2 focus:outline-none"
-                        onClick={() => removeFromCart(item.productId._id)}
+                        onClick={() => removeFromCart(item.productId,item.size)}
                       >
                         Remove
                       </button>

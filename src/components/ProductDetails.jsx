@@ -41,8 +41,9 @@ const ProductDetails = () => {
         console.log("Product: ", product);
         // console.log(getMyProduct.data);
         // console.log(getMyProduct.data.color);
-        setSelectedSize(getMyProduct.data.size[0]);
+        // setSelectedSize(getMyProduct.data.size[0]);
         setSelectedColor(getMyProduct.data.color[0]);
+        // setSelectedSize("")
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -71,6 +72,7 @@ const ProductDetails = () => {
   console.log(images[0]);
   const handleSizeClick = (size) => {
     setSelectedSize(size);
+    console.log(selectedSize)
   };
 
   const handleColorClick = (color) => {
@@ -135,6 +137,11 @@ const ProductDetails = () => {
       toast.warning("Please login to add items to the cart", {
         position: "top-center",
       });
+    }else if(!selectedSize){
+      toast.warning("Please select size", {
+        position: "top-center",
+      });
+
     } else {
       const token = localStorage.getItem("token");
       console.log(token);
@@ -143,6 +150,7 @@ const ProductDetails = () => {
           "http://localhost:8080/api/appuser/addtocart",
           {
             productId: id,
+            size:selectedSize,
           },
           {
             headers: {
