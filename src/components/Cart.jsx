@@ -4,6 +4,9 @@ import { FaTrash, FaMinus, FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
 
 const Cart = () => {
   // const { cartItems, removeFromCart, clearCart, updateQuantity } =
@@ -75,6 +78,13 @@ const Cart = () => {
       removeFromCart(itemId);
     } else {
       updateQuantity(itemId, quantity);
+    }
+  };
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate("/checkout");
+    } else {
+      toast.warning("Your cart is empty. Please add items to proceed to checkout.");
     }
   };
 
@@ -271,7 +281,10 @@ const Cart = () => {
                 <p>Total:</p>
                 <p>₹{TotalPrice}</p>
               </div>
-              <button className="bg-indigo-600 text-white rounded-lg py-3 px-6 mt-6 w-full focus:outline-none hover:bg-indigo-700 transition duration-200 shadow-lg">
+              <button
+                className="bg-indigo-600 text-white rounded-lg py-3 px-6 mt-6 w-full focus:outline-none hover:bg-indigo-700 transition duration-200 shadow-lg"
+                onClick={handleCheckout}
+              >
                 Proceed to Checkout
               </button>
               <button

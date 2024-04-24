@@ -188,17 +188,17 @@ const ProductDetails = () => {
   };
 
   const handleBuyNow = () => {
-    const cartItem = {
-      id: product.id,
-      name: product.title,
-      price: product.price,
-      image: product.images,
-      size: selectedSize,
-      color: selectedColor,
-      quantity: 1,
-    };
-    addToCart(cartItem);
-    navigate("/cart");
+    if (!logindata) {
+      toast.warning("Please login to proceed with the purchase", {
+        position: "top-center",
+      });
+    } else if (!selectedSize) {
+      toast.warning("Please select a size", {
+        position: "top-center",
+      });
+    } else {
+      navigate(`/checkout/${id}`);
+    }
   };
   const formatKey = (key) => {
     // Split the key by uppercase letters and join with space
