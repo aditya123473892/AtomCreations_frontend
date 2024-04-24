@@ -94,6 +94,13 @@ const CheckoutPage = () => {
   if (!item) {
     return <div>Item not found.</div>;
   }
+  const handleRazorpayPayment = () => {
+    // Implement Razorpay payment logic here
+    // You can use the Razorpay API or SDK to create an order and proceed with the payment
+    // Once the payment is successful, you can update the order status and display a success message
+    console.log("Initiating Razorpay payment...");
+    // ...
+  };
 
   const discountedPrice = item.price - (item.price * discountPercentage) / 100;
   const shippingCharges = formData.paymentMethod === "cashOnDelivery" ? 50 : 0;
@@ -353,12 +360,47 @@ const CheckoutPage = () => {
                             </span>
                           </label>
                         </div>
-                        {formData.paymentMethod === "cashOnDelivery" && (
-                          <p className="text-gray-500 mt-2">
-                            ₹50 shipping charges will be added for Cash on
-                            Delivery.
-                          </p>
+                        <div>
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name="paymentMethod"
+                              value="razorpay"
+                              checked={formData.paymentMethod === "razorpay"}
+                              onChange={handleChange}
+                              className="form-radio h-5 w-5 text-blue-600"
+                            />
+                            <span className="ml-2 text-gray-400">Razorpay</span>
+                          </label>
+                        </div>
+                        {formData.paymentMethod === "razorpay" && (
+                          <button
+                            type="button"
+                            onClick={handleRazorpayPayment}
+                            className="px-6 py-2 mt-4 text-white text-lg font-semibold bg-green-500 rounded-full hover:bg-green-600 transition duration-75"
+                          >
+                            Pay with Razorpay
+                          </button>
                         )}
+                        {formData.paymentMethod === "razorpay" && (
+  <div className="mt-4">
+    <p className="text-gray-400">
+      Proceed with Razorpay payment to securely complete your order.
+    </p>
+    <button
+      type="button"
+      onClick={handleRazorpayPayment}
+      className="px-6 py-2 mt-4 text-white text-lg font-semibold bg-green-500 rounded-full hover:bg-green-600 transition duration-75 flex items-center"
+    >
+      <img
+        src="https://razorpay.com/assets/razorpay-logo.svg"
+        alt="Razorpay"
+        className="h-6 mr-2"
+      />
+      Pay with Razorpay
+    </button>
+  </div>
+)}
                       </div>
                       <div className="mb-4">
                         <label
