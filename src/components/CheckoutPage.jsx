@@ -13,6 +13,7 @@ const CheckoutPage = () => {
   console.log(cart);
   const [item, setItem] = useState({});
   const [cartItem, setCartItem] = useState([]);
+  const [TotalPrice, setTotalPrice] = useState("");
 
   // const item = collectionData.find((item) => item.id === itemId);
   const navigate = useNavigate();
@@ -143,7 +144,7 @@ const CheckoutPage = () => {
             if (myCart) {
               console.log("Cart USER: ", myCart);
               setCartItem(myCart.data.cartItems);
-              // setTotalPrice(myCart.data.totalprice);
+              setTotalPrice(myCart.data.totalprice);
               // console.log(myCart.data.totalprice);
               // console.log(TotalPrice);
               console.log(myCart.data.cartItems);
@@ -284,9 +285,7 @@ const CheckoutPage = () => {
                     </div>
                   </div>
                 )}
-             
 
-              
                 {cartItem &&
                   cartItem.map((item) => (
                     <>
@@ -310,20 +309,26 @@ const CheckoutPage = () => {
                               <p className="text-lg text-gray-500 line-through">
                                 ₹{item.productDetails.price}
                               </p>
+
                               <p className="text-lg text-green-500">
                                 ₹{discountedPrice.toFixed(2)}
                               </p>
                             </div>
                           ) : (
-                            <p className="text-lg">
-                              ₹{item.productDetails.price}
-                            </p>
+                            <>
+                              <p className="text-lg">
+                                ₹{item.productDetails.price}
+                              </p>
+                              <p className="text-lg">{item.size}</p>
+                              <p className="text-lg">{item.quantity}</p>
+                              
+                            </>
                           )}
                         </div>
                       </div>
                     </>
                   ))}
-               </motion.div>
+              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
@@ -532,7 +537,7 @@ const CheckoutPage = () => {
                   </div>
                   <div className="mb-4">
                     <p className="text-xl font-bold">
-                      Total Price: ₹{totalPrice.toFixed(2)}
+                      Total Price: ₹ {TotalPrice}
                     </p>
                   </div>
                   <button
