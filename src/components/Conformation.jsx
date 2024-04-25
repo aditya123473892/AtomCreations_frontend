@@ -10,8 +10,8 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const orderId = searchParams.get("id");
-  // setOrderId(()=>id);
   console.log(orderId);
+
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [order, setOrder] = useState({});
   const [totalPrice, setTotalPrice] = useState("");
@@ -26,10 +26,8 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
 
   const handleApplyCoupon = async () => {
     const { couponCode } = formData;
-    // console.log(couponCode)
     try {
       const token = localStorage.getItem("token");
-
       const res = await axios.put(
         `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
         {
@@ -41,80 +39,67 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
           },
         }
       );
-      console.log(res);
+      console.log("Apply Coupon Response:", res);
       setTotalPrice(res.data.paymentInfo.totalPrice);
-      // setOrder(res.data)
-    } catch (error) {
-      console.log(error);
-    }
-    // const couponCodes = {
-    //   ATOMS20: 20,
-    // };
 
-    const enteredCode = formData.couponCode.toUpperCase();
-    if (couponCodes[enteredCode]) {
-      setDiscountPercentage(couponCodes[enteredCode]);
-    } else {
-      setDiscountPercentage(0);
+      // Uncomment and define couponCodes with sample coupon codes and their discounts
+      const couponCodes = {
+        ATOMS20: 20,
+        // Add more coupon codes here if needed
+      };
+
+      const enteredCode = formData.couponCode.toUpperCase();
+      if (couponCodes[enteredCode]) {
+        setDiscountPercentage(couponCodes[enteredCode]);
+      } else {
+        setDiscountPercentage(0);
+      }
+    } catch (error) {
+      console.log("Apply Coupon Error:", error);
     }
   };
+
   const handleConfirmOrder = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      console.log(orderId);
       const res = await axios.put(
         `http://localhost:8080/api/appuser/confirmOrder/${orderId}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(res);
-      alert("order placed");
+      console.log("Confirm Order Response:", res);
+      alert("Order placed successfully!");
     } catch (error) {
-      console.log(error);
+      console.log("Confirm Order Error:", error);
     }
   };
 
-  // const discountedPrice =
-  //   orderDetails.totalPrice - (orderDetails.totalPrice * discountPercentage) / 100;
-  // const shippingCharges = 0;
-  // const finalPrice = discountedPrice + shippingCharges;
-
   useEffect(() => {
-    // Fetch the latest order details from the server
     const fetchOrderDetails = async () => {
-      // const { id } = orderId;
-
       try {
-        console.log(orderId);
         const token = localStorage.getItem("token");
         const res = await axios.get(
           `http://localhost:8080/api/appuser/getorder/${orderId}`,
-
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        console.log(res);
+        console.log("Fetch Order Details Response:", res);
         setOrder(res.data);
-        console.log(res.data);
         setTotalPrice(res.data.paymentInfo.totalPrice);
-        // Update the orderDetails state with the latest data
-        // You can use the response data to update the orderDetails state
-        // For example: setOrderDetails(res.data);
       } catch (error) {
-        console.log(error);
+        console.log("Fetch Order Details Error:", error);
       }
     };
 
     fetchOrderDetails();
-
-    // fetchOrderDetails();
   }, [orderId, totalPrice]);
 
   return (
@@ -135,7 +120,6 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
                     Address: {order.shippingInfo.address}
                   </p>
                   <p className="text-lg">City: {order.shippingInfo.city}</p>
-
                   <p className="text-lg">State: {order.shippingInfo.state}</p>
                   <p className="text-lg">
                     Pin Code: {order.shippingInfo.pinCode}
@@ -147,33 +131,20 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
               )}
 
               {order.orderItems &&
-                order.orderItems.map((item) => (
-                  <>
-                    <div className="mb-4">
-                      <h3 className="text-xl font-bold mb-2">Selected Item</h3>
-
-                      <div className="flex items-center">
-                        {/* <img
-              src={selectedItem.images[0]}
-              alt={selectedItem.title}
-              className="w-32 h-32 object-cover mr-4"
-            /> */}
-                        <div>
-                          <h4 className="text-lg font-bold">
-                            {item.ProductsTitle}
-                          </h4>
-                          <p className="text-lg">
-                            Price: ₹{item.ProductsPrice}
-                          </p>
-                          <p className="text-lg">Quantity: {item.quantity}</p>
-                        </div>
+                order.orderItems.map((item, index) => (
+                  <div className="mb-4" key={index}>
+                    <h3 className="text-xl font-bold mb-2">Selected Item</h3>
+                    <div className="flex items-center">
+                      <div>
+                        <h4 className="text-lg font-bold">
+                          {item.ProductsTitle}
+                        </h4>
+                        <p className="text-lg">Price: ₹{item.ProductsPrice}</p>
+                        <p className="text-lg">Quantity: {item.quantity}</p>
                       </div>
                     </div>
-                  </>
+                  </div>
                 ))}
-              {/* <p className="text-lg">Order ID: {orderDetails._id}</p>
-              {/* <p className="text-lg">Name: {orderDetails.name}</p> */}
-              {/* <p className="text-lg">Email: {orderDetails.shippingInfo}</p> */}
             </div>
           </>
         )}
@@ -214,7 +185,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         </div>
 
         <button
-         type="button"
+          type="button"
           onClick={handleConfirmOrder}
           className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
