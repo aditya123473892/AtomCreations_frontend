@@ -84,6 +84,37 @@ const CheckoutPage = () => {
       }
     }
 
+    if(cart){
+      const orderItems = cartItem.map((cartItem) => ({
+        product: cartItem.productId,
+        quantity: cartItem.quantity,
+        size: cartItem.size,
+      }));
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/appuser/placeorder",
+          {
+            address,
+            city,
+            state,
+            pinCode,
+            phoneNo,
+            orderItems: orderItems,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOrderPlaced(true);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+
     setDiscountPercentage(0);
     // setOrderPlaced(true);
   };
