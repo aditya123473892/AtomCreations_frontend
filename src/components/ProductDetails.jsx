@@ -202,7 +202,7 @@ const ProductDetails = () => {
       });
     } else {
       // navigate(`/checkout/${id}`);
-      navigate(`/checkout/?id=${id}?size=${selectedSize}`);
+      navigate(`/checkout/?id=${id}&size=${selectedSize}`);
     }
   };
   const formatKey = (key) => {

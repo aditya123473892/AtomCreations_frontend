@@ -8,6 +8,8 @@ const CheckoutPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const itemId = searchParams.get("id");
+  const size = searchParams.get("size");
+  console.log(size)
   const cart = searchParams.get("cart");
   console.log(itemId);
   console.log(cart);
@@ -51,32 +53,35 @@ const CheckoutPage = () => {
     console.log(formData);
 
     // Process the form submission (e.g., send data to server)
-    try {
-      const res = await axios.post(
-        "http://localhost:8080/api/appuser/placeorder",
-        {
-          address,
-          city,
-          state,
-          pinCode,
-          phoneNo,
-          orderItems: [
-            {
-              product: item._id,
-              quantity: 1,
-            },
-          ],
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    if (itemId) {
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/appuser/placeorder",
+          {
+            address,
+            city,
+            state,
+            pinCode,
+            phoneNo,
+            orderItems: [
+              {
+                product: item._id,
+                quantity: 1,
+                size: size,
+              },
+            ],
           },
-        }
-      );
-      setOrderPlaced(true);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOrderPlaced(true);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     setDiscountPercentage(0);
@@ -321,7 +326,6 @@ const CheckoutPage = () => {
                               </p>
                               <p className="text-lg">{item.size}</p>
                               <p className="text-lg">{item.quantity}</p>
-                              
                             </>
                           )}
                         </div>
