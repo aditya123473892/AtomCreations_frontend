@@ -115,14 +115,14 @@ const Orders = () => {
                           <span className="text-white"> {item.size}</span>
                         </div>
                         <span className="text-white">
-                          {item.quantity} x ₹ {item.ProductsPrice}
+                          {item.quantity} x ₹ {parseInt(item.ProductsPrice)}
                         </span>
                       </div>
                     ))}
                   </div>
                     <div className="flex justify-end">
                     <p className="text-xl font-bold text-white">
-                      Total: ₹ {order.paymentInfo.totalPrice}
+                      Total: ₹ {parseInt(order.paymentInfo.totalPrice)}
                     </p>
                   </div>
                   </div>
