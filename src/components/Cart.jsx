@@ -202,7 +202,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <ToastContainer position="bottom-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </div>
   );
 };

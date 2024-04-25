@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useLocation, useParams } from "react-router";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ConfirmationPage = ({ orderDetails, selectedItem }) => {
   const [formData, setFormData] = useState({
     couponCode: "",
@@ -76,7 +77,9 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
           }
         );
         console.log(res);
-        alert("order placed");
+        // alert("order placed");
+        toast.success("Order Placed.");
+
       }
     } catch (error) {
       console.log(error);
@@ -225,6 +228,8 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         >
           Confirm Order
         </button>
+        <ToastContainer position="top-center" autoClose={2000} />
+
       </motion.div>
     </>
   );
