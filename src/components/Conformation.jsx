@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useLocation, useParams } from "react-router";
-
+import { useLocation, useNavigate, useParams } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ConfirmationPage = ({ orderDetails, selectedItem }) => {
   const [formData, setFormData] = useState({
     couponCode: "",
@@ -10,12 +11,12 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const orderId = searchParams.get("id");
+  // setOrderId(()=>id);
   console.log(orderId);
-
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [order, setOrder] = useState({});
   const [totalPrice, setTotalPrice] = useState("");
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -26,8 +27,10 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
 
   const handleApplyCoupon = async () => {
     const { couponCode } = formData;
+    // console.log(couponCode)
     try {
       const token = localStorage.getItem("token");
+
       const res = await axios.put(
         `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
         {
@@ -39,67 +42,89 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
           },
         }
       );
-      console.log("Apply Coupon Response:", res);
+      console.log(res);
       setTotalPrice(res.data.paymentInfo.totalPrice);
+      // setOrder(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+    // const couponCodes = {
+    //   ATOMS20: 20,
+    // };
 
-      // Uncomment and define couponCodes with sample coupon codes and their discounts
-      const couponCodes = {
-        ATOMS20: 20,
-        // Add more coupon codes here if needed
-      };
-
-      const enteredCode = formData.couponCode.toUpperCase();
-      if (couponCodes[enteredCode]) {
-        setDiscountPercentage(couponCodes[enteredCode]);
-      } else {
-        setDiscountPercentage(0);
+    const enteredCode = formData.couponCode.toUpperCase();
+    if (couponCodes[enteredCode]) {
+      setDiscountPercentage(couponCodes[enteredCode]);
+    } else {
+      setDiscountPercentage(0);
+    }
+  };
+  const handleConfirmOrder = async () => {
+    // e.preventDefault();
+    try {
+      const YOUR_TOKEN = localStorage.getItem("token");
+      console.log(orderId);
+      if (orderId) {
+        const res = await axios.put(
+          "http://localhost:8080/api/appuser/confirmOrder",
+          {
+            orderId: orderId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${YOUR_TOKEN}`,
+            },
+          }
+        );
+        console.log(res);
+        // alert("order placed");
+        toast.success("Order Placed.");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       }
     } catch (error) {
-      console.log("Apply Coupon Error:", error);
+      console.log(error);
     }
   };
 
-  const handleConfirmOrder = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem("token");
-      const res = await axios.put(
-        `http://localhost:8080/api/appuser/confirmOrder/${orderId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("Confirm Order Response:", res);
-      alert("Order placed successfully!");
-    } catch (error) {
-      console.log("Confirm Order Error:", error);
-    }
-  };
+  // const discountedPrice =
+  //   orderDetails.totalPrice - (orderDetails.totalPrice * discountPercentage) / 100;
+  // const shippingCharges = 0;
+  // const finalPrice = discountedPrice + shippingCharges;
 
   useEffect(() => {
+    // Fetch the latest order details from the server
     const fetchOrderDetails = async () => {
+      // const { id } = orderId;
+
       try {
+        console.log(orderId);
         const token = localStorage.getItem("token");
         const res = await axios.get(
           `http://localhost:8080/api/appuser/getorder/${orderId}`,
+
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        console.log("Fetch Order Details Response:", res);
+        console.log(res);
         setOrder(res.data);
+        console.log(res.data);
         setTotalPrice(res.data.paymentInfo.totalPrice);
+        // Update the orderDetails state with the latest data
+        // You can use the response data to update the orderDetails state
+        // For example: setOrderDetails(res.data);
       } catch (error) {
-        console.log("Fetch Order Details Error:", error);
+        console.log(error);
       }
     };
 
     fetchOrderDetails();
+
+    // fetchOrderDetails();
   }, [orderId, totalPrice]);
 
   return (
@@ -120,6 +145,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
                     Address: {order.shippingInfo.address}
                   </p>
                   <p className="text-lg">City: {order.shippingInfo.city}</p>
+
                   <p className="text-lg">State: {order.shippingInfo.state}</p>
                   <p className="text-lg">
                     Pin Code: {order.shippingInfo.pinCode}
@@ -131,20 +157,33 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
               )}
 
               {order.orderItems &&
-                order.orderItems.map((item, index) => (
-                  <div className="mb-4" key={index}>
-                    <h3 className="text-xl font-bold mb-2">Selected Item</h3>
-                    <div className="flex items-center">
-                      <div>
-                        <h4 className="text-lg font-bold">
-                          {item.ProductsTitle}
-                        </h4>
-                        <p className="text-lg">Price: ₹{item.ProductsPrice}</p>
-                        <p className="text-lg">Quantity: {item.quantity}</p>
+                order.orderItems.map((item) => (
+                  <>
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold mb-2">Selected Item</h3>
+
+                      <div className="flex items-center">
+                        {/* <img
+              src={selectedItem.images[0]}
+              alt={selectedItem.title}
+              className="w-32 h-32 object-cover mr-4"
+            /> */}
+                        <div>
+                          <h4 className="text-lg font-bold">
+                            {item.ProductsTitle}
+                          </h4>
+                          <p className="text-lg">
+                            Price: ₹{item.ProductsPrice}
+                          </p>
+                          <p className="text-lg">Quantity: {item.quantity}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </>
                 ))}
+              {/* <p className="text-lg">Order ID: {orderDetails._id}</p>
+              {/* <p className="text-lg">Name: {orderDetails.name}</p> */}
+              {/* <p className="text-lg">Email: {orderDetails.shippingInfo}</p> */}
             </div>
           </>
         )}
@@ -191,6 +230,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         >
           Confirm Order
         </button>
+        <ToastContainer position="top-center" autoClose={2000} />
       </motion.div>
     </>
   );
