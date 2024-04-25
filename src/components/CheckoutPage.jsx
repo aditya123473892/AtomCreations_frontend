@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
+
 const CheckoutPage = () => {
   const { itemId } = useParams();
   const [item, setItem] = useState({});
@@ -117,13 +118,13 @@ const CheckoutPage = () => {
                           <img
                             src={item.images[0]}
                             alt={item.title}
-                            className="w-32 h-32 object-cover mr-4"
+                            className="w-64 h-64 object-cover mr-8 rounded-lg shadow-lg"
                           />
                         </>
                       )}
                       <div>
-                        <h3 className="text-xl font-bold">{item.title}</h3>
-                        <p className="text-lg">₹{item.price}</p>
+                        <h3 className="text-2xl font-bold">{item.title}</h3>
+                        <p className="text-xl">₹{item.price}</p>
                       </div>
                     </div>
                   </motion.div>
