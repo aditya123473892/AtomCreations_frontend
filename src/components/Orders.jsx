@@ -109,9 +109,10 @@ const Orders = () => {
                     <div className="mb-4">
                     {order.orderItems.map((item) => (
                       <div key={item._id} className="flex justify-between mb-2">
-                        <div className="flex items-center">
+                        <div className="flex items-center gap-1">
                           <FaBox className="text-gray-400 mr-2" />
-                          <span className="text-white">{item.ProductsTitle}</span>
+                          <span className="text-white">{item.ProductsTitle} </span> 
+                          <span className="text-white"> {item.size}</span>
                         </div>
                         <span className="text-white">
                           {item.quantity} x ₹ {item.ProductsPrice}

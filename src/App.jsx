@@ -30,6 +30,7 @@ import Wishlist from "./components/Wishlist";
 import Orders from "./components/Orders";
 import AddressManagement from "./components/Address";
 import ResetPassword from "./components/ResetPassword";
+import ConfirmationPage from "./components/Conformation";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -72,6 +73,7 @@ const App = () => {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="/confirmation" element={<ConfirmationPage/>}/>
           <Route path="addresses" element={<AddressManagement />} />
           <Route path="/reset-password/:token" element={<ResetPassword/>}/>
         </Routes>
