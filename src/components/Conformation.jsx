@@ -58,21 +58,26 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
       setDiscountPercentage(0);
     }
   };
-  const handleConfirmOrder = async (e) => {
-    e.preventDefault();
+  const handleConfirmOrder = async () => {
+    // e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
+      const YOUR_TOKEN = localStorage.getItem("token");
       console.log(orderId);
-      const res = await axios.put(
-        `http://localhost:8080/api/appuser/confirmOrder/${orderId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      if (orderId) {
+        const res = await axios.put(
+          "http://localhost:8080/api/appuser/confirmOrder",
+          {
+            orderId: orderId,
           },
-        }
-      );
-      console.log(res);
-      alert("order placed");
+          {
+            headers: {
+              Authorization: `Bearer ${YOUR_TOKEN}`,
+            },
+          }
+        );
+        console.log(res);
+        alert("order placed");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -214,7 +219,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         </div>
 
         <button
-         type="button"
+          type="button"
           onClick={handleConfirmOrder}
           className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
