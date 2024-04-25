@@ -13,9 +13,8 @@ import axios from "axios";
 const CollectionSlider = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-
   const handleBuyNowClick = (item) => {
-    navigate(`/product/${item._id}`);
+    navigate(`/product?id=${item._id}`);
   };
   useEffect(() => {
     const fetchProducts = async () => {
