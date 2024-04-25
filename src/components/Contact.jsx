@@ -1,8 +1,49 @@
-import React from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-
+import React, { useState } from "react";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import axios from "axios";
 const ContactUs = () => {
+  const [inputValue, setInputValue] = useState({
+    senderName: "",
+    email: "",
+    message: "",
+  });
+
+  const setValue = (e) => {
+    const { name, value } = e.target;
+
+    setInputValue(() => {
+      return {
+        ...inputValue,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    const { senderName, email, message } = inputValue;
+
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/appuser/contactus",
+        {
+          senderName,
+          email,
+          message,
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+    setInputValue({
+      ...inputValue,
+      senderName: "",
+      email: "",
+      message: "",
+    });
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,14 +68,21 @@ const ContactUs = () => {
           >
             <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
             <p className="text-gray-400 mb-8">
-              We'd love to hear from you! If you have any questions, comments, or concerns, please don't hesitate to reach out to us. Our friendly customer support team is here to assist you.
+              We'd love to hear from you! If you have any questions, comments,
+              or concerns, please don't hesitate to reach out to us. Our
+              friendly customer support team is here to assist you.
             </p>
             <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-2">Contact Information</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                Contact Information
+              </h3>
               <ul className="space-y-4">
                 <li className="flex items-center">
                   <FaEnvelope className="text-indigo-600 mr-2" />
-                  <a href="mailto:support@example.com" className="text-gray-400 hover:text-white">
+                  <a
+                    href="mailto:support@example.com"
+                    className="text-gray-400 hover:text-white"
+                  >
                     support@atomcreations.co
                   </a>
                 </li>
@@ -57,7 +105,10 @@ const ContactUs = () => {
                   Name
                 </label>
                 <input
+                  value={inputValue.senderName}
                   type="text"
+                  name="senderName"
+                  onChange={setValue}
                   id="name"
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   required
@@ -68,8 +119,11 @@ const ContactUs = () => {
                   Email
                 </label>
                 <input
+                  value={inputValue.email}
+                  onChange={setValue}
                   type="email"
                   id="email"
+                  name="email"
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   required
                 />
@@ -79,7 +133,10 @@ const ContactUs = () => {
                   Message
                 </label>
                 <textarea
+                  onChange={setValue}
+                  value={inputValue.message}
                   id="message"
+                  name="message"
                   rows="5"
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   required
@@ -90,6 +147,7 @@ const ContactUs = () => {
                 className="bg-indigo-600 text-white rounded-lg py-2 px-4 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={handleSubmit}
               >
                 Send Message
               </motion.button>
