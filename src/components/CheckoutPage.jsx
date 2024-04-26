@@ -509,7 +509,7 @@ const CheckoutPage = () => {
               </motion.div>
             </div>
           </>
-          )
+          
         </>
       </div>
     </div>
