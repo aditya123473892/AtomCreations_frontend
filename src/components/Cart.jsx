@@ -32,7 +32,8 @@ const Cart = () => {
       }
     );
     if (res.status === 200) {
-      setCartItems(cartItems.filter((item) => item.productId !== id));
+      window.location.reload()
+      // setCartItems(cartItems.filter((item) => item.productId !== id));
       toast.success("Item removed from cart.");
     }
   };
