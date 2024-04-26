@@ -58,6 +58,9 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
 
       // setOrder(res.data)
     } catch (error) {
+      toast.warning("Invalid Coupon Code", {
+        position: "top-center",
+      });
       console.log(error);
     }
     // const couponCodes = {
@@ -126,7 +129,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         setOrder(res.data);
         console.log(res.data);
         setTotalPrice(res.data.paymentInfo.totalPrice);
-        console.log(totalPrice)
+        console.log(totalPrice);
         // Update the orderDetails state with the latest data
         // You can use the response data to update the orderDetails state
         // For example: setOrderDetails(res.data);
@@ -200,6 +203,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
             </div>
           </>
         )}
+        <p className="text-lg font-semibold"> Shipping Charges: ₹50 (added in your order) </p>
 
         <div className="mb-4">
           <label htmlFor="couponCode" className="block mb-2 font-bold">
@@ -228,6 +232,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
             </p>
           )}
         </div>
+        
         <div className="mb-4">
           {order.paymentInfo && (
             <p className="text-xl font-bold">
