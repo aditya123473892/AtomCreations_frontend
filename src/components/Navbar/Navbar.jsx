@@ -6,6 +6,7 @@ import { FaUser, FaShoppingCart, FaBars, FaTimes, FaSearch } from "react-icons/f
 import { AuthContext } from "../ContextProvider/AuthContext";
 import { Avatar } from "@mui/material";
 import axios from "axios";
+
 const links = [
   { name: "About Us", to: "/aboutus" },
   { name: "Privacy Policy", to: "/privacypolicy" },
@@ -26,16 +27,16 @@ const Navbar = () => {
   const [open, cycleOpen] = useCycle(false, true);
   const [isOpen, setIsOpen] = useState(false);
   const { logindata, setLoginData } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const handleLogOut = (e) => {
     e.preventDefault();
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setLoginData("");
     console.log(logindata);
-    navigate("/")
-    // window.location.reload();
-    
+    navigate("/");
   };
+
   useEffect(() => {
     setIsOpen(open);
   }, [open]);
@@ -57,62 +58,59 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex items-center text-white space-x-4">
-        {!logindata ? (
-          <Link to="/login" className="relative button-link">
+        <div className="hidden md:flex items-center space-x-4">
+          {!logindata ? (
+            <Link to="/login" className="relative button-link">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
+              >
+                <FaUser className="text-xl" />
+              </motion.div>
+            </Link>
+          ) : (
+            <Link to="/profile" className="relative button-link">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-white text-black"
+              >
+                {logindata.name && (
+                  <Avatar
+                    style={{
+                      background: "white",
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                      color: "black",
+                    }}
+                  >
+                    {logindata.name[0]}
+                  </Avatar>
+                )}
+              </motion.div>
+            </Link>
+          )}
+          {logindata ? (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleLogOut}
+              className="text-white font-semibold py-2 px-4 rounded-md border border-white transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
+            >
+              Log Out
+            </motion.button>
+          ) : null}
+          <Link to="/cart" className="relative button-link">
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
             >
-              <FaUser className="text-xl" />
+              <FaShoppingCart className="text-xl" />
             </motion.div>
           </Link>
-        ) : (
-          <Link to="/profile" className="relative button-link">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white text-black"
-            >
-              {logindata.name && (
-                <Avatar
-                  style={{
-                    background: "white",
-                    fontWeight: "bold",
-                    textTransform: "capitalize",
-                    color: "black",
-                  }}
-                >
-                  {logindata.name[0]}
-                </Avatar>
-              )}
-            </motion.div>
-
-            {/* <p className="text-white">{logindata.name}</p> */}
-          </Link>
-        )}
-        {logindata ? (
-          <>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={handleLogOut}
-              className="flex items-center justify-center w-22 h-10 px-2 rounded bg-white text-black"
-            >
-              <button className="font-bold">Log Out</button>
-            </motion.div>
-          </>
-        ) : null}
-
-        <Link to="/cart" className="relative button-link">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
-          >
-            <FaShoppingCart className="text-xl" />
-          </motion.div>
-        </Link>
+        </div>
         <Link to="/explore" className="relative button-link">
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -122,7 +120,7 @@ const Navbar = () => {
             <FaSearch className="text-xl" />
           </motion.div>
         </Link>
-        <div>
+        <div className="md:hidden">
           <motion.div
             initial={false}
             animate={isOpen ? "open" : "closed"}
@@ -139,10 +137,53 @@ const Navbar = () => {
         initial={false}
         animate={isOpen ? "open" : "closed"}
         variants={sideVariants}
-        className={`bg-black text-white fixed w-96 top-16 right-0 overflow-y-auto bottom-0 py-6 px-8 text-right ${
+        className={`bg-black text-white fixed w-full md:w-96 top-16 right-0 overflow-y-auto bottom-0 py-6 px-8 text-right md:hidden ${
           isOpen ? "block" : "hidden"
         }`}
       >
+        {!logindata ? (
+          <motion.li
+            variants={itemVariants}
+            className="my-3"
+            onClick={cycleOpen}
+            whileHover={{ x: 10 }}
+          >
+            <Link to="/login" className="text-xl uppercase">
+              Login
+            </Link>
+          </motion.li>
+        ) : (
+          <>
+            <motion.li
+              variants={itemVariants}
+              className="my-3"
+              onClick={cycleOpen}
+              whileHover={{ x: 10 }}
+            >
+              <Link to="/profile" className="text-xl uppercase">
+                Profile
+              </Link>
+            </motion.li>
+            <motion.li
+              variants={itemVariants}
+              className="my-3"
+              onClick={handleLogOut}
+              whileHover={{ x: 10 }}
+            >
+              <button className="text-xl uppercase">Log Out</button>
+            </motion.li>
+          </>
+        )}
+        <motion.li
+          variants={itemVariants}
+          className="my-3"
+          onClick={cycleOpen}
+          whileHover={{ x: 10 }}
+        >
+          <Link to="/cart" className="text-xl uppercase">
+            Cart
+          </Link>
+        </motion.li>
         {links.map(({ name, to }) => (
           <motion.li
             key={name}
