@@ -20,7 +20,7 @@ const Cart = () => {
   const removeFromCart = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "http://localhost:8080/api/appuser/removefromcart",
+      "https://backendatom.vercel.app/api/appuser/removefromcart",
       {
         productId: id,
         size: size,
@@ -39,12 +39,15 @@ const Cart = () => {
 
   const clearCart = async () => {
     const YOUR_TOKEN = localStorage.getItem("token");
-    const res = await fetch("http://localhost:8080/api/appuser/emptycart", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${YOUR_TOKEN}`,
-      },
-    });
+    const res = await fetch(
+      "https://backendatom.vercel.app/api/appuser/emptycart",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${YOUR_TOKEN}`,
+        },
+      }
+    );
     setCartItems([]);
   };
 
@@ -58,14 +61,16 @@ const Cart = () => {
     if (cartItems.length > 0) {
       navigate(`/checkout?cart=${true}`);
     } else {
-      toast.warning("Your cart is empty. Please add items to proceed to checkout.");
+      toast.warning(
+        "Your cart is empty. Please add items to proceed to checkout."
+      );
     }
   };
 
   const incrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "http://localhost:8080/api/appuser/incquantity",
+      "https://backendatom.vercel.app/api/appuser/incquantity",
       {
         productId: id,
         size: size,
@@ -82,7 +87,7 @@ const Cart = () => {
   const decrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "http://localhost:8080/api/appuser/decquantity",
+      "https://backendatom.vercel.app/api/appuser/decquantity",
       {
         productId: id,
         size: size,
@@ -102,7 +107,7 @@ const Cart = () => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const myCart = await axios.get(
-            "http://localhost:8080/api/appuser/getcartitem",
+            "https://backendatom.vercel.app/api/appuser/getcartitem",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`,
@@ -124,10 +129,9 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-extrabold text-center mb-8 text-white">
-    My Cart
-</h1>
-
+        <h1 className="text-4xl font-extrabold text-center mb-8 text-white">
+          My Cart
+        </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8">
@@ -153,21 +157,27 @@ const Cart = () => {
                       <div className="flex items-center mb-4">
                         <button
                           className="text-gray-400 hover:text-gray-200 focus:outline-none mr-2"
-                          onClick={() => decrementQuantity(item.productId, item.size)}
+                          onClick={() =>
+                            decrementQuantity(item.productId, item.size)
+                          }
                         >
                           <FaMinus className="w-5 h-5" />
                         </button>
                         <span className="mx-2 text-xl">{item.quantity}</span>
                         <button
                           className="text-gray-400 hover:text-gray-200 focus:outline-none ml-2"
-                          onClick={() => incrementQuantity(item.productId, item.size)}
+                          onClick={() =>
+                            incrementQuantity(item.productId, item.size)
+                          }
                         >
                           <FaPlus className="w-5 h-5" />
                         </button>
                       </div>
                       <button
                         className="text-red-600 hover:text-red-800 focus:outline-none"
-                        onClick={() => removeFromCart(item.productId, item.size)}
+                        onClick={() =>
+                          removeFromCart(item.productId, item.size)
+                        }
                       >
                         Remove
                       </button>

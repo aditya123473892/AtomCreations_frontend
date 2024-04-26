@@ -26,7 +26,7 @@ const ContactUs = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/appuser/contactus",
+        "https://backendatom.vercel.app/api/appuser/contactus",
         {
           senderName,
           email,

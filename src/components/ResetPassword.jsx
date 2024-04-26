@@ -25,9 +25,9 @@ const ResetPassword = () => {
       });
     } else {
       try {
-        console.log(token)
+        console.log(token);
         const res = await axios.put(
-          `http://localhost:8080/api/user/reset-password/${token}`,
+          `https://backendatom.vercel.app/api/user/reset-password/${token}`,
           {
             password,
           }
@@ -53,7 +53,7 @@ const ResetPassword = () => {
         });
       }
 
-    //   setPassword("");
+      //   setPassword("");
     }
   };
 
@@ -66,7 +66,7 @@ const ResetPassword = () => {
           <img src={icon} alt="Company Icon" className="w-33 h-24" />
         </div>
         <h2 className="text-3xl font-bold mb-6 text-center">Reset Password</h2>
-        <form className="w-full" >
+        <form className="w-full">
           <div className="mb-6">
             <label
               htmlFor="password"

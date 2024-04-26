@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const user = await axios.get(
-            "http://localhost:8080/api/user/fetchuser",
+            "https://backendatom.vercel.app/api/user/fetchuser",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token

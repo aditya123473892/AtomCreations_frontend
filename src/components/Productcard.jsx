@@ -33,7 +33,7 @@ const ProductCard = ({ product, id }) => {
       console.log(token);
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/addtocart",
+          "https://backendatom.vercel.app/api/appuser/addtocart",
           {
             productId: id,
           },
