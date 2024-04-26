@@ -203,7 +203,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
             </div>
           </>
         )}
-        <p className="text-lg font-semibold"> Shipping Charges: ₹50 (added in your order) </p>
+        <p className="text-lg font-semibold mb-1"> Shipping Charges: ₹50 (added in your order) </p>
 
         <div className="mb-4">
           <label htmlFor="couponCode" className="block mb-2 font-bold">
