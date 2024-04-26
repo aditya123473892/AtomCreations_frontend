@@ -43,7 +43,19 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         }
       );
       console.log(res);
-      setTotalPrice(res.data.paymentInfo.totalPrice);
+
+      console.log(res.data);
+      const message = res.data.message;
+      console.log(message);
+      if (message === "Coupon is already applied") {
+        toast.warning("Coupon applied", {
+          position: "top-center",
+        });
+        // alert(message);
+      } else {
+        setTotalPrice(res.data.paymentInfo.totalPrice);
+      }
+
       // setOrder(res.data)
     } catch (error) {
       console.log(error);
@@ -114,6 +126,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         setOrder(res.data);
         console.log(res.data);
         setTotalPrice(res.data.paymentInfo.totalPrice);
+        console.log(totalPrice)
         // Update the orderDetails state with the latest data
         // You can use the response data to update the orderDetails state
         // For example: setOrderDetails(res.data);
@@ -218,7 +231,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         <div className="mb-4">
           {order.paymentInfo && (
             <p className="text-xl font-bold">
-              Total Price: ₹{parseInt(order.paymentInfo.totalPrice)}
+              Total Price: ₹{parseInt(totalPrice)}
             </p>
           )}
         </div>
