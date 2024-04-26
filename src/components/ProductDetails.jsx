@@ -7,6 +7,8 @@ import {
   FaShoppingCart,
   FaChevronLeft,
   FaChevronRight,
+  FaMinus,
+  FaPlus,
 } from "react-icons/fa";
 import { CartContext } from "./CartContext";
 import LoadingSpinner from "./LoadingSpinner";
@@ -15,6 +17,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./ContextProvider/AuthContext";
+
 const ProductDetails = () => {
   // const { id } = useParams();
   const location = useLocation();
@@ -25,12 +28,14 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
   const [isAdded, setIsAdded] = useState(false);
   const { logindata } = useContext(AuthContext);
+
   useEffect(() => {
     console.log(id);
     const fetchProduct = async () => {
@@ -74,6 +79,7 @@ const ProductDetails = () => {
     description,
   } = product;
   console.log(images[0]);
+
   const handleSizeClick = (size) => {
     setSelectedSize(size);
     console.log(selectedSize);
@@ -134,6 +140,7 @@ const ProductDetails = () => {
   //   };
   //   addToCart(cartItem);
   // };
+
   const handleAddToCart = async (event) => {
     console.log(logindata);
     event.stopPropagation();
@@ -154,6 +161,7 @@ const ProductDetails = () => {
           {
             productId: id,
             size: selectedSize,
+            quantity: quantity,
           },
           {
             headers: {
@@ -204,12 +212,21 @@ const ProductDetails = () => {
       navigate(`/checkout/?id=${id}&size=${selectedSize}`);
     }
   };
+
   const formatKey = (key) => {
     // Split the key by uppercase letters and join with space
     return key
       .split(/(?=[A-Z])/)
       .join(" ")
       .replace(/^\w/, (c) => c.toUpperCase());
+  };
+
+  const handleQuantityChange = (value) => {
+    if (value < 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(value);
+    }
   };
 
   return (
@@ -233,9 +250,8 @@ const ProductDetails = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
-                  isFavorite ? "text-red-500" : ""
-                }`}
+                className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${isFavorite ? "text-red-500" : ""
+                  }`}
                 onClick={handleFavoriteClick}
               >
                 <FaHeart size={24} />
@@ -268,9 +284,8 @@ const ProductDetails = () => {
                   key={index}
                   src={image}
                   alt={`${name} ${index + 1}`}
-                  className={`w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
-                    index === currentImageIndex ? "border-2 border-black" : ""
-                  }`}
+                  className={`w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${index === currentImageIndex ? "border-2 border-black" : ""
+                    }`}
                   onClick={() => setCurrentImageIndex(index)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -337,11 +352,10 @@ const ProductDetails = () => {
                     key={size}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`px-4 py-2 mr-2 mb-2 rounded-full font-semibold ${
-                      selectedSize === size
+                    className={`px-4 py-2 mr-2 mb-2 rounded-full font-semibold ${selectedSize === size
                         ? "bg-black text-white"
                         : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-                    }`}
+                      }`}
                     onClick={() => handleSizeClick(size)}
                   >
                     {size}
@@ -362,11 +376,10 @@ const ProductDetails = () => {
                     key={color}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`w-8 h-8 rounded-full mr-2 cursor-pointer border-2 ${
-                      selectedColor === color
+                    className={`w-8 h-8 rounded-full mr-2 cursor-pointer border-2 ${selectedColor === color
                         ? "border-black"
                         : "border-gray-300"
-                    }`}
+                      }`}
                     style={{ backgroundColor: color }}
                     onClick={() => handleColorClick(color)}
                   ></motion.div>
@@ -377,6 +390,39 @@ const ProductDetails = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1 }}
+              className="mb-8"
+            >
+              <p className="text-gray-600 mb-2">Quantity:</p>
+              <div className="flex items-center">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="bg-gray-200 text-gray-800 px-2 py-1 rounded-l focus:outline-none"
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                >
+                  <FaMinus />
+                </motion.button>
+                <input
+                  type="number"
+                  className="w-16 text-center border-t border-b border-gray-300 focus:outline-none"
+                  value={quantity}
+                  onChange={(e) => handleQuantityChange(parseInt(e.target.value))}
+                />
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="bg-gray-200 text-gray-800 px-2 py-
+                  1 rounded-r focus:outline-none"
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                >
+                  <FaPlus />
+                </motion.button>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.1 }}
               className="flex items-center mb-8"
             >
               <motion.button
@@ -400,18 +446,17 @@ const ProductDetails = () => {
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
             >
               <h3 className="text-lg font-semibold mb-2">Product Details</h3>
               <ul className="list-disc pl-4">
                 {/* <li>Material: 100% Cotton</li>
-                <li>Fit Type: Regular Fit</li>
-                <li>Care Instructions: Machine wash cold, tumble dry low</li>
-                <li>Imported</li> */}
-
+<li>Fit Type: Regular Fit</li>
+<li>Care Instructions: Machine wash cold, tumble dry low</li>
+<li>Imported</li> */}
                 {/* {Object.entries(description).map(([key, value]) => (
-                  <li key={key}>{`${key}: ${value}`}</li>
-                ))} */}
+              <li key={key}>{`${key}: ${value}`}</li>
+            ))} */}
               </ul>
 
               <ul className="list-none pl-4">
@@ -426,5 +471,4 @@ const ProductDetails = () => {
     </motion.div>
   );
 };
-
 export default ProductDetails;
