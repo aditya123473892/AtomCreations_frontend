@@ -9,7 +9,7 @@ const Verification = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const email = searchParams.get("email");
-  console.log(email)
+  console.log(email);
   const [otp, setOTP] = useState("");
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const Verification = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/user/verify-otp",
+          "https://backendatom.vercel.app/api/user/verify-otp",
           {
             email,
             otp,

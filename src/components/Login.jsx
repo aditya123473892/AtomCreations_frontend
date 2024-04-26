@@ -26,38 +26,35 @@ const LoginPage = () => {
     });
   };
 
-  const sendPasswordMail = async(e)=>{
+  const sendPasswordMail = async (e) => {
     e.preventDefault();
-    const {email} = inputValue;
-    if(email===""){
+    const { email } = inputValue;
+    if (email === "") {
       toast.warning("Email is required!", {
         position: "top-center",
         autoClose: 2000,
       });
-
-    }else if(!email.includes("@")){
+    } else if (!email.includes("@")) {
       toast.warning("email must include @", {
         position: "top-center",
       });
-
-    }else{
-      console.log(email)
-      try{
-        const response = await axios.post("http://localhost:8080/api/user/forgot-password-token",{
-          email
-        })
-        console.log(response)
-
-      }catch(error){
+    } else {
+      console.log(email);
+      try {
+        const response = await axios.post(
+          "https://backendatom.vercel.app/api/user/forgot-password-token",
+          {
+            email,
+          }
+        );
+        console.log(response);
+      } catch (error) {
         toast.warning("Something went wrong", {
           position: "top-center",
         });
-
       }
     }
-
-
-  }
+  };
   const userLogin = async (e) => {
     e.preventDefault();
     const { email, password } = inputValue;
@@ -72,10 +69,13 @@ const LoginPage = () => {
       });
     } else {
       try {
-        const res = await axios.post("http://localhost:8080/api/user/login", {
-          email,
-          password,
-        });
+        const res = await axios.post(
+          "https://backendatom.vercel.app/api/user/login",
+          {
+            email,
+            password,
+          }
+        );
 
         console.log(res.data);
         const storageToken = res.data.token;

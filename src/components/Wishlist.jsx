@@ -14,7 +14,7 @@ const Wishlist = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        "http://localhost:8080/api/appuser/removefromwishlist",
+        "https://backendatom.vercel.app/api/appuser/removefromwishlist",
         {
           productId: id,
         },
@@ -46,7 +46,7 @@ const Wishlist = () => {
       console.log(token);
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/addtocart",
+          "https://backendatom.vercel.app/api/appuser/addtocart",
           {
             productId: id,
           },
@@ -86,7 +86,7 @@ const Wishlist = () => {
 
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/appuser/getwishlist",
+          "https://backendatom.vercel.app/api/appuser/getwishlist",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
+import {
+  FaBox,
+  FaTruck,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaSpinner,
+} from "react-icons/fa";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -57,7 +63,7 @@ const Orders = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/appuser/getuserorders",
+          "https://backendatom.vercel.app/api/appuser/getuserorders",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -107,24 +113,29 @@ const Orders = () => {
                       </div>
                     </div>
                     <div className="mb-4">
-                    {order.orderItems.map((item) => (
-                      <div key={item._id} className="flex justify-between mb-2">
-                        <div className="flex items-center gap-1">
-                          <FaBox className="text-gray-400 mr-2" />
-                          <span className="text-white">{item.ProductsTitle} </span> 
-                          <span className="text-white"> {item.size}</span>
+                      {order.orderItems.map((item) => (
+                        <div
+                          key={item._id}
+                          className="flex justify-between mb-2"
+                        >
+                          <div className="flex items-center gap-1">
+                            <FaBox className="text-gray-400 mr-2" />
+                            <span className="text-white">
+                              {item.ProductsTitle}{" "}
+                            </span>
+                            <span className="text-white"> {item.size}</span>
+                          </div>
+                          <span className="text-white">
+                            {item.quantity} x ₹ {parseInt(item.ProductsPrice)}
+                          </span>
                         </div>
-                        <span className="text-white">
-                          {item.quantity} x ₹ {parseInt(item.ProductsPrice)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
                     <div className="flex justify-end">
-                    <p className="text-xl font-bold text-white">
-                      Total: ₹ {parseInt(order.paymentInfo.totalPrice)}
-                    </p>
-                  </div>
+                      <p className="text-xl font-bold text-white">
+                        Total: ₹ {parseInt(order.paymentInfo.totalPrice)}
+                      </p>
+                    </div>
                   </div>
                 ))}
             </div>

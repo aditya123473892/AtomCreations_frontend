@@ -41,7 +41,7 @@ const SignupPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/user/send-otp",
+          "https://backendatom.vercel.app/api/user/send-otp",
           {
             name,
             email,

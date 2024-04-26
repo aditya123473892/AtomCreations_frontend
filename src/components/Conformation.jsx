@@ -32,7 +32,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
+        `https://backendatom.vercel.app/api/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
@@ -66,7 +66,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
       console.log(orderId);
       if (orderId) {
         const res = await axios.put(
-          "http://localhost:8080/api/appuser/confirmOrder",
+          "https://backendatom.vercel.app/api/appuser/confirmOrder",
           {
             orderId: orderId,
           },
@@ -102,7 +102,7 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         console.log(orderId);
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `http://localhost:8080/api/appuser/getorder/${orderId}`,
+          `https://backendatom.vercel.app/api/appuser/getorder/${orderId}`,
 
           {
             headers: {

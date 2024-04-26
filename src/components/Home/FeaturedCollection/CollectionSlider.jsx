@@ -19,7 +19,9 @@ const CollectionSlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/products/");
+        const res = await axios.get(
+          "https://backendatom.vercel.app/api/products/"
+        );
         console.log(res.data);
         setProducts(() => res.data);
       } catch (error) {

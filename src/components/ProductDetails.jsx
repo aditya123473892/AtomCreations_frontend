@@ -20,7 +20,7 @@ const ProductDetails = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-  console.log(id)
+  console.log(id);
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
@@ -38,7 +38,7 @@ const ProductDetails = () => {
       try {
         // const data = await getProductById(id);
         const getMyProduct = await axios.get(
-          `http://localhost:8080/api/products/${id}`
+          `https://backendatom.vercel.app/api/products/${id}`
         );
         console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
@@ -76,7 +76,7 @@ const ProductDetails = () => {
   console.log(images[0]);
   const handleSizeClick = (size) => {
     setSelectedSize(size);
-    console.log(selectedSize)
+    console.log(selectedSize);
   };
 
   const handleColorClick = (color) => {
@@ -92,7 +92,7 @@ const ProductDetails = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/addToWishList",
+          "https://backendatom.vercel.app/api/appuser/addToWishList",
           {
             productId: id,
           },
@@ -141,20 +141,19 @@ const ProductDetails = () => {
       toast.warning("Please login to add items to the cart", {
         position: "top-center",
       });
-    }else if(!selectedSize){
+    } else if (!selectedSize) {
       toast.warning("Please select size", {
         position: "top-center",
       });
-
     } else {
       const token = localStorage.getItem("token");
       console.log(token);
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/addtocart",
+          "https://backendatom.vercel.app/api/appuser/addtocart",
           {
             productId: id,
-            size:selectedSize,
+            size: selectedSize,
           },
           {
             headers: {

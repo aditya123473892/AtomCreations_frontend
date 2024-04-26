@@ -48,8 +48,9 @@ const ExploreSection = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-
-        const response = await axios.get("http://localhost:8080/api/products");
+        const response = await axios.get(
+          "https://backendatom.vercel.app/api/products"
+        );
 
         // console.log(response.data);
         products = response.data;
@@ -143,7 +144,8 @@ const ExploreSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSearch}
-            className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center">
+            className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center"
+          >
             Search
             <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center hover:rotate-0 transition duratuion-75">
               <FaSearch className="text-2xl" />
@@ -170,7 +172,7 @@ const ExploreSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-              className="text-center font-base py-8 text-gray-600 text-xl"
+            className="text-center font-base py-8 text-gray-600 text-xl"
           >
             No products found.
           </motion.p>
@@ -179,7 +181,7 @@ const ExploreSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-                className="text-center font-base text-gray-600 py-8 text-xl"
+            className="text-center font-base text-gray-600 py-8 text-xl"
           >
             Start exploring by searching for a product.
           </motion.p>

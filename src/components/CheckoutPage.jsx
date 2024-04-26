@@ -56,7 +56,7 @@ const CheckoutPage = () => {
     if (itemId) {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/placeorder",
+          "https://backendatom.vercel.app/api/appuser/placeorder",
           {
             address,
             city,
@@ -78,11 +78,10 @@ const CheckoutPage = () => {
           }
         );
         setOrderPlaced(true);
-        
-        console.log(res);
-        console.log(res.data._id)
-        navigate(`/confirmation/?id=${res.data.data._id}`)
 
+        console.log(res);
+        console.log(res.data._id);
+        navigate(`/confirmation/?id=${res.data.data._id}`);
       } catch (error) {
         console.log(error);
       }
@@ -96,7 +95,7 @@ const CheckoutPage = () => {
       }));
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/placeorder",
+          "https://backendatom.vercel.app/api/appuser/placeorder",
           {
             address,
             city,
@@ -114,10 +113,9 @@ const CheckoutPage = () => {
         setOrderPlaced(true);
         setOrderDetails(res.data);
         console.log(res);
-        console.log(res.data.data._id)
+        console.log(res.data.data._id);
 
-        navigate(`/confirmation/?id=${res.data.data._id}`)
-
+        navigate(`/confirmation/?id=${res.data.data._id}`);
       } catch (error) {
         console.log(error);
       }
@@ -164,11 +162,11 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.get(
-            `http://localhost:8080/api/products/${itemId}`
+            `https://backendatom.vercel.app/api/products/${itemId}`
           );
 
           setItem(res.data);
-          setTotalPrice(res.data.price)
+          setTotalPrice(res.data.price);
         } catch (error) {
           console.log(error);
         }
@@ -179,7 +177,7 @@ const CheckoutPage = () => {
           const YOUR_TOKEN = localStorage.getItem("token");
           if (YOUR_TOKEN) {
             const myCart = await axios.get(
-              "http://localhost:8080/api/appuser/getcartitem",
+              "https://backendatom.vercel.app/api/appuser/getcartitem",
               {
                 headers: {
                   Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token

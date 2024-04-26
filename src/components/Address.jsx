@@ -26,7 +26,7 @@ const AddressManagement = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/appuser/addAdress",
+        "https://backendatom.vercel.app/api/appuser/addAdress",
         {
           address,
           city,
@@ -69,7 +69,7 @@ const AddressManagement = () => {
 
     try {
       const res = await axios.put(
-        "http://localhost:8080/api/appuser/deleteAddress",
+        "https://backendatom.vercel.app/api/appuser/deleteAddress",
         {
           addressId: id,
         },
@@ -103,7 +103,7 @@ const AddressManagement = () => {
 
     const getAddress = async () => {
       const res = await axios.get(
-        "http://localhost:8080/api/appuser/getaddress",
+        "https://backendatom.vercel.app/api/appuser/getaddress",
         {
           headers: {
             Authorization: `Bearer ${token}`,
