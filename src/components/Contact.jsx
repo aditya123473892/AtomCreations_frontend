@@ -90,11 +90,11 @@ const ContactUs = () => {
                 </li>
                       <li className="flex items-center">
                   
-                  <span className="text-gray-400">Pincode:201016</span>
+                  <span className="text-gray-400">Pincode:201001</span>
                 </li>
                   <li className="flex items-center">
                   
-                  <span className="text-gray-400">9971665564</span>
+                  <span className="text-gray-400">phone no. 9971665564</span>
                 </li>
               </ul>
             </div>
