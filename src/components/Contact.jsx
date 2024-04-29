@@ -68,9 +68,7 @@ const ContactUs = () => {
           >
             <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
             <p className="text-gray-400 mb-8">
-              We'd love to hear from you! If you have any questions, comments,
-              or concerns, please don't hesitate to reach out to us. Our
-              friendly customer support team is here to assist you.
+           
             </p>
             <div className="mb-8">
               <h3 className="text-xl font-semibold mb-2">
@@ -83,12 +81,12 @@ const ContactUs = () => {
                     href="mailto:support@example.com"
                     className="text-gray-400 hover:text-white"
                   >
-                    support@atomcreations.co
+                    info@atomcreations.co
                   </a>
                 </li>
                 <li className="flex items-center">
                   <FaMapMarkerAlt className="text-indigo-600 mr-2" />
-                  <span className="text-gray-400">Ghaziabad, India</span>
+                  <span className="text-gray-400">Mahagun Mascott crossing republik Ghaziabad, India</span>
                 </li>
               </ul>
             </div>
