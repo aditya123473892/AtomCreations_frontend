@@ -88,6 +88,14 @@ const ContactUs = () => {
                   <FaMapMarkerAlt className="text-indigo-600 mr-2" />
                   <span className="text-gray-400">Mahagun Mascott crossing republik Ghaziabad, India</span>
                 </li>
+                      <li className="flex items-center">
+                  
+                  <span className="text-gray-400">Pincode:201016</span>
+                </li>
+                  <li className="flex items-center">
+                  
+                  <span className="text-gray-400">9971665564</span>
+                </li>
               </ul>
             </div>
           </motion.div>
