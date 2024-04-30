@@ -57,10 +57,10 @@ const CollectionSlider = () => {
       >
         {products.map((item) => (
           <SwiperSlide key={item.title}>
-            <div className="relative group">
+            <div className="relative bg-white shadow-md rounded-lg overflow-hidden">
               <div className="aspect-[3/4] overflow-hidden">
                 <img
-                  className="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110"
+                  className="w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-110"
                   src={item.images[0]}
                   alt={item.title}
                 />
@@ -68,17 +68,17 @@ const CollectionSlider = () => {
                   <FaHeart className="text-red-500 text-lg" />
                 </button>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 px-4 py-2 bg-gradient-to-t from-black via-gray-800 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="text-lg font-semibold text-white">₹{item.price}</p>
+              <div className="px-4 py-3">
+                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                <div className="flex items-center justify-between mt-2">
+                  <p className="text-xl font-bold text-gray-900">₹{item.price}</p>
+                  <button
+                    className="px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-gray-700 transition duration-300"
+                    onClick={() => handleBuyNowClick(item)}
+                  >
+                    Buy Now
+                  </button>
                 </div>
-                <button
-                  className="mt-2 px-4 py-2 w-full bg-white text-gray-800 text-sm font-semibold rounded-md hover:bg-gray-100 transition duration-300"
-                  onClick={() => handleBuyNowClick(item)}
-                >
-                  Buy Now
-                </button>
               </div>
             </div>
           </SwiperSlide>
