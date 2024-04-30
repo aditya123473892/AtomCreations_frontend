@@ -29,10 +29,10 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-center">
           <img src={feature3} alt="Feature 3" className="w-24 h-24 sm:w-32 sm:h-32 mb-4" />
           <h2 className="text-xl sm:text-2xl font-base text-center mb-2">
-            Shipping within 48 hours
+            Made in india
           </h2>
           <p className="text-sm sm:text-base text-center">
-            Your order will be shipped within 48 hours from the time since order is placed
+          Crafted with pride in India, delivering quality and authenticity
           </p>
         </div>
       </div>
