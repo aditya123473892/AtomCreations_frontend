@@ -7,21 +7,22 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import { Autoplay, FreeMode, Navigation } from "swiper/modules";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const CollectionSlider = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
   const handleBuyNowClick = (item) => {
     navigate(`/product?id=${item._id}`);
   };
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          "https://backendatom.vercel.app/api/products/"
-        );
+        const res = await axios.get("http://localhost:8080/api/products/");
         console.log(res.data);
         setProducts(() => res.data);
       } catch (error) {
@@ -32,7 +33,7 @@ const CollectionSlider = () => {
   }, []);
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative mb-12">
       <Swiper
         breakpoints={{
           500: {
@@ -56,20 +57,24 @@ const CollectionSlider = () => {
       >
         {products.map((item) => (
           <SwiperSlide key={item.title}>
-            <div className="flex aspect-[3/4] gap-8 mb-20 justify-center text-white overflow-hidden cursor-pointer group relative">
-              <img
-                className="h-full w-full ease-in-out duration-500 group-hover:scale-110"
-                src={item.images[0]}
-                alt={item.title}
-              />
-              <div className="absolute h-full w-full flex items-start justify-end">
-                <div className="h-14 w-14 bg-white text-black m-4 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duration-75">
-                  <FaArrowRight className="text-2xl" />
-                </div>
+            <div className="relative group">
+              <div className="aspect-[3/4] overflow-hidden">
+                <img
+                  className="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110"
+                  src={item.images[0]}
+                  alt={item.title}
+                />
+                <button className="absolute top-4 right-4 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-100 transition duration-300">
+                  <FaHeart className="text-red-500 text-lg" />
+                </button>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-75 bg-black bg-opacity-20">
+              <div className="absolute bottom-0 left-0 right-0 px-4 py-2 bg-gradient-to-t from-black via-gray-800 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="text-lg font-semibold text-white">₹{item.price}</p>
+                </div>
                 <button
-                  className="px-6 py-2 text-white text-lg font-semibold font-base bg-transparent border border-white rounded-full hover:bg-white hover:text-black transition duration-75"
+                  className="mt-2 px-4 py-2 w-full bg-white text-gray-800 text-sm font-semibold rounded-md hover:bg-gray-100 transition duration-300"
                   onClick={() => handleBuyNowClick(item)}
                 >
                   Buy Now
