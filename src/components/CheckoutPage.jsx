@@ -29,7 +29,7 @@ const CheckoutPage = () => {
     state: "",
     pinCode: "",
     couponCode: "",
-    paymentMethod: "cashOnDelivery",
+    paymentMethod: "",
   });
 
   const [discountPercentage, setDiscountPercentage] = useState(0);
@@ -48,18 +48,32 @@ const CheckoutPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
     const token = localStorage.getItem("token");
-    const { name, email, address, city, state, pinCode, phoneNo } = formData;
+    const {
+      name,
+      email,
+      address,
+      city,
+      state,
+      pinCode,
+      phoneNo,
+      paymentMethod,
+    } = formData;
     console.log(formData);
+    console.log(paymentMethod);
 
     // Process the form submission (e.g., send data to server)
     if (itemId) {
       try {
         const res = await axios.post(
-          "https://backendatom.vercel.app/api/appuser/placeorder",
+          "http://localhost:8080/api/appuser/placeorder",
           {
             address,
+            email,
+            name,
             city,
+            paymentMethod,
             state,
             pinCode,
             phoneNo,
@@ -81,7 +95,7 @@ const CheckoutPage = () => {
 
         console.log(res);
         console.log(res.data._id);
-        navigate(`/confirmation/?id=${res.data.data._id}`);
+        navigate(`/confirmation/?id=${res.data.data._id}&m=${paymentMethod}`);
       } catch (error) {
         console.log(error);
       }
@@ -95,10 +109,13 @@ const CheckoutPage = () => {
       }));
       try {
         const res = await axios.post(
-          "https://backendatom.vercel.app/api/appuser/placeorder",
+          "http://localhost:8080/api/appuser/placeorder",
           {
             address,
             city,
+            email,
+            name,
+            paymentMethod,
             state,
             pinCode,
             phoneNo,
@@ -463,16 +480,15 @@ const CheckoutPage = () => {
                         checked={formData.paymentMethod === "razorpay"}
                         onChange={handleChange}
                         className="mr-2"
-                        disabled
                       />
                       <label
                         htmlFor="razorpay"
                         className="text-lg text-gray-400 relative"
                       >
-                        Razorpay
-                        <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                          Coming Soon
-                        </span>
+                        UPI
+                        {/* <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                          UPI
+                        </span> */}
                       </label>
                     </div>
                     <div className="flex items-center">
@@ -507,7 +523,6 @@ const CheckoutPage = () => {
               </motion.div>
             </div>
           </>
-          
         </>
       </div>
     </div>
