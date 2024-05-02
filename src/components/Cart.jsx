@@ -20,7 +20,7 @@ const Cart = () => {
   const removeFromCart = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://backendatom.vercel.app/api/appuser/removefromcart",
+      "https://atom-creations-backend.vercel.app/api/appuser/removefromcart",
       {
         productId: id,
         size: size,
@@ -32,7 +32,7 @@ const Cart = () => {
       }
     );
     if (res.status === 200) {
-      window.location.reload()
+      window.location.reload();
       // setCartItems(cartItems.filter((item) => item.productId !== id));
       toast.success("Item removed from cart.");
     }
@@ -41,7 +41,7 @@ const Cart = () => {
   const clearCart = async () => {
     const YOUR_TOKEN = localStorage.getItem("token");
     const res = await fetch(
-      "https://backendatom.vercel.app/api/appuser/emptycart",
+      "https://atom-creations-backend.vercel.app/api/appuser/emptycart",
       {
         method: "POST",
         headers: {
@@ -71,7 +71,7 @@ const Cart = () => {
   const incrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://backendatom.vercel.app/api/appuser/incquantity",
+      "https://atom-creations-backend.vercel.app/api/appuser/incquantity",
       {
         productId: id,
         size: size,
@@ -88,7 +88,7 @@ const Cart = () => {
   const decrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://backendatom.vercel.app/api/appuser/decquantity",
+      "https://atom-creations-backend.vercel.app/api/appuser/decquantity",
       {
         productId: id,
         size: size,
@@ -108,7 +108,7 @@ const Cart = () => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const myCart = await axios.get(
-            "https://backendatom.vercel.app/api/appuser/getcartitem",
+            "https://atom-creations-backend.vercel.app/api/appuser/getcartitem",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`,

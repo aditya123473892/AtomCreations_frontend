@@ -26,7 +26,7 @@ const ContactUs = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://backendatom.vercel.app/api/appuser/contactus",
+        "https://atom-creations-backend.vercel.app/api/appuser/contactus",
         {
           senderName,
           email,
@@ -67,9 +67,7 @@ const ContactUs = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
-            <p className="text-gray-400 mb-8">
-           
-            </p>
+            <p className="text-gray-400 mb-8"></p>
             <div className="mb-8">
               <h3 className="text-xl font-semibold mb-2">
                 Contact Information
@@ -86,14 +84,14 @@ const ContactUs = () => {
                 </li>
                 <li className="flex items-center">
                   <FaMapMarkerAlt className="text-indigo-600 mr-2" />
-                  <span className="text-gray-400">Mahagun Mascott crossing republik Ghaziabad, India</span>
+                  <span className="text-gray-400">
+                    Mahagun Mascott crossing republik Ghaziabad, India
+                  </span>
                 </li>
-                      <li className="flex items-center">
-                  
+                <li className="flex items-center">
                   <span className="text-gray-400">Pincode:201001</span>
                 </li>
-                  <li className="flex items-center">
-                  
+                <li className="flex items-center">
                   <span className="text-gray-400">phone no. 9971665564</span>
                 </li>
               </ul>

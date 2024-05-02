@@ -22,7 +22,9 @@ const CollectionSlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("https://backendatom.vercel.app/api/products/");
+        const res = await axios.get(
+          "https://atom-creations-backend.vercel.app/api/products/"
+        );
         console.log(res.data);
         setProducts(() => res.data);
       } catch (error) {
@@ -69,9 +71,13 @@ const CollectionSlider = () => {
                 </button>
               </div>
               <div className="px-4 py-3">
-                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {item.title}
+                </h3>
                 <div className="flex items-center justify-between mt-2">
-                  <p className="text-xl font-bold text-gray-900">₹{item.price}</p>
+                  <p className="text-xl font-bold text-gray-900">
+                    ₹{item.price}
+                  </p>
                   <button
                     className="px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-gray-700 transition duration-300"
                     onClick={() => handleBuyNowClick(item)}

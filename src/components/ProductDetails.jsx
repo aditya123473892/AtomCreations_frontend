@@ -38,7 +38,7 @@ const ProductDetails = () => {
       try {
         // const data = await getProductById(id);
         const getMyProduct = await axios.get(
-          `https://backendatom.vercel.app/api/products/${id}`
+          `https://atom-creations-backend.vercel.app/api/products/${id}`
         );
         console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
@@ -92,7 +92,7 @@ const ProductDetails = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://backendatom.vercel.app/api/appuser/addToWishList",
+          "https://atom-creations-backend.vercel.app/api/appuser/addToWishList",
           {
             productId: id,
           },
@@ -150,7 +150,7 @@ const ProductDetails = () => {
       console.log(token);
       try {
         const res = await axios.post(
-          "https://backendatom.vercel.app/api/appuser/addtocart",
+          "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
           {
             productId: id,
             size: selectedSize,

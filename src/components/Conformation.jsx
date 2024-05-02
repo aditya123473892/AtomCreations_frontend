@@ -36,7 +36,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `https://backendatom.vercel.app/api/appuser/applyCoupon/${orderId}`,
+        `https://atom-creations-backend.vercel.app/api/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
@@ -85,7 +85,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       console.log(orderId);
       if (orderId) {
         const res = await axios.put(
-          "https://backendatom.vercel.app/api/appuser/confirmOrder",
+          "https://atom-creations-backend.vercel.app/api/appuser/confirmOrder",
           {
             orderId: orderId,
           },
@@ -111,19 +111,20 @@ const ConfirmationPage = ({ selectedItem }) => {
     const token = localStorage.getItem("token");
 
     try {
-      console.log("Is Razorpay defined?", window.Razorpay); 
+      console.log("Is Razorpay defined?", window.Razorpay);
       setTimeout(() => {
-        console.log("Is Razorpay defined?", window.Razorpay); 
-
+        console.log("Is Razorpay defined?", window.Razorpay);
       }, 4000);
       const {
         data: { key },
-      } = await axios.get("https://backendatom.vercel.app/api/payment/getkey");
-      console.log(key)
+      } = await axios.get(
+        "https://atom-creations-backend.vercel.app/api/payment/getkey"
+      );
+      console.log(key);
       const {
         data: { order },
       } = await axios.post(
-        "https://backendatom.vercel.app/api/payment/checkout",
+        "https://atom-creations-backend.vercel.app/api/payment/checkout",
         {
           amount: parseInt(totalPrice),
         },
@@ -133,18 +134,18 @@ const ConfirmationPage = ({ selectedItem }) => {
           },
         }
       );
-      console.log(order)
+      console.log(order);
 
       const options = {
         key,
         amount: order.amount,
-       
+
         currency: "INR",
         name: "Atom Creations",
         description: "Atom Creations Payment",
         image: icon,
         order_id: order.id,
-        callback_url: `https://backendatom.vercel.app/api/payment/paymentverification/${orderId}`,
+        callback_url: `https://atom-creations-backend.vercel.app/api/payment/paymentverification/${orderId}`,
         prefill: {
           name: orderDetails.shippingInfo.name,
           email: orderDetails.shippingInfo.email,
@@ -157,7 +158,7 @@ const ConfirmationPage = ({ selectedItem }) => {
           color: "#121212",
         },
       };
-      console.log(options)
+      console.log(options);
       const razor = new window.Razorpay(options);
       razor.open();
       // Razorpay.open(options);
@@ -189,7 +190,7 @@ const ConfirmationPage = ({ selectedItem }) => {
         console.log(orderId);
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `https://backendatom.vercel.app/api/appuser/getorder/${orderId}`,
+          `https://atom-creations-backend.vercel.app/api/appuser/getorder/${orderId}`,
 
           {
             headers: {
