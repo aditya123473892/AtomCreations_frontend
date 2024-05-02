@@ -3,18 +3,22 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
+import icon from "../assets/new_logo.png";
+
 import "react-toastify/dist/ReactToastify.css";
-const ConfirmationPage = ({ orderDetails, selectedItem }) => {
+const ConfirmationPage = ({ selectedItem }) => {
   const [formData, setFormData] = useState({
     couponCode: "",
   });
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const orderId = searchParams.get("id");
+  const paymentMethod = searchParams.get("m");
+  console.log(paymentMethod);
   // setOrderId(()=>id);
   console.log(orderId);
   const [discountPercentage, setDiscountPercentage] = useState(0);
-  const [order, setOrder] = useState({});
+  const [orderDetails, setOrderDetails] = useState({});
   const [totalPrice, setTotalPrice] = useState("");
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -27,12 +31,12 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
 
   const handleApplyCoupon = async () => {
     const { couponCode } = formData;
-    // console.log(couponCode)
+    console.log(couponCode);
     try {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `https://backendatom.vercel.app/api/appuser/applyCoupon/${orderId}`,
+        `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
@@ -67,12 +71,12 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
     //   ATOMS20: 20,
     // };
 
-    const enteredCode = formData.couponCode.toUpperCase();
-    if (couponCodes[enteredCode]) {
-      setDiscountPercentage(couponCodes[enteredCode]);
-    } else {
-      setDiscountPercentage(0);
-    }
+    // const enteredCode = formData.couponCode.toUpperCase();
+    // if (couponCodes[enteredCode]) {
+    //   setDiscountPercentage(couponCodes[enteredCode]);
+    // } else {
+    //   setDiscountPercentage(0);
+    // }
   };
   const handleConfirmOrder = async () => {
     // e.preventDefault();
@@ -103,6 +107,74 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
     }
   };
 
+  const handlePayNow = async (amount) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      console.log("Is Razorpay defined?", window.Razorpay); 
+      setTimeout(() => {
+        console.log("Is Razorpay defined?", window.Razorpay); 
+
+      }, 4000);
+      const {
+        data: { key },
+      } = await axios.get("http://localhost:8080/api/payment/getkey");
+      console.log(key)
+      const {
+        data: { order },
+      } = await axios.post(
+        "http://localhost:8080/api/payment/checkout",
+        {
+          amount: parseInt(totalPrice),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(order)
+
+      const options = {
+        key,
+        amount: order.amount,
+       
+        currency: "INR",
+        name: "Atom Creations",
+        description: "Atom Creations Payment",
+        image: icon,
+        order_id: order.id,
+        callback_url: `http://localhost:8080/api/payment/paymentverification/${orderId}`,
+        prefill: {
+          name: orderDetails.shippingInfo.name,
+          email: orderDetails.shippingInfo.email,
+          contact: orderDetails.shippingInfo.phoneNo,
+        },
+        notes: {
+          address: orderDetails.shippingInfo.address,
+        },
+        theme: {
+          color: "#121212",
+        },
+      };
+      console.log(options)
+      const razor = new window.Razorpay(options);
+      razor.open();
+      // Razorpay.open(options);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const handlePayNow = async()=>{
+  //   const YOUR_TOKEN = localStorage.getItem("token");
+  //   try {
+
+  //   } catch (error) {
+
+  //   }
+  // }
+
   // const discountedPrice =
   //   orderDetails.totalPrice - (orderDetails.totalPrice * discountPercentage) / 100;
   // const shippingCharges = 0;
@@ -126,9 +198,10 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
           }
         );
         console.log(res);
-        setOrder(res.data);
+        setOrderDetails(res.data);
         console.log(res.data);
         setTotalPrice(res.data.paymentInfo.totalPrice);
+
         console.log(totalPrice);
         // Update the orderDetails state with the latest data
         // You can use the response data to update the orderDetails state
@@ -152,28 +225,32 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
         className=" rounded-lg p-8 shadow-2xl"
       >
         <h2 className="text-2xl font-bold mb-4">Order Confirmation</h2>
-        {order && (
+        {orderDetails && (
           <>
             <div className="mb-4">
-              {order.shippingInfo && (
+              {orderDetails.shippingInfo && (
                 <>
                   <p className="text-lg">
-                    Address: {order.shippingInfo.address}
+                    Address: {orderDetails.shippingInfo.address}
                   </p>
-                  <p className="text-lg">City: {order.shippingInfo.city}</p>
+                  <p className="text-lg">
+                    City: {orderDetails.shippingInfo.city}
+                  </p>
 
-                  <p className="text-lg">State: {order.shippingInfo.state}</p>
                   <p className="text-lg">
-                    Pin Code: {order.shippingInfo.pinCode}
+                    State: {orderDetails.shippingInfo.state}
                   </p>
                   <p className="text-lg">
-                    Phone No: {order.shippingInfo.phoneNo}
+                    Pin Code: {orderDetails.shippingInfo.pinCode}
+                  </p>
+                  <p className="text-lg">
+                    Phone No: {orderDetails.shippingInfo.phoneNo}
                   </p>
                 </>
               )}
 
-              {order.orderItems &&
-                order.orderItems.map((item) => (
+              {orderDetails.orderItems &&
+                orderDetails.orderItems.map((item) => (
                   <>
                     <div className="mb-4">
                       <h3 className="text-xl font-bold mb-2">Selected Item</h3>
@@ -203,7 +280,10 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
             </div>
           </>
         )}
-        <p className="text-lg font-semibold mb-1"> Shipping Charges: ₹50 (added in your order) </p>
+        <p className="text-lg font-semibold mb-1">
+          {" "}
+          Shipping Charges: ₹50 (added in your order){" "}
+        </p>
 
         <div className="mb-4">
           <label htmlFor="couponCode" className="block mb-2 font-bold">
@@ -232,22 +312,37 @@ const ConfirmationPage = ({ orderDetails, selectedItem }) => {
             </p>
           )}
         </div>
-        
+
         <div className="mb-4">
-          {order.paymentInfo && (
+          {orderDetails.paymentInfo && (
             <p className="text-xl font-bold">
               Total Price: ₹{parseInt(totalPrice)}
             </p>
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={handleConfirmOrder}
-          className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Confirm Order
-        </button>
+        {paymentMethod === "cod" ? (
+          <>
+            <button
+              type="button"
+              onClick={handleConfirmOrder}
+              className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Confirm Order
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={handlePayNow}
+              className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Pay Now
+            </button>
+          </>
+        )}
+
         <ToastContainer position="top-center" autoClose={2000} />
       </motion.div>
     </>

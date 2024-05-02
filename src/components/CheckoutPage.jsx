@@ -3,6 +3,9 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { collectionData } from "../../src/components/constants/HomeCollectionData";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+// import { FaArrowRight } from "react-icons/fa";
+import "react-toastify/dist/ReactToastify.css";
 const CheckoutPage = () => {
   // const { itemId } = useParams();
   const location = useLocation();
@@ -29,7 +32,7 @@ const CheckoutPage = () => {
     state: "",
     pinCode: "",
     couponCode: "",
-    paymentMethod: "cashOnDelivery",
+    paymentMethod: "",
   });
 
   const [discountPercentage, setDiscountPercentage] = useState(0);
@@ -48,80 +51,108 @@ const CheckoutPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const token = localStorage.getItem("token");
-    const { name, email, address, city, state, pinCode, phoneNo } = formData;
+    const {
+      name,
+      email,
+      address,
+      city,
+      state,
+      pinCode,
+      phoneNo,
+      paymentMethod,
+    } = formData;
     console.log(formData);
+    console.log(paymentMethod);
 
-    // Process the form submission (e.g., send data to server)
-    if (itemId) {
-      try {
-        const res = await axios.post(
-          "https://backendatom.vercel.app/api/appuser/placeorder",
-          {
-            address,
-            city,
-            state,
-            pinCode,
-            phoneNo,
-            orderItems: [
-              {
-                product: item._id,
-                quantity: 1,
-                size: size,
+    if (phoneNo.length !== 10) {
+      toast.warning("Phone Number must be of 10 digits", {
+        position: "top-center",
+      });
+    } else if (!email.includes("@")) {
+      toast.warning("email must include @", {
+        position: "top-center",
+      });
+    } else {
+      // Process the form submission (e.g., send data to server)
+      if (itemId) {
+        try {
+          const res = await axios.post(
+            "http://localhost:8080/api/appuser/placeorder",
+            {
+              address,
+              email,
+              name,
+              city,
+              paymentMethod,
+              state,
+              pinCode,
+              phoneNo,
+              orderItems: [
+                {
+                  product: item._id,
+                  quantity: 1,
+                  size: size,
+                },
+              ],
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
               },
-            ],
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setOrderPlaced(true);
+            }
+          );
+          setOrderPlaced(true);
 
-        console.log(res);
-        console.log(res.data._id);
-        navigate(`/confirmation/?id=${res.data.data._id}`);
-      } catch (error) {
-        console.log(error);
+          console.log(res);
+          console.log(res.data._id);
+          navigate(`/confirmation/?id=${res.data.data._id}&m=${paymentMethod}`);
+        } catch (error) {
+          console.log(error);
+        }
       }
+
+      if (cart) {
+        const orderItems = cartItem.map((cartItem) => ({
+          product: cartItem.productId,
+          quantity: cartItem.quantity,
+          size: cartItem.size,
+        }));
+        try {
+          const res = await axios.post(
+            "http://localhost:8080/api/appuser/placeorder",
+            {
+              address,
+              city,
+              email,
+              name,
+              paymentMethod,
+              state,
+              pinCode,
+              phoneNo,
+              orderItems: orderItems,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setOrderPlaced(true);
+          setOrderDetails(res.data);
+          console.log(res);
+          console.log(res.data.data._id);
+
+          navigate(`/confirmation/?id=${res.data.data._id}`);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      setDiscountPercentage(0);
     }
 
-    if (cart) {
-      const orderItems = cartItem.map((cartItem) => ({
-        product: cartItem.productId,
-        quantity: cartItem.quantity,
-        size: cartItem.size,
-      }));
-      try {
-        const res = await axios.post(
-          "https://backendatom.vercel.app/api/appuser/placeorder",
-          {
-            address,
-            city,
-            state,
-            pinCode,
-            phoneNo,
-            orderItems: orderItems,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setOrderPlaced(true);
-        setOrderDetails(res.data);
-        console.log(res);
-        console.log(res.data.data._id);
-
-        navigate(`/confirmation/?id=${res.data.data._id}`);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    setDiscountPercentage(0);
     // setOrderPlaced(true);
   };
 
@@ -209,6 +240,8 @@ const CheckoutPage = () => {
   return (
     <div className="min-h-screen bg-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ToastContainer />
+
         {/* {orderDetails ? (
           <PaymentComponent orderDetails={orderDetails} selectedItem={item} />
         ) : ( */}
@@ -463,16 +496,15 @@ const CheckoutPage = () => {
                         checked={formData.paymentMethod === "razorpay"}
                         onChange={handleChange}
                         className="mr-2"
-                        disabled
                       />
                       <label
                         htmlFor="razorpay"
                         className="text-lg text-gray-400 relative"
                       >
-                        Razorpay
-                        <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                          Coming Soon
-                        </span>
+                        UPI
+                        {/* <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                          UPI
+                        </span> */}
                       </label>
                     </div>
                     <div className="flex items-center">
@@ -507,7 +539,6 @@ const CheckoutPage = () => {
               </motion.div>
             </div>
           </>
-          
         </>
       </div>
     </div>
