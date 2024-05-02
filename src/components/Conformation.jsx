@@ -36,7 +36,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
+        `https://backendatom.vercel.app/api/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
@@ -118,12 +118,12 @@ const ConfirmationPage = ({ selectedItem }) => {
       }, 4000);
       const {
         data: { key },
-      } = await axios.get("http://localhost:8080/api/payment/getkey");
+      } = await axios.get("https://backendatom.vercel.app/api/payment/getkey");
       console.log(key)
       const {
         data: { order },
       } = await axios.post(
-        "http://localhost:8080/api/payment/checkout",
+        "https://backendatom.vercel.app/api/payment/checkout",
         {
           amount: parseInt(totalPrice),
         },
@@ -144,7 +144,7 @@ const ConfirmationPage = ({ selectedItem }) => {
         description: "Atom Creations Payment",
         image: icon,
         order_id: order.id,
-        callback_url: `http://localhost:8080/api/payment/paymentverification/${orderId}`,
+        callback_url: `https://backendatom.vercel.app/api/payment/paymentverification/${orderId}`,
         prefill: {
           name: orderDetails.shippingInfo.name,
           email: orderDetails.shippingInfo.email,

@@ -79,7 +79,7 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.post(
-            "http://localhost:8080/api/appuser/placeorder",
+            "https://backendatom.vercel.app/api/appuser/placeorder",
             {
               address,
               email,
@@ -121,7 +121,7 @@ const CheckoutPage = () => {
         }));
         try {
           const res = await axios.post(
-            "http://localhost:8080/api/appuser/placeorder",
+            "https://backendatom.vercel.app/api/appuser/placeorder",
             {
               address,
               city,
