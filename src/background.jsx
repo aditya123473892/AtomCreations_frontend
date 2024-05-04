@@ -1,5 +1,5 @@
 import React from 'react';
-import bg from './assets/login.jpg';
+import bg from './assets/login.webp';
 
 const Background = () => {
   return (

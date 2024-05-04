@@ -1,16 +1,16 @@
 // FeaturedProducts.jsx
 import React, { useState, useEffect } from 'react';
-import seamlessImage1 from "../../assets/feature1.jpg";
-import seamlessImage2 from "../../assets/feature1.jpg";
+import seamlessImage1 from "../../assets/feature1.webp";
+import seamlessImage2 from "../../assets/feature1.webp";
 import seamlessImage3 from "../../assets/feature13.jpg";
-import imprintsImage1 from "../../assets/feature.jpg";
-import imprintsImage2 from "../../assets/feature21.jpg";
-import imprintsImage3 from "../../assets/feature22.jpg";
-import frenchTerryImage1 from "../../assets/feature3.jpg";
-import frenchTerryImage2 from "../../assets/feature31.jpg";
-import frenchTerryImage3 from "../../assets/feature6.jpg";
+import imprintsImage1 from "../../assets/feature.webp";
+import imprintsImage2 from "../../assets/feature21.webp";
+import imprintsImage3 from "../../assets/feature22.webp";
+import frenchTerryImage1 from "../../assets/feature3.webp";
+import frenchTerryImage2 from "../../assets/feature31.webp";
+import frenchTerryImage3 from "../../assets/feature6.webp";
 import frenchTerryImage4 from "../../assets/feature33.jpg";
-import frenchTerryImage5 from "../../assets/feature34.jpg";
+import frenchTerryImage5 from "../../assets/feature34.webp";
 import { FaArrowRight } from "react-icons/fa";
 
 const FeaturedProducts = () => {

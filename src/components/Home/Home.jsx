@@ -6,7 +6,7 @@ import Testimonials from "./TestimonialsSection/Testimonials";
 import FeaturedProducts from "./FeaturedProducts";
 import Offer from "./Offer";
 import UpcomingDesign from "./FeaturedCollection/UpcomingDesign"
-import bgimage from "../../assets/home62.jpg"; // Import your background image
+import bgimage from "../../assets/home62.webp"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
 
 export const Home = () => {
