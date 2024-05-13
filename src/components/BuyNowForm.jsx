@@ -9,7 +9,7 @@ const BuyNowForm = ({ item, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Process the form submission (e.g., send data to server)
-    console.log("Form submitted:", { address, pinCode });
+    // console.log("Form submitted:", { address, pinCode });
     toast.success("Order has been placed");
     onClose();
   };

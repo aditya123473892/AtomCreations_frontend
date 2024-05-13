@@ -56,7 +56,7 @@ const ChangePassword = () => {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.removeItem(token);
         setLoginData("");
         toast.success("Password changed successfully!", {
