@@ -32,9 +32,14 @@ import AddressManagement from "./components/Address";
 import ResetPassword from "./components/ResetPassword";
 import ConfirmationPage from "./components/Conformation";
 import PaymentSuccess from "./components/PaymentSuccess";
-import ReactGA from "react-ga";
-const TRACKING_ID = "G-6KTM44H7KH";
-ReactGA.initialize(TRACKING_ID);
+// import ReactGA from "react-ga";
+// const TRACKING_ID = "G-6KTM44H7KH";
+// ReactGA.initialize(TRACKING_ID);
+import TagManager from 'react-gtm-module'
+const tagManagerArgs = {
+  gtmId: 'G-6KTM44H7KH'
+}
+TagManager.initialize(tagManagerArgs)
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -44,10 +49,13 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-    // console.log(ReactGA.ga())
-  }, []);
+  // useEffect(() => {
+  //   ReactGA.pageview(window.location.pathname + window.location.search);
+  //   // console.log(ReactGA.ga())
+  // }, []);
+  window.dataLayer.push({
+    event: 'pageview'
+  });
   return (
     <AuthProvider>
       <CartProvider>
