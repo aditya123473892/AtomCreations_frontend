@@ -16,7 +16,6 @@ const CollectionSlider = () => {
     mobile: 300,
     desktop: 480,
   });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState(null); // Add a new state for hover index
 
   const handleMouseEnter = (itemIndex) => {
@@ -46,7 +45,7 @@ const CollectionSlider = () => {
   }, []);
 
   return (
-    <div className="flex flex-col relative mb-24">
+    <div className="flex flex-col relative mb-24 px-4">
       <Swiper
         breakpoints={{
           0: {
