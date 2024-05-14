@@ -49,7 +49,7 @@ const SignupPage = () => {
             // mobile,
           }
         );
-        console.log(response);
+       
         navigate(`/verify-otp?email=${email}`);
 
         // navigate("/verify-otp");

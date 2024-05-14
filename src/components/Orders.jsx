@@ -70,10 +70,10 @@ const Orders = () => {
             },
           }
         );
-        console.log(res.data);
+      
         const orderData = res.data;
         setOrders(orderData);
-        console.log(orders);
+       
       } catch (error) {
         throw new Error(error);
       }

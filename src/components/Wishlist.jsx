@@ -24,7 +24,7 @@ const Wishlist = () => {
           },
         }
       );
-      console.log(response.data);
+     
       setWishlistItems((prevItems) =>
         prevItems.filter((item) => item.productDetails._id !== id)
       );
@@ -35,7 +35,7 @@ const Wishlist = () => {
 
   const handleAddToCart = async (id) => {
     // Logic to add the item to the cart
-    console.log(logindata);
+    
     // event.stopPropagation();
     if (!logindata) {
       toast.warning("Please login to add items to the cart", {
@@ -43,7 +43,7 @@ const Wishlist = () => {
       });
     } else {
       const token = localStorage.getItem("token");
-      console.log(token);
+     
       try {
         const res = await axios.post(
           "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
@@ -57,14 +57,14 @@ const Wishlist = () => {
           }
         );
         const message = res.data.message;
-        console.log(message);
+       
         if (message === "Product already exists in the cart") {
           toast.warning("Product already exists", {
             position: "top-center",
           });
           // alert(message);
         } else {
-          console.log("added");
+          
           toast.success("Product added to cart", {
             position: "top-center",
           });
@@ -78,7 +78,7 @@ const Wishlist = () => {
         console.log(error);
       }
     }
-    // console.log("Added to cart:", item);
+    
   };
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -93,7 +93,7 @@ const Wishlist = () => {
             },
           }
         );
-        console.log(res.data.wishlistItems);
+       
         setWishlistItems(res.data.wishlistItems);
       } catch (error) {
         console.log(error);

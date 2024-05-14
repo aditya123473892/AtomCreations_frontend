@@ -65,11 +65,10 @@ const ExploreSection = () => {
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
-    console.log(searchTerm);
+   
     if (term.trim() !== "") {
       const filteredSuggestions = items.filter((product) => {
-        console.log(product.title);
-        console.log(product._id);
+       
         return product.title.toLowerCase().includes(term.toLowerCase());
       });
       setSuggestions(filteredSuggestions);
@@ -80,7 +79,7 @@ const ExploreSection = () => {
 
   const handleSearch = () => {
     const filteredResults = items.filter((product) => {
-      console.log(product.images[1]);
+    
       return product.title.toLowerCase().includes(searchTerm.toLowerCase());
     });
     setSearchResults(filteredResults);

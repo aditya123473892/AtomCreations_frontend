@@ -25,7 +25,7 @@ const CollectionSlider = () => {
         const res = await axios.get(
           "https://atom-creations-backend.vercel.app/api/products/"
         );
-        console.log(res.data);
+       
         setProducts(() => res.data);
       } catch (error) {
         console.log(error);

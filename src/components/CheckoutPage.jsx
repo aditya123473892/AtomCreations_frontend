@@ -12,10 +12,7 @@ const CheckoutPage = () => {
   const searchParams = new URLSearchParams(location.search);
   const itemId = searchParams.get("id");
   const size = searchParams.get("size");
-  console.log(size);
   const cart = searchParams.get("cart");
-  console.log(itemId);
-  console.log(cart);
   const [item, setItem] = useState({});
   const [cartItem, setCartItem] = useState([]);
   const [TotalPrice, setTotalPrice] = useState("");
@@ -63,8 +60,8 @@ const CheckoutPage = () => {
       phoneNo,
       paymentMethod,
     } = formData;
-    console.log(formData);
-    console.log(paymentMethod);
+    // console.log(formData);
+    // console.log(paymentMethod);
 
     if (phoneNo.length !== 10) {
       toast.warning("Phone Number must be of 10 digits", {
@@ -105,8 +102,7 @@ const CheckoutPage = () => {
           );
           setOrderPlaced(true);
 
-          console.log(res);
-          console.log(res.data._id);
+         
           navigate(`/confirmation/?id=${res.data.data._id}&m=${paymentMethod}`);
         } catch (error) {
           console.log(error);
@@ -141,8 +137,8 @@ const CheckoutPage = () => {
           );
           setOrderPlaced(true);
           setOrderDetails(res.data);
-          console.log(res);
-          console.log(res.data.data._id);
+          // console.log(res);
+          // console.log(res.data.data._id);
 
           navigate(`/confirmation/?id=${res.data.data._id}`);
         } catch (error) {
@@ -176,13 +172,13 @@ const CheckoutPage = () => {
   if (!item) {
     return <div>Item not found.</div>;
   }
-  const handleRazorpayPayment = () => {
-    // Implement Razorpay payment logic here
-    // You can use the Razorpay API or SDK to create an order and proceed with the payment
-    // Once the payment is successful, you can update the order status and display a success message
-    console.log("Initiating Razorpay payment...");
-    // ...
-  };
+  // const handleRazorpayPayment = () => {
+  //   // Implement Razorpay payment logic here
+  //   // You can use the Razorpay API or SDK to create an order and proceed with the payment
+  //   // Once the payment is successful, you can update the order status and display a success message
+  //   console.log("Initiating Razorpay payment...");
+  //   // ...
+  // };
 
   const discountedPrice = item.price - (item.price * discountPercentage) / 100;
   const shippingCharges = formData.paymentMethod === "cashOnDelivery" ? 50 : 0;
@@ -216,14 +212,14 @@ const CheckoutPage = () => {
               }
             );
             if (myCart) {
-              console.log("Cart USER: ", myCart);
+              
               setCartItem(myCart.data.cartItems);
               setTotalPrice(myCart.data.totalprice);
               // console.log(myCart.data.totalprice);
               // console.log(TotalPrice);
-              console.log(myCart.data.cartItems);
+              
             }
-            console.log("CART ITEMS: ", cartItem);
+           
           }
         } catch (error) {
           console.log("Error fetching user:", error);

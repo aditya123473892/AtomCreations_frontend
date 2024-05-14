@@ -14,9 +14,9 @@ const ConfirmationPage = ({ selectedItem }) => {
   const searchParams = new URLSearchParams(location.search);
   const orderId = searchParams.get("id");
   const paymentMethod = searchParams.get("m");
-  console.log(paymentMethod);
+
   // setOrderId(()=>id);
-  console.log(orderId);
+
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [orderDetails, setOrderDetails] = useState({});
   const [totalPrice, setTotalPrice] = useState("");
@@ -46,11 +46,11 @@ const ConfirmationPage = ({ selectedItem }) => {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
 
-      console.log(res.data);
+      // console.log(res.data);
       const message = res.data.message;
-      console.log(message);
+
       if (message === "Coupon is already applied") {
         toast.warning("Coupon applied", {
           position: "top-center",
@@ -82,7 +82,7 @@ const ConfirmationPage = ({ selectedItem }) => {
     // e.preventDefault();
     try {
       const YOUR_TOKEN = localStorage.getItem("token");
-      console.log(orderId);
+      // console.log(orderId);
       if (orderId) {
         const res = await axios.put(
           "https://atom-creations-backend.vercel.app/api/appuser/confirmOrder",
@@ -95,7 +95,7 @@ const ConfirmationPage = ({ selectedItem }) => {
             },
           }
         );
-        console.log(res);
+
         // alert("order placed");
         toast.success("Order Placed.");
         setTimeout(() => {
@@ -111,16 +111,16 @@ const ConfirmationPage = ({ selectedItem }) => {
     const token = localStorage.getItem("token");
 
     try {
-      console.log("Is Razorpay defined?", window.Razorpay);
-      setTimeout(() => {
-        console.log("Is Razorpay defined?", window.Razorpay);
-      }, 4000);
+      // console.log("Is Razorpay defined?", window.Razorpay);
+      // setTimeout(() => {
+      //   console.log("Is Razorpay defined?", window.Razorpay);
+      // }, 4000);
       const {
         data: { key },
       } = await axios.get(
         "https://atom-creations-backend.vercel.app/api/payment/getkey"
       );
-      console.log(key);
+
       const {
         data: { order },
       } = await axios.post(
@@ -134,7 +134,6 @@ const ConfirmationPage = ({ selectedItem }) => {
           },
         }
       );
-      console.log(order);
 
       const options = {
         key,
@@ -158,7 +157,7 @@ const ConfirmationPage = ({ selectedItem }) => {
           color: "#121212",
         },
       };
-      console.log(options);
+
       const razor = new window.Razorpay(options);
       razor.open();
       // Razorpay.open(options);
@@ -187,7 +186,6 @@ const ConfirmationPage = ({ selectedItem }) => {
       // const { id } = orderId;
 
       try {
-        console.log(orderId);
         const token = localStorage.getItem("token");
         const res = await axios.get(
           `https://atom-creations-backend.vercel.app/api/appuser/getorder/${orderId}`,
@@ -198,12 +196,11 @@ const ConfirmationPage = ({ selectedItem }) => {
             },
           }
         );
-        console.log(res);
+
         setOrderDetails(res.data);
-        console.log(res.data);
+
         setTotalPrice(res.data.paymentInfo.totalPrice);
 
-        console.log(totalPrice);
         // Update the orderDetails state with the latest data
         // You can use the response data to update the orderDetails state
         // For example: setOrderDetails(res.data);
