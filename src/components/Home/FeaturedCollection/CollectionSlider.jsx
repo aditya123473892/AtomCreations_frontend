@@ -22,9 +22,14 @@ const CollectionSlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          "https://atom-creations-backend.vercel.app/api/products/"
-        );
+        // const res = await axios.get(
+        //   "https://atom-creations-backend.vercel.app/api/products/"
+        // );
+        const res = await axios.get("https://atom-creations-backend.vercel.app/api/products/", {
+          params: {
+            type: "featured",
+          },
+        });
        
         setProducts(() => res.data);
       } catch (error) {
