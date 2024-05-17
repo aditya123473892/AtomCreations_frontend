@@ -10,6 +10,7 @@ import { Autoplay, FreeMode, Navigation } from "swiper/modules";
 import { FaArrowRight, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// import "./navStyle.css"
 
 const CollectionSlider = () => {
   const [products, setProducts] = useState([]);

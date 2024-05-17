@@ -8,6 +8,7 @@ import Offer from "./Offer";
 import UpcomingDesign from "./FeaturedCollection/UpcomingDesign"
 import bgimage from "../../assets/home62.webp"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
+import Typography from "./TypographySection/Typography";
 
 export const Home = () => {
   return (
@@ -22,7 +23,7 @@ export const Home = () => {
         }}
       >
         <div className="absolute text-center flex justify-center items-center h-full w-full">
-          <h1 className="mb-[25vh] text-4xl md:text-[80px] font-heading tracking-widest text-white mb-8 animate-fade-in">
+          <h1 className="mb-[25vh] text-4xl md:text-[80px] font-heading tracking-widest text-white animate-fade-in">
             Let's Atomize Fashion
           </h1>
         </div>
@@ -39,6 +40,7 @@ export const Home = () => {
       </section>
       <FeaturedProducts />
       <Collections />
+      <Typography/>
       <Offer />
       <UpcomingDesign />
       
