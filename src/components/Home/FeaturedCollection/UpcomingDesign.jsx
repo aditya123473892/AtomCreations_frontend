@@ -1,16 +1,14 @@
 import React from "react";
-import CollectionSlider from "./UpcomingSlider";
+import UpcomingSlider from "./UpcomingSlider";
 const UpcomingDesign = () => {
   return (
-    <section className="gap-10 text-black">
+    <section className="gap-10 text-black bg-custom-bg-color">
+      <h1 className="py-6 px-4 md:py-12 text-4xl md:text-5xl text-start sans-regular font-normal text">
+        Upcoming Designs
+      </h1>
 
-      <h1 className="p-12 text-6xl text-center font-heading text">Upcoming Designs</h1>
-
-      <CollectionSlider/>
-
-    
+      <UpcomingSlider />
     </section>
   );
 };
 export default UpcomingDesign;
-

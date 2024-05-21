@@ -31,7 +31,7 @@ const FeaturedProducts = () => {
   const frenchTerryImages = [frenchTerryImage1, frenchTerryImage2, frenchTerryImage3, frenchTerryImage4,frenchTerryImage5];
 
   return (
-    <section className="flex items-center justify-center w-full overflow-hidden">
+    <section className="flex items-center justify-center w-full overflow-hidden bg-custom-bg-color">
       <div className="flex flex-col md:flex-row w-full">
         <div className="w-full md:w-6/12 m-0 p-0">
           {/* Show seamless images */}

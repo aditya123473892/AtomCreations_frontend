@@ -8,7 +8,7 @@ import "swiper/css/free-mode";
 import { Autoplay, FreeMode, Navigation } from "swiper/modules";
 import { FaArrowRight } from "react-icons/fa";
 
-const CollectionSlider = () => {
+const UpcomingSlider = () => {
   return (
     <div className="flex flex-col relative">
       <Swiper
@@ -17,8 +17,16 @@ const CollectionSlider = () => {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-          900: {
+          800: {
             slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1000: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          1440: {
+            slidesPerView: 5,
             spaceBetween: 30,
           },
         }}
@@ -30,20 +38,18 @@ const CollectionSlider = () => {
         }}
         loop={true}
         modules={[Autoplay, FreeMode, Navigation]}
-        className="max-w-[90%] lg:max-w-[90%]"
+        className="max-w-[92%] lg:max-w-[98%]"
       >
         {collectionData.map((item) => (
           <SwiperSlide key={item.title}>
-            <div className="flex aspect-[3/4] gap-8 mb-20 justify-center text-white overflow-hidden cursor-pointer group relative">
+            <div className=" aspect-[1/1] md:aspect-[3/4] gap-8 rounded-3xl mb-20 justify-center text-white overflow-hidden cursor-pointer group relative">
               <img
-                className="h-full w-full ease-in-out duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover rounded-3xl ease-in-out duration-500 group-hover:scale-110"
                 src={item.image}
                 alt={item.title}
               />
-              <div className="absolute h-full w-full flex items-start justify-end">
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-75 bg-black bg-opacity-20">
-              </div>
+              <div className="absolute h-full w-full flex items-start justify-end"></div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-75 bg-black bg-opacity-20"></div>
             </div>
           </SwiperSlide>
         ))}
@@ -52,4 +58,4 @@ const CollectionSlider = () => {
   );
 };
 
-export default CollectionSlider;
+export default UpcomingSlider;

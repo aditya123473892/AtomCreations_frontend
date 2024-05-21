@@ -64,7 +64,7 @@ const Navbar = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="bg-white flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-3"
+      className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4"
     >
       <div className="flex items-center justify-start flex-grow">
         <Link to="/">
@@ -78,9 +78,9 @@ const Navbar = () => {
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-custom-bg-color  text-black"
               >
-                <User size={30} strokeWidth={1.7} />
+                <User size={26} strokeWidth={1.7} />
                 {/* <FaUser className="text-xl" /> */}
               </motion.div>
             </Link>
@@ -120,19 +120,19 @@ const Navbar = () => {
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
+              className="flex items-center justify-center w-10 h-10 bg-custom-bg-color  rounded-full  text-black"
             >
               {/* <FaSearch className="text-xl" /> */}
-              <Search size={30} strokeWidth={1.7} />
+              <Search size={26} strokeWidth={1.7} />
             </motion.div>
           </Link>
           <Link to="/cart" className="relative button-link">
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black"
+              className="flex items-center justify-center w-10 h-10 bg-custom-bg-color  rounded-full  text-black"
             >
-              <ShoppingCart size={30} strokeWidth={1.7} />
+              <ShoppingCart size={26} strokeWidth={1.7} />
               {/* <FaShoppingCart className="text-xl" /> */}
             </motion.div>
           </Link>
@@ -147,7 +147,7 @@ const Navbar = () => {
             // whileHover={{ scale: 1.1 }}
             // whileTap={{ scale: 0.9 }}
           >
-            <Menu size={30} strokeWidth={1.7} />
+            <Menu size={28} strokeWidth={1.7} />
           </motion.div>
         </div>
       </div>
