@@ -15,27 +15,26 @@ export const AuthProvider = ({ children }) => {
             "http://localhost:8080/api/user/fetchuser",
             {
               headers: {
-                Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token
+                Authorization: `Bearer ${YOUR_TOKEN}`, 
               },
             }
           );
           if (user) {
-            console.log(user.data.getUser);
             setLoginData(() => user.data.getUser);
           }
         }
       } catch (error) {
-        console.log("Error fetching user:", error);
+        console.log("Error fetching user");
       }
     };
 
     checkLoggedIn();
   }, []);
-  useEffect(() => {
-    console.log("Updated login data:", logindata);
+  // useEffect(() => {
+  //   console.log("Updated login data:", logindata);
 
-    console.log(logindata);
-  }, []);
+  //   console.log(logindata);
+  // }, []);
 
   return (
     <>

@@ -3,14 +3,13 @@ import React from "react";
 import TypographySlider from "./TypographySlider";
 const Typography = () => {
   return (
-    <section className="gap-10 text-black bg-custom-bg-color">
-     <h1 className="py-6 px-4 md:p-12 text-4xl md:text-5xl text-start sans-regular text">Typography Collection</h1>
-      <TypographySlider/>
-
-    
+    <section className="gap-10 text-black">
+      <h1 className="py-12 text-5xl md:text-6xl text-center font-heading text">
+        Typography
+      </h1>
+      <TypographySlider />
     </section>
   );
 };
 
 export default Typography;
-

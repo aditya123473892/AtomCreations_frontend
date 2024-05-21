@@ -10,6 +10,7 @@ import { Autoplay, FreeMode, Navigation } from "swiper/modules";
 import { FaArrowRight, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// import "./navStyle.css"
 
 const CollectionSlider = () => {
   const [products, setProducts] = useState([]);
@@ -22,12 +23,15 @@ const CollectionSlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/products/", {
+        // const res = await axios.get(
+        //   "https://atom-creations-backend.vercel.app/api/products/"
+        // );
+        const res = await axios.get("https://atom-creations-backend.vercel.app/api/products/", {
           params: {
             type: "featured",
           },
         });
-        console.log(res.data);
+       
         setProducts(() => res.data);
       } catch (error) {
         console.log(error);

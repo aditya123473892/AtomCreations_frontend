@@ -47,7 +47,7 @@ const Navbar = () => {
     e.preventDefault();
     localStorage.removeItem("token");
     setLoginData("");
-    console.log(logindata);
+
     navigate("/");
   };
 
@@ -55,9 +55,9 @@ const Navbar = () => {
     setIsOpen(open);
   }, [open]);
 
-  useEffect(() => {
-    console.log("Login data updated:", logindata);
-  }, [logindata]);
+  // useEffect(() => {
+  //   console.log("Login data updated:", logindata);
+  // }, [logindata]);
 
   return (
     <motion.nav

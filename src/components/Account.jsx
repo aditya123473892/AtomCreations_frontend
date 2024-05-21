@@ -19,7 +19,7 @@ const MyAccount = () => {
     localStorage.removeItem("token")
     setLoginData("")
     navigate("/")
-    console.log("Logout clicked");
+    
   };
 
   return (

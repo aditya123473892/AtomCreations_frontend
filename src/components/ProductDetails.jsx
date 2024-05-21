@@ -20,7 +20,6 @@ const ProductDetails = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-  console.log(id);
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
@@ -40,9 +39,9 @@ const ProductDetails = () => {
         const getMyProduct = await axios.get(
           `https://atom-creations-backend.vercel.app/api/products/${id}`
         );
-        console.log(getMyProduct.data);
+        // console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
-        console.log("Product: ", product);
+       
         // console.log(getMyProduct.data);
         // console.log(getMyProduct.data.color);
         // setSelectedSize(getMyProduct.data.size[0]);
@@ -73,10 +72,10 @@ const ProductDetails = () => {
     reviews,
     description,
   } = product;
-  console.log(images[0]);
+ 
   const handleSizeClick = (size) => {
     setSelectedSize(size);
-    console.log(selectedSize);
+    
   };
 
   const handleColorClick = (color) => {
@@ -102,7 +101,7 @@ const ProductDetails = () => {
             },
           }
         );
-        console.log(res.data);
+        
       } catch (error) {
         console.log(error);
       }
@@ -135,7 +134,7 @@ const ProductDetails = () => {
   //   addToCart(cartItem);
   // };
   const handleAddToCart = async (event) => {
-    console.log(logindata);
+   
     event.stopPropagation();
     if (!logindata) {
       toast.warning("Please login to add items to the cart", {
@@ -147,7 +146,7 @@ const ProductDetails = () => {
       });
     } else {
       const token = localStorage.getItem("token");
-      console.log(token);
+      
       try {
         const res = await axios.post(
           "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
@@ -162,7 +161,7 @@ const ProductDetails = () => {
           }
         );
         const message = res.data.message;
-        console.log(message);
+      
         if (message === "Product already exists in the cart") {
           toast.warning("Product already exists", {
             position: "top-center",

@@ -32,6 +32,8 @@ import AddressManagement from "./components/Address";
 import ResetPassword from "./components/ResetPassword";
 import ConfirmationPage from "./components/Conformation";
 import PaymentSuccess from "./components/PaymentSuccess";
+import ReactGA from "react-ga";
+const TRACKING_ID = import.meta.env.VITE_TRACKING_ID;
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -42,6 +44,15 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
+  useEffect(() => {
+    
+    
+    ReactGA.initialize(TRACKING_ID);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+  window.dataLayer.push({
+    event: "pageview",
+  });
   return (
     <AuthProvider>
       <CartProvider>
@@ -74,10 +85,10 @@ const App = () => {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="orders" element={<Orders />} />
-          <Route path="/confirmation" element={<ConfirmationPage/>}/>
+          <Route path="/confirmation" element={<ConfirmationPage />} />
           <Route path="addresses" element={<AddressManagement />} />
-          <Route path="/paymentsuccess" element={<PaymentSuccess/>}/>
-          <Route path="/reset-password/:token" element={<ResetPassword/>}/>
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>
         <Footer />
       </CartProvider>

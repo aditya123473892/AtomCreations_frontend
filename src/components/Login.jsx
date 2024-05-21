@@ -39,7 +39,7 @@ const LoginPage = () => {
         position: "top-center",
       });
     } else {
-      console.log(email);
+    
       try {
         const response = await axios.post(
           "https://atom-creations-backend.vercel.app/api/user/forgot-password-token",
@@ -47,7 +47,7 @@ const LoginPage = () => {
             email,
           }
         );
-        console.log(response);
+       
       } catch (error) {
         toast.warning("Something went wrong", {
           position: "top-center",
@@ -77,11 +77,11 @@ const LoginPage = () => {
           }
         );
 
-        console.log(res.data);
+      
         const storageToken = res.data.token;
         localStorage.setItem("token", storageToken);
         const expirationTime = Date.now() + 3 * 24 * 60 * 60 * 1000;
-        console.log(res);
+       
         navigate("/");
         window.location.reload();
 
@@ -95,7 +95,7 @@ const LoginPage = () => {
         //   navigate("/");
         // }, 2000);
       } catch (error) {
-        console.log(error);
+       
         toast.error("Incorrect email or password", {
           position: "top-center",
           autoClose: 3000,

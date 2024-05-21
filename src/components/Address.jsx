@@ -40,7 +40,7 @@ const AddressManagement = () => {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
       setAddresses(res.data.addresses);
     } catch (error) {
       console.log(error);
@@ -52,7 +52,7 @@ const AddressManagement = () => {
         isDefault: false,
       };
 
-      console.log(address);
+      // console.log(address);
       // setNewAddress({
       //   name: "",
       //   address: "",
@@ -79,7 +79,7 @@ const AddressManagement = () => {
           },
         }
       );
-      console.log(res.data.user.addresses);
+      // console.log(res.data.user.addresses);
       setAddresses(res.data.user.addresses);
     } catch (error) {
       console.log(error);

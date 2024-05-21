@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { collectionData } from "../../constants/HomeCollectionData";
+// import { collectionData } from "../../constants/HomeCollectionData";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
@@ -22,38 +22,34 @@ const TypographySlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/products/", {
+        // const res = await axios.get(
+        //   "https://atom-creations-backend.vercel.app/api/products/"
+        // );
+        const res = await axios.get("https://atom-creations-backend.vercel.app/api/products/", {
           params: {
             type: "typography",
           },
         });
-        console.log(res.data);
+
         setProducts(() => res.data);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchProducts();
   }, []);
-
+  const navigationButtonColor = "black"; 
   return (
-    <div className="flex flex-col relative pb-6">
+    <div className="flex flex-col relative mb-12">
       <Swiper
         breakpoints={{
           500: {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-          800: {
+          900: {
             slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1000: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
-          1440: {
-            slidesPerView: 5,
             spaceBetween: 30,
           },
         }}
@@ -65,18 +61,19 @@ const TypographySlider = () => {
         }}
         loop={true}
         modules={[Autoplay, FreeMode, Navigation]}
-        className="max-w-[92%] lg:max-w-[98%]"
+        className="max-w-[90%] lg:max-w-[90%]"
+        // style={{ "swiper-button-next": "black" }}
       >
         {products.map((item) => (
-          <SwiperSlide key={item.title}>
-            <div className="relative bg-white shadow-md rounded-xl overflow-hidden">
-              <div className=" overflow-hidden  aspect-[1/1] lg:aspect-[3/4] ">
+          <SwiperSlide style={{ "swiper-button-next": "black" }} key={item.title}>
+            <div className="relative bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="aspect-[3/4] overflow-hidden">
                 <img
-                  className="w-full h-full rounded-xl object-cover transition duration-500 ease-in-out transform hover:scale-110"
+                  className="w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-110"
                   src={item.images[0]}
                   alt={item.title}
                 />
-                <button className="absolute top-4 right-4 p-2 bg-opacity-50  hover:bg-opacity-100 transition duration-300">
+                <button className="absolute top-4 right-4 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-100 transition duration-300">
                   <FaHeart className="text-red-500 text-lg" />
                 </button>
               </div>
@@ -84,12 +81,12 @@ const TypographySlider = () => {
                 <h3 className="text-lg font-semibold text-gray-800">
                   {item.title}
                 </h3>
-                <div className="flex items-center justify-between mt-3.5">
+                <div className="flex items-center justify-between mt-2">
                   <p className="text-xl font-bold text-gray-900">
                     ₹{item.price}
                   </p>
                   <button
-                    className="px-6 py-[8px] border-[1px] border-gray-700 text-black text-sm font-semibold hover:bg-gray-400 transition duration-300 rounded-3xl"
+                    className="px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-gray-700 transition duration-300"
                     onClick={() => handleBuyNowClick(item)}
                   >
                     Buy Now

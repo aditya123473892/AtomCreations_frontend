@@ -9,6 +9,7 @@ import UpcomingDesign from "./FeaturedCollection/UpcomingDesign"
 import bgimage from "../../assets/home62.webp"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
 import Typography from "./TypographySection/Typography";
+import Typography from "./TypographySection/Typography";
 
 export const Home = () => {
   return (
@@ -41,7 +42,7 @@ export const Home = () => {
       {/* <FeaturedProducts /> */}
       <Collections />
       <Typography/>
-      {/* <Offer /> */}
+      <Offer />
       <UpcomingDesign />
       
     </>
