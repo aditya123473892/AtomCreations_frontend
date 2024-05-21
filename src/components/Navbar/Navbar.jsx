@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, useCycle } from "framer-motion";
-import icon from "../../assets/new_logo.png";
+import icon from "../../assets/black_logo.png";
 import {
   FaUser,
   FaShoppingCart,
@@ -56,7 +56,7 @@ const Navbar = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="bg-black flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-3"
+      className="bg-white flex justify-between items-center px-8 top-0 z-50 py-2 md:py-3"
     >
       <div className="flex items-center justify-start flex-grow">
         <Link to="/">

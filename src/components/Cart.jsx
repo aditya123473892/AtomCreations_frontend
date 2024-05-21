@@ -20,7 +20,7 @@ const Cart = () => {
   const removeFromCart = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/removefromcart",
+      "http://localhost:8080/api/appuser/removefromcart",
       {
         productId: id,
         size: size,
@@ -41,7 +41,7 @@ const Cart = () => {
   const clearCart = async () => {
     const YOUR_TOKEN = localStorage.getItem("token");
     const res = await fetch(
-      "https://atom-creations-backend.vercel.app/api/appuser/emptycart",
+      "http://localhost:8080/api/appuser/emptycart",
       {
         method: "POST",
         headers: {
@@ -71,7 +71,7 @@ const Cart = () => {
   const incrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/incquantity",
+      "http://localhost:8080/api/appuser/incquantity",
       {
         productId: id,
         size: size,
@@ -88,7 +88,7 @@ const Cart = () => {
   const decrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/decquantity",
+      "http://localhost:8080/api/appuser/decquantity",
       {
         productId: id,
         size: size,
@@ -108,7 +108,7 @@ const Cart = () => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const myCart = await axios.get(
-            "https://atom-creations-backend.vercel.app/api/appuser/getcartitem",
+            "http://localhost:8080/api/appuser/getcartitem",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`,

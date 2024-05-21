@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import Offer1 from "../../assets/offers.png"
+import Offer1 from "../../assets/sale121.jpeg"
 import Offer2 from "../../assets/offers2.jpg"
 import OfferMobile1 from "../../assets/offers-mobile.jpg"
 import OfferMobile2 from "../../assets/offers2-mobile.png"

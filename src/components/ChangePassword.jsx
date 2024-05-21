@@ -48,7 +48,7 @@ const ChangePassword = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-          "https://atom-creations-backend.vercel.app/api/user/password",
+          "http://localhost:8080/api/user/password",
           { currentPassword, newPassword },
           {
             headers: {

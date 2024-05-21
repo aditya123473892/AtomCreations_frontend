@@ -1,8 +1,6 @@
-// CollectionSlider.js
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-// import { collectionData } from "../../constants/HomeCollectionData";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
@@ -13,6 +11,19 @@ import axios from "axios";
 
 const TypographySlider = () => {
   const [products, setProducts] = useState([]);
+  const [imageHeight, setImageHeight] = useState({
+    mobile: 300,
+    desktop: 480,
+  });
+  const [hoverIndex, setHoverIndex] = useState(null); // Add a new state for hover index
+
+  const handleMouseEnter = (itemIndex) => {
+    setHoverIndex(itemIndex); // Set the hover index when mouse enters
+  };
+
+  const handleMouseLeave = () => {
+    setHoverIndex(null); // Reset the hover index when mouse leaves
+  };
   const navigate = useNavigate();
 
   const handleBuyNowClick = (item) => {
@@ -22,10 +33,7 @@ const TypographySlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // const res = await axios.get(
-        //   "https://atom-creations-backend.vercel.app/api/products/"
-        // );
-        const res = await axios.get("https://atom-creations-backend.vercel.app/api/products/", {
+        const res = await axios.get("http://localhost:8080/api/products/", {
           params: {
             type: "typography",
           },
@@ -39,65 +47,110 @@ const TypographySlider = () => {
 
     fetchProducts();
   }, []);
-  const navigationButtonColor = "black"; 
-  return (
-    <div className="flex flex-col relative mb-12">
-      <Swiper
-        breakpoints={{
-          500: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-          900: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        }}
-        freeMode={true}
-        navigation={true}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        modules={[Autoplay, FreeMode, Navigation]}
-        className="max-w-[90%] lg:max-w-[90%]"
-        // style={{ "swiper-button-next": "black" }}
-      >
-        {products.map((item) => (
-          <SwiperSlide style={{ "swiper-button-next": "black" }} key={item.title}>
-            <div className="relative bg-white shadow-md rounded-lg overflow-hidden">
-              <div className="aspect-[3/4] overflow-hidden">
-                <img
-                  className="w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-110"
-                  src={item.images[0]}
-                  alt={item.title}
-                />
-                <button className="absolute top-4 right-4 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-100 transition duration-300">
-                  <FaHeart className="text-red-500 text-lg" />
-                </button>
-              </div>
-              <div className="px-4 py-3">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {item.title}
-                </h3>
-                <div className="flex items-center justify-between mt-2">
-                  <p className="text-xl font-bold text-gray-900">
-                    ₹{item.price}
-                  </p>
-                  <button
-                    className="px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-gray-700 transition duration-300"
+
+    return (
+      <div className="flex flex-col relative mb-24 px-4">
+        <Swiper
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }}
+          freeMode={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          modules={[Autoplay, FreeMode, Navigation]}
+          className="max-w-full"
+        >
+          {products.map((item, itemIndex) => (
+            <SwiperSlide key={item.title}>
+              <div className="relative bg-white overflow-hidden">
+                <div
+                  className="aspect-w-1 aspect-h-1 overflow-hidden cursor-pointer"
+                  onMouseEnter={() => handleMouseEnter(itemIndex)} // Call handleMouseEnter with itemIndex
+                  onMouseLeave={handleMouseLeave} // Call handleMouseLeave
+                  onClick={() => handleBuyNowClick(item)}
+                >
+                  <img
+                    className="w-full object-cover object-center transition duration-500 ease-in-out transform"
+                    src={
+                      hoverIndex === itemIndex && item.images.length > 1
+                        ? item.images[(itemIndex + 1) % item.images.length] // Show next image if hovering
+                        : item.images[0] // Show first image if not hovering
+                    }
+                    alt={item.title}
+                    style={{
+                      height: `${
+                        window.innerWidth < 768
+                          ? imageHeight.mobile
+                          : imageHeight.desktop
+                      }px`,
+                      width: "100%",
+                    }}
+                  />
+                </div>
+                <div className="px-4 py-3">
+                  <h3
+                    className="text-xs font-semibold text-gray-400 mb-2 cursor-pointer"
                     onClick={() => handleBuyNowClick(item)}
                   >
-                    Buy Now
-                  </button>
+                    LATEST COLLECTION, OVERSIZED T-SHIRT
+                  </h3>
+                  <h3
+                    className="text-s font-Roboto font-semibold text-gray-800 mb-4 cursor-pointer"
+                    onClick={() => handleBuyNowClick(item)}
+                  >
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-xl font-bold text-gray-700 mr-2">
+                        ₹{item.price}
+                      </span>
+                      <span className="text-sm font-semibold text-gray-500 line-through">
+                        ₹1099
+                      </span>
+                    </div>
+                    <div className="flex items-center">
+                      <button
+                        className="px-4 py-2 bg-transparent text-gray-800 text-sm font-semibold border border-gray-800 rounded-none hover:bg-gray-800 hover:text-white transition duration-300 mr-2"
+                        onClick={() => handleBuyNowClick(item)}
+                      >
+                        Buy Now
+                      </button>
+                      <button
+                        className="p-2 bg-transparent text-gray-800 text-lg transition duration-300 focus:outline-none"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.currentTarget.classList.toggle("text-black");
+                        }}
+                      >
+                        <FaHeart />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
   );
 };
 

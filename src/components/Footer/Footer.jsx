@@ -1,12 +1,12 @@
 import React from "react";
 import ItemsContainer from "./ItemsContainer";
-import feature1 from "../../assets/footerfeature1.svg";
-import feature2 from "../../assets/footerfeature2.svg";
-import feature3 from "../../assets/footerfeature3.svg";
+import feature1 from "../../assets/footer3.svg";
+import feature2 from "../../assets/footer2.svg";
+import feature3 from "../../assets/footer1.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-white text-black">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12 px-4 sm:px-8 md:px-12">
         <div className="flex flex-col items-center justify-center">
           <img src={feature1} alt="Feature 1" className="w-24 h-24 scale-[0.8] sm:w-32 sm:h-32 mb-4" />

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const CodeOfConduct = () => {
   return (
-    <div className="min-h-screen bg-black text-white py-12">
+    <div className="min-h-screen bg-white text-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
@@ -17,7 +17,7 @@ const CodeOfConduct = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="bg-gray-900 rounded-lg p-8 shadow-2xl"
+          className="bg-gray-200 rounded-lg p-8 shadow-2xl"
         >
           <h2 className="text-2xl font-semibold mb-4">
             Our Commitment to Ethical Conduct

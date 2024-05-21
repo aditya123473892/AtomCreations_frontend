@@ -26,7 +26,7 @@ const ContactUs = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://atom-creations-backend.vercel.app/api/appuser/contactus",
+        "http://localhost:8080/api/appuser/contactus",
         {
           senderName,
           email,
@@ -49,14 +49,14 @@ const ContactUs = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="min-h-screen bg-black text-white py-12"
+      className="min-h-screen bg-white text-black py-12"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-extrabold text-left mb-8"
+          className="text-4xl text-black font-extrabold text-left mb-8"
         >
           Contact Us
         </motion.h1>
@@ -114,7 +114,7 @@ const ContactUs = () => {
                   name="senderName"
                   onChange={setValue}
                   id="name"
-                  className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  className="w-full bg-gray-200 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   required
                 />
               </div>
@@ -128,7 +128,7 @@ const ContactUs = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  className="w-full bg-gray-200 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   required
                 />
               </div>
@@ -142,7 +142,7 @@ const ContactUs = () => {
                   id="message"
                   name="message"
                   rows="5"
-                  className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  className="w-full bg-gray-200 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   required
                 ></textarea>
               </div>

@@ -24,7 +24,7 @@ const Verification = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/user/verify-otp",
+          "http://localhost:8080/api/user/verify-otp",
           {
             email,
             otp,
