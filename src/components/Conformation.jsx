@@ -67,16 +67,16 @@ const ConfirmationPage = ({ selectedItem }) => {
       });
       console.log(error);
     }
-    // const couponCodes = {
-    //   ATOMS20: 20,
-    // };
+    const couponCodes = {
+      IAMSHE: 20,
+    };
 
-    // const enteredCode = formData.couponCode.toUpperCase();
-    // if (couponCodes[enteredCode]) {
-    //   setDiscountPercentage(couponCodes[enteredCode]);
-    // } else {
-    //   setDiscountPercentage(0);
-    // }
+    const enteredCode = formData.couponCode.toUpperCase();
+    if (couponCodes[enteredCode]) {
+      setDiscountPercentage(couponCodes[enteredCode]);
+    } else {
+      setDiscountPercentage(0);
+    }
   };
   const handleConfirmOrder = async () => {
     // e.preventDefault();
