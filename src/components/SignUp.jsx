@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaArrowRight } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
+import { images } from "./constants/imagesData";
 const SignupPage = () => {
   const [inputValue, setInputValue] = useState({
     name: "",
@@ -76,15 +77,15 @@ const SignupPage = () => {
     }
   };
   return (
-    <div className="flex flex-row-reverse bg-cover bg-center">
+    <div className="flex flex-row-reverse bg-cover m-1 mb-0"  style={{ backgroundImage: `url(${images.bg_signup})`}}>
       <ToastContainer />
-      <Background />
+      {/* <Background /> */}
       {/* Signup form container */}
-      <div className="bg-custom-bg-color p-2 px-10 font-base shadow-lg rounded-xl max-w-md w-full mx-8 m-2">
+      <div className="bg-custom-bg-color p-2 py-4 px-10 font-base shadow-lg rounded-xl max-w-md w-full mx-8 m-2">
         <div className="flex justify-center mb-6">
-          <img src={icon} alt="Company Icon" className="w-33 h-24" />
+          <img src={images.logo_signup} alt="Company Icon" className="w-30 h-20" />
         </div>
-        <h2 className="text-3xl font-medium sans-bold mb-4 text-center">
+        <h2 className="text-3xl font-medium sans-bold mb-6 text-center">
           {/* Create an Account */}
           Sign up
         </h2>
@@ -172,7 +173,7 @@ const SignupPage = () => {
             <button
               onClick={addUser}
               type="submit"
-              className="px-8 py-2 sans-regular bg-custom-dark text-black text-xl font-base bg-black rounded-full flex items-center"
+              className="px-8 py-2 sans-regular bg-custom-dark text-black text-xl font-base bg-black rounded-full flex items-center hover:bg-black hover:text-white "
             >
               Sign up
               {/* <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
@@ -182,7 +183,7 @@ const SignupPage = () => {
           </div>
         </form>
         {/* Sign in link */}
-        <p className="mt-2 text-lg text-center sans-bold text-black ">
+        <p className="mt-4 text-xl text-center sans-bold text-black ">
           Already have an account ?{" "}
           <Link
             to="/login"
