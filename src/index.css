@@ -5,65 +5,79 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'font1';
-    src: url('/src/assets/ArchivoBlack-Regular.ttf') format('truetype');
+  font-family: "sans-regular";
+  src: url("./font/ProductSansRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal; 
 }
-
 @font-face {
-    font-family: 'font2';
-    src: url('/src/assets/QanelasSoftDEMO-UltraLight.otf') format('opentype');
+  font-family: "sans-bold";
+  src: url("./font/ProductSansBold.ttf") format("truetype");
+  /* font-style: normal; */
+  font-weight: 400; 
 }
-.bg-image{
-   
-    height: 60vh;
-    overflow-y: hidden;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 1;
-    position: relative;
+.sans-regular {
+  font-family: sans-regular;
 }
-.bg-image::after{
-    content: "";
-    background: url("../src/assets/home.jpg");
-    background: linear-gradient(180deg, hsla(0, 0%, 5%, 0.4) 29.9%, #0e0e0e), url("../src/assets/home.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.8;
-    top: 0;
-    left: 0;
-    bottom:0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-    overflow-y: hidden;
-    
+.sans-bold{
+  font-family: sans-bold;
 }
-
+.bg-image {
+  height: 60vh;
+  overflow-y: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+  position: relative;
+}
+.bg-image::after {
+  content: "";
+  background: url("../src/assets/home.jpg");
+  background: linear-gradient(180deg, hsla(0, 0%, 5%, 0.4) 29.9%, #0e0e0e),
+    url("../src/assets/home.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  overflow-y: hidden;
+}
+.bg-custom-bg-color {
+  background-color: #FBF9F1;
+}
+.bg-custom-dark{
+  background-color: #E5E1DA;
+}
 .swiper-pagination-bullet {
-    background-color: black; 
-    transition: transform 0.3s ease;
+  background-color: black;
+  transition: transform 0.3s ease;
 }
 :root {
-    --swiper-theme-color: #000;
-    --swiper-navigation-size:1.2rem;
-    --swiper-navigation-font-weight:'bold';
+  --swiper-theme-color: #000;
+  --swiper-navigation-size: 1.2rem;
+  --swiper-navigation-font-weight: "bold";
 }
-.swiper-button-next,.swiper-button-prev{
-    margin: -40px 0;
-    font-weight: bolder;
-    color:gray;
+.swiper-button-next,
+.swiper-button-prev {
+  margin: -40px 0;
+  font-weight: bolder;
+  color: gray;
 }
 
 /* custom-toast.css */
 
 .Toastify__toast--warning {
-    color: black;
-  }
-.Toastify__progress-bar {
-    background-color: black; 
+  color: black;
 }
-  .Toastify__toast-body .Toastify__spinner path {
-    fill: white; 
-  }
+.Toastify__progress-bar {
+  background-color: black;
+}
+.Toastify__toast-body .Toastify__spinner path {
+  fill: white;
+}

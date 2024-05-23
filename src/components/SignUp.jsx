@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaArrowRight } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
+import { images } from "./constants/imagesData";
 const SignupPage = () => {
   const [inputValue, setInputValue] = useState({
     name: "",
@@ -41,7 +42,7 @@ const SignupPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/user/send-otp",
+          "https://atom-creations-backend.vercel.app/api/user/send-otp",
           {
             name,
             email,
@@ -76,22 +77,23 @@ const SignupPage = () => {
     }
   };
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center">
+    <div className="flex flex-row-reverse bg-cover m-1 mb-0"  style={{ backgroundImage: `url(${images.bg_signup})`}}>
       <ToastContainer />
-      <Background />
+      {/* <Background /> */}
       {/* Signup form container */}
-      <div className="bg-white p-10 font-base shadow-lg max-w-md w-full m-8">
-        <div className="flex justify-center mb-8">
-          <img src={icon} alt="Company Icon" className="w-33 h-24" />
+      <div className="bg-custom-bg-color p-2 py-4 px-10 font-base shadow-lg rounded-xl max-w-md w-full mx-8 m-2">
+        <div className="flex justify-center mb-6">
+          <img src={images.logo_signup} alt="Company Icon" className="w-30 h-20" />
         </div>
-        <h2 className="text-3xl font-heading font-bold mb-6 text-center">
-          Create an Account
+        <h2 className="text-3xl font-medium sans-bold mb-6 text-center">
+          {/* Create an Account */}
+          Sign up
         </h2>
         <form className="w-full">
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block font-bold text-gray-700 mb-2"
+              className="block sans-regular font-bold text-gray-700 mb-2"
             >
               Full Name
             </label>
@@ -101,14 +103,14 @@ const SignupPage = () => {
               name="name"
               value={inputValue.name}
               id="name"
-              className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your full name"
+              className="w-full rounded-lg font-sans px-8 py-2 border bg-custom-dark border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+              
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 ">
             <label
               htmlFor="email"
-              className="block font-bold text-gray-700 mb-2"
+              className="block sans-regular font-bold text-gray-700 mb-2"
             >
               Email
             </label>
@@ -118,14 +120,14 @@ const SignupPage = () => {
               value={inputValue.email}
               type="email"
               id="email"
-              className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
+              className="w-full font-sans px-8 bg-custom-dark rounded-lg py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+             
             />
           </div>
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block font-bold text-gray-700 mb-2"
+              className="block font-bold sans-regular text-gray-700 mb-2"
             >
               Password
             </label>
@@ -135,8 +137,8 @@ const SignupPage = () => {
               value={inputValue.password}
               type="password"
               id="password"
-              className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter a password"
+              className="w-full font-sans bg-custom-dark rounded-lg px-8 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+             
             />
           </div>
           {/* <div className="mb-4">
@@ -167,25 +169,25 @@ const SignupPage = () => {
               placeholder="Confirm your password"
             />
           </div> */}
-          <div className="w-full py-4 flex justify-center">
+          <div className="w-full py-2 flex justify-center">
             <button
               onClick={addUser}
               type="submit"
-              className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center"
+              className="px-8 py-2 sans-regular bg-custom-dark text-black text-xl font-base bg-black rounded-full flex items-center hover:bg-black hover:text-white "
             >
-              Sign Up
-              <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
+              Sign up
+              {/* <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
                 <FaArrowRight className="text-2xl" />
-              </div>
+              </div> */}
             </button>
           </div>
         </form>
         {/* Sign in link */}
-        <p className="mt-8 text-center text-gray-700 font-medium">
-          Already have an account?{" "}
+        <p className="mt-4 text-xl text-center sans-bold text-black ">
+          Already have an account ?{" "}
           <Link
             to="/login"
-            className="text-blue-500 hover:text-blue-700 font-medium"
+            className="text-black hover:text-gray-500 font-medium"
           >
             Sign in
           </Link>

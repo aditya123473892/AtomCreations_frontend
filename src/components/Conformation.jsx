@@ -36,7 +36,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
+        `http://atom-creations-backend.vercel.app/api/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
@@ -85,7 +85,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       // console.log(orderId);
       if (orderId) {
         const res = await axios.put(
-          "http://localhost:8080/api/appuser/confirmOrder",
+          "http://atom-creations-backend.vercel.app/api/appuser/confirmOrder",
           {
             orderId: orderId,
           },
@@ -118,13 +118,13 @@ const ConfirmationPage = ({ selectedItem }) => {
       const {
         data: { key },
       } = await axios.get(
-        "http://localhost:8080/api/payment/getkey"
+        "http://atom-creations-backend.vercel.app/api/payment/getkey"
       );
 
       const {
         data: { order },
       } = await axios.post(
-        "http://localhost:8080/api/payment/checkout",
+        "http://atom-creations-backend.vercel.app/api/payment/checkout",
         {
           amount: parseInt(totalPrice),
         },
@@ -144,7 +144,7 @@ const ConfirmationPage = ({ selectedItem }) => {
         description: "Atom Creations Payment",
         image: icon,
         order_id: order.id,
-        callback_url: `http://localhost:8080/api/payment/paymentverification/${orderId}`,
+        callback_url: `http://atom-creations-backend.vercel.app/api/payment/paymentverification/${orderId}`,
         prefill: {
           name: orderDetails.shippingInfo.name,
           email: orderDetails.shippingInfo.email,
@@ -188,7 +188,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `http://localhost:8080/api/appuser/getorder/${orderId}`,
+          `http://atom-creations-backend.vercel.app/api/appuser/getorder/${orderId}`,
 
           {
             headers: {
