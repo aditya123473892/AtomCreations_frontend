@@ -6,7 +6,7 @@ import Testimonials from "./TestimonialsSection/Testimonials";
 import FeaturedProducts from "./FeaturedProducts";
 import Offer from "./Offer";
 import UpcomingDesign from "./FeaturedCollection/UpcomingDesign"
-import bgimage from "../../assets/hero121.jpeg"; // Import your background image
+import bgimage from "../../assets/hero121.jpg"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
 import Typography from "./TypographySection/Typography";
 
@@ -35,8 +35,9 @@ export const Home = () => {
           </Link>
         </div>
       </section>
-      <FeaturedProducts />
+      
       <Collections />
+      <FeaturedProducts />
       <Typography/>
       <Offer />
       <UpcomingDesign />

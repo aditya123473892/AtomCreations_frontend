@@ -10,28 +10,35 @@ import { FaArrowRight } from "react-icons/fa";
 
 const CollectionSlider = () => {
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative mb-24 px-4">
       <Swiper
-        breakpoints={{
-          500: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-          900: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        }}
-        freeMode={true}
-        navigation={true}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        modules={[Autoplay, FreeMode, Navigation]}
-        className="max-w-[90%] lg:max-w-[90%]"
-      >
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }}
+          freeMode={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          modules={[Autoplay, FreeMode, Navigation]}
+          className="max-w-full"
+        >
         {collectionData.map((item) => (
           <SwiperSlide key={item.title}>
             <div className="flex aspect-[3/4] gap-8 mb-20 justify-center text-white overflow-hidden cursor-pointer group relative">
