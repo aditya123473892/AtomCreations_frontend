@@ -283,7 +283,7 @@ const ConfirmationPage = ({ selectedItem }) => {
           Shipping Charges: ₹50 (added in your order){" "}
         </p>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="couponCode" className="block mb-2 font-bold">
             Coupon Code:
           </label>
@@ -309,7 +309,7 @@ const ConfirmationPage = ({ selectedItem }) => {
               {discountPercentage}% discount applied!
             </p>
           )}
-        </div>
+        </div> */}
 
         <div className="mb-4">
           {orderDetails.paymentInfo && (
