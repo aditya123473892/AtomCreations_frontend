@@ -5,7 +5,7 @@ const Typography = () => {
   return (
     <section className="gap-10 text-black">
       <h1 className="py-12 text-5xl md:text-6xl text-center font-Roboto text">
-        Typography
+        Typography collection
       </h1>
       <TypographySlider />
     </section>

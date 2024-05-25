@@ -229,38 +229,35 @@ const ProductDetails = () => {
             className="md:w-1/2 mb-8 md:mb-0"
           >
             <div className="relative">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
-                  isFavorite ? "text-red-500" : ""
-                }`}
-                onClick={handleFavoriteClick}
-              >
-                <FaHeart size={24} />
-              </motion.button>
-              <img
-                src={images[currentImageIndex]}
-                alt={title}
-                className="w-full h-auto object-cover rounded-lg shadow-lg"
-              />
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-                onClick={handlePrevImage}
-              >
-                <FaChevronLeft />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-                onClick={handleNextImage}
-              >
-                <FaChevronRight />
-              </motion.button>
-            </div>
+  <div className="image-container w-[600px] h-[600px] relative">
+    <button
+      className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
+        isFavorite ? "text-red-500" : ""
+      }`}
+      onClick={handleFavoriteClick}
+    >
+      <FaHeart size={24} />
+    </button>
+    <img
+      src={images[currentImageIndex]}
+      alt={title}
+      className="w-full h-full object-cover rounded-lg shadow-lg"
+    />
+    <button
+      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
+      onClick={handlePrevImage}
+    >
+      <FaChevronLeft />
+    </button>
+    <button
+      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
+      onClick={handleNextImage}
+    >
+      <FaChevronRight />
+    </button>
+  </div>
+</div>
+
             <div className="flex mt-4">
               {images.map((image, index) => (
                 <motion.img

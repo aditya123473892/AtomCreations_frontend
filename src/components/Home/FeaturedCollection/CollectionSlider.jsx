@@ -48,7 +48,7 @@ const CollectionSlider = () => {
   }, []);
 
   return (
-    <div className="flex flex-col relative mb-24 px-4">
+    <div className="flex flex-col relative pb-2 px-4">
     <Swiper
       breakpoints={{
         0: {
