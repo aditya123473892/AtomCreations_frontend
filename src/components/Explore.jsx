@@ -49,7 +49,7 @@ const ExploreSection = () => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          "http://atom-creations-backend.vercel.app/api/products"
+          "http://localhost:8080/api/products"
         );
 
         // console.log(response.data);

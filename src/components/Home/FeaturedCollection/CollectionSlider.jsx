@@ -33,7 +33,7 @@ const CollectionSlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://atom-creations-backend.vercel.app/api/products/", {
+        const res = await axios.get("http://localhost:8080/api/products/", {
           params: {
             type: "featured",
           },
