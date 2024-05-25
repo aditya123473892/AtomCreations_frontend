@@ -27,7 +27,7 @@ const ResetPassword = () => {
       try {
        
         const res = await axios.put(
-          `http://localhost:8080/api/user/reset-password/${token}`,
+          `http://atom-creations-backend.vercel.app/api/user/reset-password/${token}`,
           {
             password,
           }
