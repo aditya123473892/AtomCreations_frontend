@@ -22,7 +22,6 @@ const ProductCard = ({ product, id }) => {
   };
 
   const handleAddToCart = async (event) => {
-   
     event.stopPropagation();
     if (!logindata) {
       toast.warning("Please login to add items to the cart", {
@@ -30,10 +29,10 @@ const ProductCard = ({ product, id }) => {
       });
     } else {
       const token = localStorage.getItem("token");
-      
+
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/addtocart",
+          "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
           {
             productId: id,
           },
@@ -44,7 +43,7 @@ const ProductCard = ({ product, id }) => {
           }
         );
         const message = res.data.message;
-       
+
         if (message === "Product already exists in the cart") {
           toast.warning("Product already exists", {
             position: "top-center",

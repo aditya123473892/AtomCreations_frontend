@@ -14,7 +14,7 @@ const Wishlist = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        "http://localhost:8080/api/appuser/removefromwishlist",
+        "https://atom-creations-backend.vercel.app/api/appuser/removefromwishlist",
         {
           productId: id,
         },
@@ -24,7 +24,7 @@ const Wishlist = () => {
           },
         }
       );
-     
+
       setWishlistItems((prevItems) =>
         prevItems.filter((item) => item.productDetails._id !== id)
       );
@@ -35,7 +35,7 @@ const Wishlist = () => {
 
   const handleAddToCart = async (id) => {
     // Logic to add the item to the cart
-    
+
     // event.stopPropagation();
     if (!logindata) {
       toast.warning("Please login to add items to the cart", {
@@ -43,10 +43,10 @@ const Wishlist = () => {
       });
     } else {
       const token = localStorage.getItem("token");
-     
+
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/appuser/addtocart",
+          "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
           {
             productId: id,
           },
@@ -57,14 +57,13 @@ const Wishlist = () => {
           }
         );
         const message = res.data.message;
-       
+
         if (message === "Product already exists in the cart") {
           toast.warning("Product already exists", {
             position: "top-center",
           });
           // alert(message);
         } else {
-          
           toast.success("Product added to cart", {
             position: "top-center",
           });
@@ -78,7 +77,6 @@ const Wishlist = () => {
         console.log(error);
       }
     }
-    
   };
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -86,14 +84,14 @@ const Wishlist = () => {
 
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/appuser/getwishlist",
+          "https://atom-creations-backend.vercel.app/api/appuser/getwishlist",
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-       
+
         setWishlistItems(res.data.wishlistItems);
       } catch (error) {
         console.log(error);

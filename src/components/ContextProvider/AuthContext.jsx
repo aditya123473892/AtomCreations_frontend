@@ -12,10 +12,10 @@ export const AuthProvider = ({ children }) => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const user = await axios.get(
-            "http://localhost:8080/api/user/fetchuser",
+            "https://atom-creations-backend.vercel.app/api/user/fetchuser",
             {
               headers: {
-                Authorization: `Bearer ${YOUR_TOKEN}`, 
+                Authorization: `Bearer ${YOUR_TOKEN}`,
               },
             }
           );

@@ -11,7 +11,6 @@ const ResetPassword = () => {
   //   const token = searchParams.get("id");
   const { token } = useParams();
 
- 
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -25,18 +24,15 @@ const ResetPassword = () => {
       });
     } else {
       try {
-       
         const res = await axios.put(
-          `http://localhost:8080/api/user/reset-password/${token}`,
+          `https://atom-creations-backend.vercel.app/api/user/reset-password/${token}`,
           {
             password,
           }
         );
 
-       
         const storageToken = res.data.token;
         localStorage.setItem("token", storageToken);
-      
 
         navigate("/login");
         // window.location.reload();
@@ -46,7 +42,6 @@ const ResetPassword = () => {
           autoClose: 3000,
         });
       } catch (error) {
-       
         toast.error("Somethung went wrong", {
           position: "top-center",
           autoClose: 3000,
