@@ -42,7 +42,7 @@ const SignupPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://localhost:8080/api/user/send-otp",
+          "http://localhost:8080/api/user/send-otp",
           {
             name,
             email,
@@ -50,7 +50,7 @@ const SignupPage = () => {
             // mobile,
           }
         );
-       
+
         navigate(`/verify-otp?email=${email}`);
 
         // navigate("/verify-otp");
@@ -77,13 +77,20 @@ const SignupPage = () => {
     }
   };
   return (
-    <div className="flex flex-row-reverse bg-cover m-1 mb-0"  style={{ backgroundImage: `url(${images.bg_signup})`}}>
+    <div
+      className="flex flex-row-reverse bg-cover m-1 mb-0"
+      style={{ backgroundImage: `url(${images.bg_signup})` }}
+    >
       <ToastContainer />
       {/* <Background /> */}
       {/* Signup form container */}
       <div className="bg-custom-bg-color p-2 py-4 px-10 font-base shadow-lg rounded-xl max-w-md w-full mx-8 m-2">
         <div className="flex justify-center mb-6">
-          <img src={images.logo_signup} alt="Company Icon" className="w-30 h-20" />
+          <img
+            src={images.logo_signup}
+            alt="Company Icon"
+            className="w-30 h-20"
+          />
         </div>
         <h2 className="text-3xl font-medium sans-bold mb-6 text-center">
           {/* Create an Account */}
@@ -104,7 +111,6 @@ const SignupPage = () => {
               value={inputValue.name}
               id="name"
               className="w-full rounded-lg font-sans px-8 py-2 border bg-custom-dark border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-              
             />
           </div>
           <div className="mb-4 ">
@@ -121,7 +127,6 @@ const SignupPage = () => {
               type="email"
               id="email"
               className="w-full font-sans px-8 bg-custom-dark rounded-lg py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-             
             />
           </div>
           <div className="mb-4">
@@ -138,7 +143,6 @@ const SignupPage = () => {
               type="password"
               id="password"
               className="w-full font-sans bg-custom-dark rounded-lg px-8 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-             
             />
           </div>
           {/* <div className="mb-4">

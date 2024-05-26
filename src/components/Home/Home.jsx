@@ -5,7 +5,7 @@ import Categories from "./CategoriesSection/Categories";
 import Testimonials from "./TestimonialsSection/Testimonials";
 import FeaturedProducts from "./FeaturedProducts";
 import Offer from "./Offer";
-import UpcomingDesign from "./FeaturedCollection/UpcomingDesign"
+import UpcomingDesign from "./FeaturedCollection/UpcomingDesign";
 import bgimage from "../../assets/hero121.jpg"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
 import Typography from "./TypographySection/Typography";
@@ -19,20 +19,18 @@ export const Home = () => {
           backgroundImage: `url(${bgimage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          minHeight: "75vh",
+          minHeight: "90vh",
+          width: "100%",
         }}
       >
-        <div className="absolute text-center flex justify-center items-center h-full w-full">
-        </div>
-        
+        <div className="absolute text-center flex justify-center items-center h-full w-full"></div>
       </section>
-      
+
       <Collections />
       <FeaturedProducts />
-      <Typography/>
+      <Typography />
       <Offer />
       <UpcomingDesign />
-      
     </>
   );
 };

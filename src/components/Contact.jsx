@@ -26,7 +26,7 @@ const ContactUs = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://localhost:8080/api/appuser/contactus",
+        "http://localhost:8080/api/appuser/contactus",
         {
           senderName,
           email,
@@ -66,7 +66,9 @@ const ContactUs = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-2xl font-semibold mb-4 text-black sans-regular">Get in Touch</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-black sans-regular">
+              Get in Touch
+            </h2>
             <p className="text-gray-400 mb-8"></p>
             <div className="mb-8">
               <h3 className="text-xl text-black sans-regular font-semibold mb-2">
@@ -89,10 +91,14 @@ const ContactUs = () => {
                   </span>
                 </li>
                 <li className="flex items-center">
-                  <span className="text-black sans-regular">Pincode: 201001</span>
+                  <span className="text-black sans-regular">
+                    Pincode: 201001
+                  </span>
                 </li>
                 <li className="flex items-center">
-                  <span className="text-black sans-regular">phone no. 9971665564</span>
+                  <span className="text-black sans-regular">
+                    phone no. 9971665564
+                  </span>
                 </li>
               </ul>
             </div>
@@ -102,10 +108,15 @@ const ContactUs = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-2xl text-black sans-bold font-semibold mb-4">Send Us a Message</h2>
+            <h2 className="text-2xl text-black sans-bold font-semibold mb-4">
+              Send Us a Message
+            </h2>
             <form>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-black sans-regular mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-black sans-regular mb-2"
+                >
                   Name
                 </label>
                 <input
@@ -119,7 +130,10 @@ const ContactUs = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block  text-black sans-regular mb-2">
+                <label
+                  htmlFor="email"
+                  className="block  text-black sans-regular mb-2"
+                >
                   Email
                 </label>
                 <input
@@ -133,7 +147,10 @@ const ContactUs = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="message" className="block text-black sans-regular mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-black sans-regular mb-2"
+                >
                   Message
                 </label>
                 <textarea

@@ -32,9 +32,9 @@ const itemVariants = {
 //   closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
 //   open: { transition: { staggerChildren: 0.07, staggerDirection: 1 } },
 // };
-const sideVariants = { 
-  closed: { x: 0 }, 
-  open: { x: 0 }, 
+const sideVariants = {
+  closed: { x: 0 },
+  open: { x: 0 },
   transition: { duration: 3 },
 };
 const Navbar = () => {
@@ -111,7 +111,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLogOut}
-              className="text-white font-semibold py-2 px-4 rounded-md border border-white transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
+              className="text-black font-semibold py-2 px-4 rounded-md border border-black transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
             >
               Log Out
             </motion.button>
@@ -178,7 +178,10 @@ const Navbar = () => {
               onClick={cycleOpen}
               // whileHover={{ x: 10 }}
             >
-              <Link to="/profile" className="text-xl uppercase">
+              <Link
+                to="/profile"
+                className="text-xl uppercase text-black bg-white"
+              >
                 Profile
               </Link>
             </motion.li>

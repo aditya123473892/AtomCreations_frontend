@@ -43,7 +43,7 @@ const LoginPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://localhost:8080/api/user/forgot-password-token",
+          "http://localhost:8080/api/user/forgot-password-token",
           {
             email,
           }
@@ -69,13 +69,10 @@ const LoginPage = () => {
       });
     } else {
       try {
-        const res = await axios.post(
-          "https://localhost:8080/api/user/login",
-          {
-            email,
-            password,
-          }
-        );
+        const res = await axios.post("http://localhost:8080/api/user/login", {
+          email,
+          password,
+        });
 
         const storageToken = res.data.token;
         localStorage.setItem("token", storageToken);
@@ -136,7 +133,6 @@ const LoginPage = () => {
               type="email"
               id="email"
               className="w-full rounded-lg font-sans px-8 py-2 border bg-custom-dark border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-             
             />
           </div>
 
@@ -155,7 +151,6 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 className="w-full rounded-lg font-sans px-8 py-2 border bg-custom-dark border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-               
               />
             </div>
           ) : (
@@ -176,7 +171,10 @@ const LoginPage = () => {
                 id="rememberMe"
                 className="mr-2 rounded border-gray-300 text-black focus:ring-black"
               />
-              <label htmlFor="rememberMe" className="text-gray-700 sans-regular font-bold">
+              <label
+                htmlFor="rememberMe"
+                className="text-gray-700 sans-regular font-bold"
+              >
                 Remember me
               </label>
             </div>
