@@ -213,50 +213,50 @@ const ProductDetails = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="bg-white"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row">
-          <ToastContainer />
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 mb-8 md:mb-0"
-          >
-            <div className="relative">
-  <div className="image-container w-[600px] h-[600px] relative">
-    <button
-      className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
-        isFavorite ? "text-red-500" : ""
-      }`}
-      onClick={handleFavoriteClick}
-    >
-      <FaHeart size={24} />
-    </button>
-    <img
-      src={images[currentImageIndex]}
-      alt={title}
-      className="w-full h-full object-cover rounded-lg shadow-lg"
-    />
-    <button
-      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-      onClick={handlePrevImage}
-    >
-      <FaChevronLeft />
-    </button>
-    <button
-      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-      onClick={handleNextImage}
-    >
-      <FaChevronRight />
-    </button>
-  </div>
-</div>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  transition={{ duration: 0.5 }}
+  className="bg-white"
+>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="flex flex-col md:flex-row">
+      <ToastContainer />
+      <motion.div
+        initial={{ x: -50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="md:w-1/2 mb-8 md:mb-0"
+      >
+        <div className="relative">
+          <div className="image-container w-[600px] h-[650px] relative bg-gray-200 rounded-lg">
+            <button
+              className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
+                isFavorite ? "text-red-500" : ""
+              }`}
+              onClick={handleFavoriteClick}
+            >
+              <FaHeart size={24} />
+            </button>
+            <img
+              src={images[currentImageIndex]}
+              alt={title}
+              className="w-full h-full object-cover rounded-lg shadow-lg bg-gray-300"
+            />
+            <div
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
+              onClick={handlePrevImage}
+            >
+              <FaChevronLeft className="text-white" size={24} />
+            </div>
+            <div
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
+              onClick={handleNextImage}
+            >
+              <FaChevronRight className="text-white" size={24} />
+            </div>
+          </div>
+          </div>
 
             <div className="flex mt-4">
               {images.map((image, index) => (
@@ -264,7 +264,7 @@ const ProductDetails = () => {
                   key={index}
                   src={image}
                   alt={`${name} ${index + 1}`}
-                  className={`w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
+                  className={`bg-gray-200 w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
                     index === currentImageIndex ? "border-2 border-black" : ""
                   }`}
                   onClick={() => setCurrentImageIndex(index)}
