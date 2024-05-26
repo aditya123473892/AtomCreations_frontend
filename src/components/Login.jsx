@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaArrowRight } from "react-icons/fa";
+import { images } from "./constants/imagesData";
+
 // import { AuthContext } from "./ContextProvider/AuthContext";
 const LoginPage = () => {
   const [inputValue, setInputValue] = useState({
@@ -39,7 +41,6 @@ const LoginPage = () => {
         position: "top-center",
       });
     } else {
-    
       try {
         const response = await axios.post(
           "https://atom-creations-backend.vercel.app/api/user/forgot-password-token",
@@ -47,7 +48,6 @@ const LoginPage = () => {
             email,
           }
         );
-       
       } catch (error) {
         toast.warning("Something went wrong", {
           position: "top-center",
@@ -77,11 +77,10 @@ const LoginPage = () => {
           }
         );
 
-      
         const storageToken = res.data.token;
         localStorage.setItem("token", storageToken);
         const expirationTime = Date.now() + 3 * 24 * 60 * 60 * 1000;
-       
+
         navigate("/");
         window.location.reload();
 
@@ -95,7 +94,6 @@ const LoginPage = () => {
         //   navigate("/");
         // }, 2000);
       } catch (error) {
-       
         toast.error("Incorrect email or password", {
           position: "top-center",
           autoClose: 3000,
@@ -105,22 +103,29 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center">
+    <div
+      className="flex flex-row-reverse bg-cover m-1 mb-0"
+      style={{ backgroundImage: `url(${images.bg_signup})` }}
+    >
       <ToastContainer />
 
-      <Background />
-      <div className="bg-white p-10 font-base shadow-lg max-w-md w-full m-8">
-        <div className="flex justify-center mb-8">
-          <img src={icon} alt="Company Icon" className="w-33 h-24" />
+      {/* <Background /> */}
+      <div className="bg-custom-bg-color p-2 py-4 px-10 font-base shadow-lg rounded-xl max-w-md w-full mx-8 m-2">
+        <div className="flex justify-center mb-6">
+          <img
+            src={images.logo_signup}
+            alt="Company Icon"
+            className="w-30 h-20"
+          />
         </div>
-        <h2 className="text-3xl font-bold font-heading mb-6 text-center">
-          Welcome Back
+        <h2 className="text-3xl font-medium sans-bold mb-6 text-center">
+          Sign in
         </h2>
         <form className="w-full">
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block font-bold text-gray-700 mb-2"
+              className="block sans-regular font-bold text-gray-700 mb-2"
             >
               Email
             </label>
@@ -130,8 +135,7 @@ const LoginPage = () => {
               value={inputValue.email}
               type="email"
               id="email"
-              className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter Email"
+              className="w-full rounded-lg font-sans px-8 py-2 border bg-custom-dark border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -139,7 +143,7 @@ const LoginPage = () => {
             <div className="mb-6">
               <label
                 htmlFor="password"
-                className="block font-bold text-gray-700 mb-2"
+                className="block sans-regular font-bold text-gray-700 mb-2"
               >
                 Password
               </label>
@@ -149,8 +153,7 @@ const LoginPage = () => {
                 value={inputValue.password}
                 type="password"
                 id="password"
-                className="w-full font-sans px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Password"
+                className="w-full rounded-lg font-sans px-8 py-2 border bg-custom-dark border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
               />
             </div>
           ) : (
@@ -164,20 +167,23 @@ const LoginPage = () => {
             </div>
           )}
 
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-8">
             <div className="flex items-center">
               <input
                 type="checkbox"
                 id="rememberMe"
-                className="mr-2 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
+                className="mr-2 rounded border-gray-300 text-black focus:ring-black"
               />
-              <label htmlFor="rememberMe" className="text-gray-700 font-medium">
+              <label
+                htmlFor="rememberMe"
+                className="text-gray-700 sans-regular font-bold"
+              >
                 Remember me
               </label>
             </div>
             <div
               onClick={() => setEmailInput(true)}
-              className="text-blue-500 hover:text-blue-700 font-medium"
+              className="text-gray-700 font-bold hover:text-gray-500 sans-regular cursor-pointer"
             >
               Forgot Password?
             </div>
@@ -186,12 +192,12 @@ const LoginPage = () => {
             <button
               onClick={userLogin}
               type="submit"
-              className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center"
+              className="px-8 py-2 sans-regular bg-custom-dark text-black text-xl font-base bg-black rounded-full flex items-center hover:bg-black hover:text-white "
             >
               Sign In
-              <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
+              {/* <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center rotate-[-45deg] hover:rotate-0 transition duratuion-75">
                 <FaArrowRight className="text-2xl" />
-              </div>
+              </div> */}
             </button>
           </div>
         </form>
@@ -205,11 +211,11 @@ const LoginPage = () => {
           </button>
         </div> */}
         {/* Sign up link */}
-        <p className="mt-8 text-center text-gray-700 font-medium">
+        <p className="mt-8 text-xl text-center sans-bold text-black ">
           Don't have an account?{" "}
           <Link
             to="/signup"
-            className="text-blue-500 hover:text-blue-700 font-medium"
+            className="text-black hover:text-gray-500 font-medium"
           >
             Sign up
           </Link>

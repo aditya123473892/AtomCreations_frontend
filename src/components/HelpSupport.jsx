@@ -4,7 +4,7 @@ import { FaQuestionCircle, FaPhone, FaEnvelope } from 'react-icons/fa';
 
 const HelpAndSupport = () => {
   return (
-    <div className="min-h-screen bg-black text-white py-12">
+    <div className="min-h-screen bg-white text-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}

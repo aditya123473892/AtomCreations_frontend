@@ -41,7 +41,7 @@ const ProductDetails = () => {
         );
         // console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
-       
+
         // console.log(getMyProduct.data);
         // console.log(getMyProduct.data.color);
         // setSelectedSize(getMyProduct.data.size[0]);
@@ -72,10 +72,9 @@ const ProductDetails = () => {
     reviews,
     description,
   } = product;
- 
+
   const handleSizeClick = (size) => {
     setSelectedSize(size);
-    
   };
 
   const handleColorClick = (color) => {
@@ -101,7 +100,6 @@ const ProductDetails = () => {
             },
           }
         );
-        
       } catch (error) {
         console.log(error);
       }
@@ -134,7 +132,6 @@ const ProductDetails = () => {
   //   addToCart(cartItem);
   // };
   const handleAddToCart = async (event) => {
-   
     event.stopPropagation();
     if (!logindata) {
       toast.warning("Please login to add items to the cart", {
@@ -146,7 +143,7 @@ const ProductDetails = () => {
       });
     } else {
       const token = localStorage.getItem("token");
-      
+
       try {
         const res = await axios.post(
           "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
@@ -161,7 +158,7 @@ const ProductDetails = () => {
           }
         );
         const message = res.data.message;
-      
+
         if (message === "Product already exists in the cart") {
           toast.warning("Product already exists", {
             position: "top-center",
@@ -229,45 +226,42 @@ const ProductDetails = () => {
             className="md:w-1/2 mb-8 md:mb-0"
           >
             <div className="relative">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
-                  isFavorite ? "text-red-500" : ""
-                }`}
-                onClick={handleFavoriteClick}
-              >
-                <FaHeart size={24} />
-              </motion.button>
-              <img
-                src={images[currentImageIndex]}
-                alt={title}
-                className="w-full h-auto object-cover rounded-lg shadow-lg"
-              />
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-                onClick={handlePrevImage}
-              >
-                <FaChevronLeft />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-                onClick={handleNextImage}
-              >
-                <FaChevronRight />
-              </motion.button>
+              <div className="image-container w-[600px] h-[650px] relative bg-gray-200 rounded-lg">
+                <button
+                  className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
+                    isFavorite ? "text-red-500" : ""
+                  }`}
+                  onClick={handleFavoriteClick}
+                >
+                  <FaHeart size={24} />
+                </button>
+                <img
+                  src={images[currentImageIndex]}
+                  alt={title}
+                  className="w-full h-full object-cover rounded-lg shadow-lg bg-gray-300"
+                />
+                <div
+                  className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
+                  onClick={handlePrevImage}
+                >
+                  <FaChevronLeft className="text-white" size={24} />
+                </div>
+                <div
+                  className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
+                  onClick={handleNextImage}
+                >
+                  <FaChevronRight className="text-white" size={24} />
+                </div>
+              </div>
             </div>
+
             <div className="flex mt-4">
               {images.map((image, index) => (
                 <motion.img
                   key={index}
                   src={image}
                   alt={`${name} ${index + 1}`}
-                  className={`w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
+                  className={`bg-gray-200 w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
                     index === currentImageIndex ? "border-2 border-black" : ""
                   }`}
                   onClick={() => setCurrentImageIndex(index)}

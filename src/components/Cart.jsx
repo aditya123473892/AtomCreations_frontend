@@ -82,7 +82,14 @@ const Cart = () => {
         },
       }
     );
-    window.location.reload();
+    // Update the state without reloading the page
+    setCartItems((prevCartItems) =>
+      prevCartItems.map((item) =>
+        item.productId === id && item.size === size
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+    );
   };
 
   const decrementQuantity = async (id, size) => {
@@ -99,8 +106,20 @@ const Cart = () => {
         },
       }
     );
-    window.location.reload();
+    // Update the state without reloading the page
+    setCartItems((prevCartItems) =>
+      prevCartItems.map((item) =>
+        item.productId === id && item.size === size
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
   };
+  useEffect(() => {
+    const subtotal = calculateSubtotal();
+    const totalPrice = subtotal;
+    setTotalPrice(totalPrice);
+  }, [cartItems]);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -128,15 +147,15 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-200 text-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-center mb-8 text-white">
+        <h1 className="text-4xl font-extrabold text-center mb-8 text-black">
           My Cart
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8">
-            <div className="bg-gray-800 rounded-lg p-6 mb-8 shadow-2xl">
+            <div className="bg-white rounded-lg p-6 mb-8 shadow-2xl">
               {cartItems.length === 0 ? (
                 <p className="text-gray-400 text-center">Your cart is empty.</p>
               ) : (
@@ -148,16 +167,16 @@ const Cart = () => {
                       className="w-48 h-48 object-cover rounded-lg shadow-lg mr-6 transition duration-300 ease-in-out transform hover:scale-105"
                     />
                     <div>
-                      <h2 className="text-2xl font-semibold text-indigo-400">
+                      <h2 className="text-2xl font-semibold text-black-400">
                         {item.productDetails.title}
                       </h2>
-                      <p className="text-gray-400 mb-2">
+                      <p className="text-black-400 mb-2">
                         Price: ₹{item.productDetails.price}
                       </p>
-                      <p className="text-gray-400 mb-4">Size: {item.size}</p>
+                      <p className="text-black-400 mb-4">Size: {item.size}</p>
                       <div className="flex items-center mb-4">
                         <button
-                          className="text-gray-400 hover:text-gray-200 focus:outline-none mr-2"
+                          className="text-black hover:text-dark-800    rounded-full px-3 py-1"
                           onClick={() =>
                             decrementQuantity(item.productId, item.size)
                           }
@@ -166,7 +185,7 @@ const Cart = () => {
                         </button>
                         <span className="mx-2 text-xl">{item.quantity}</span>
                         <button
-                          className="text-gray-400 hover:text-gray-200 focus:outline-none ml-2"
+                          className="text-black hover:text-dark-800    rounded-full px-3 py-1"
                           onClick={() =>
                             incrementQuantity(item.productId, item.size)
                           }
@@ -175,7 +194,7 @@ const Cart = () => {
                         </button>
                       </div>
                       <button
-                        className="text-red-600 hover:text-red-800 focus:outline-none"
+                        className="text-black-600 hover:text-black-800 focus:outline-black border border-black bg-white hover:bg-white-300 rounded-full px-4 py-2"
                         onClick={() =>
                           removeFromCart(item.productId, item.size)
                         }
@@ -189,8 +208,8 @@ const Cart = () => {
             </div>
           </div>
           <div className="lg:col-span-4">
-            <div className="bg-gray-800 rounded-lg p-6 sticky top-8 shadow-2xl">
-              <h2 className="text-2xl font-semibold mb-4 text-indigo-400">
+            <div className="bg-white rounded-lg p-6 sticky top-8 shadow-2xl">
+              <h2 className="text-2xl font-semibold mb-4 text-black">
                 Order Summary
               </h2>
               <div className="flex justify-between font-semibold text-xl mt-4">
@@ -198,13 +217,13 @@ const Cart = () => {
                 <p>₹{TotalPrice}</p>
               </div>
               <button
-                className="bg-gradient-to-r from-indigo-600 to-pink-600 text-white rounded-lg py-3 px-6 mt-6 w-full focus:outline-none hover:from-indigo-700 hover:to-pink-700 transition duration-200 shadow-lg"
+                className="bg-white-600 text-black rounded-full py-3 px-6 mt-6 w-full focus:outline-black border border-black shadow-lg"
                 onClick={handleCheckout}
               >
                 Proceed to Checkout
               </button>
               <button
-                className="flex items-center justify-center bg-gradient-to-r from-red-600 to-pink-600 text-white rounded-lg py-3 px-6 mt-4 w-full hover:from-red-700 hover:to-pink-700 focus:outline-none transition duration-200 shadow-lg"
+                className="flex items-center justify-center bg-white-600 tbg-white-600 text-black rounded-full py-3 px-6 mt-6 w-full focus:outline-black border border-black shadow-lg"
                 onClick={clearCart}
               >
                 <FaTrash className="mr-2 w-4 h-4" /> Clear Cart

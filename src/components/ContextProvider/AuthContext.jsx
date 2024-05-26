@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
             "https://atom-creations-backend.vercel.app/api/user/fetchuser",
             {
               headers: {
-                Authorization: `Bearer ${YOUR_TOKEN}`, 
+                Authorization: `Bearer ${YOUR_TOKEN}`,
               },
             }
           );

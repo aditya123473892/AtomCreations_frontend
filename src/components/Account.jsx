@@ -1,6 +1,12 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { FaUser, FaLock, FaMapMarkerAlt, FaHeart, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaLock,
+  FaMapMarkerAlt,
+  FaHeart,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import { AuthContext } from "./ContextProvider/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -11,26 +17,24 @@ const MyAccount = () => {
   // });
   const navigate = useNavigate();
 
-  const { logindata,setLoginData } = useContext(AuthContext);
-
+  const { logindata, setLoginData } = useContext(AuthContext);
 
   const handleLogout = () => {
     // Perform logout logic here
-    localStorage.removeItem("token")
-    setLoginData("")
-    navigate("/")
-    
+    localStorage.removeItem("token");
+    setLoginData("");
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen bg-black text-white py-12">
+    <div className="min-h-screen bg-white text-black py-12 max-h-[200px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gray-900 shadow-lg rounded-lg p-8">
+        <div className="bg-white shadow-lg rounded-lg p-8">
           <h2 className="text-3xl font-bold mb-8">My Account</h2>
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/3 mb-8 md:mb-0">
               <div className="flex items-center mb-4">
-                <FaUser className="text-4xl text-blue-500 mr-4" />
+                <FaUser className="text-4xl text-blue-black mr-4" />
                 <div>
                   <h3 className="text-xl font-bold">{logindata.name}</h3>
                   <p className="text-gray-400">{logindata.email}</p>

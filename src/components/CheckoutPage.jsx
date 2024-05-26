@@ -102,7 +102,6 @@ const CheckoutPage = () => {
           );
           setOrderPlaced(true);
 
-         
           navigate(`/confirmation/?id=${res.data.data._id}&m=${paymentMethod}`);
         } catch (error) {
           console.log(error);
@@ -212,14 +211,11 @@ const CheckoutPage = () => {
               }
             );
             if (myCart) {
-              
               setCartItem(myCart.data.cartItems);
               setTotalPrice(myCart.data.totalprice);
               // console.log(myCart.data.totalprice);
               // console.log(TotalPrice);
-              
             }
-           
           }
         } catch (error) {
           console.log("Error fetching user:", error);
@@ -234,7 +230,7 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white py-12">
+    <div className="min-h-screen bg-white text-black py-12 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ToastContainer />
 
@@ -257,7 +253,7 @@ const CheckoutPage = () => {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="bg-gray-900 rounded-lg p-8 shadow-2xl"
+                  className="bg-white-900 rounded-lg p-8 shadow-2xl"
                 >
                   <h2 className="text-2xl font-bold mb-4">Item Details</h2>
 
@@ -294,7 +290,7 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-gray-900 rounded-lg p-8 shadow-2xl"
+                className="bg-gray-200 rounded-lg p-8 shadow-2xl"
               >
                 <h2 className="text-2xl font-bold mb-4">Item Details</h2>
 
@@ -375,7 +371,7 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-gray-900 rounded-lg p-8 shadow-2xl"
+                className="bg-gray-200 rounded-lg p-8 shadow-2xl max-h-[600px] overflow-y-auto"
               >
                 <h2 className="text-2xl font-bold mb-4">Billing Information</h2>
                 <form>
@@ -390,7 +386,7 @@ const CheckoutPage = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                     />
                   </div>
                   <div className="mb-4">
@@ -404,7 +400,7 @@ const CheckoutPage = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div className="mb-4">
@@ -418,7 +414,7 @@ const CheckoutPage = () => {
                       value={formData.address}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-4">
@@ -433,7 +429,7 @@ const CheckoutPage = () => {
                         value={formData.city}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -447,7 +443,7 @@ const CheckoutPage = () => {
                         value={formData.state}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -463,7 +459,7 @@ const CheckoutPage = () => {
                         value={formData.pinCode}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -477,7 +473,7 @@ const CheckoutPage = () => {
                         value={formData.phoneNo}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -512,7 +508,7 @@ const CheckoutPage = () => {
                   <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="px-6 py-2 text-white text-lg font-semibold bg-blue-500 rounded-full hover:bg-blue-600 transition duration-75"
+                    className="px-6 py-2 text-black text-lg font-semibold bg-white rounded-full border border-gray-300 transition duration-75"
                   >
                     Place Order
                   </button>

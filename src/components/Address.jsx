@@ -26,7 +26,7 @@ const AddressManagement = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "https://atom-creations-backend.vercel.app/api/appuser/addAdress",
+        "http:/localhost:8080//api/appuser/addAdress",
         {
           address,
           city,

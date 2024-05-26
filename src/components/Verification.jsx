@@ -9,7 +9,7 @@ const Verification = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const email = searchParams.get("email");
- 
+
   const [otp, setOTP] = useState("");
   const navigate = useNavigate();
 
@@ -31,10 +31,8 @@ const Verification = () => {
           }
         );
 
-      
         const storageToken = res.data.token;
         localStorage.setItem("token", storageToken);
-        
 
         navigate("/");
         window.location.reload();
@@ -44,7 +42,6 @@ const Verification = () => {
           autoClose: 3000,
         });
       } catch (error) {
-      
         toast.error("Invalid OTP", {
           position: "top-center",
           autoClose: 3000,
