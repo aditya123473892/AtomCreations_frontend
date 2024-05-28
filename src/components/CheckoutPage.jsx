@@ -116,7 +116,7 @@ const CheckoutPage = () => {
         }));
         try {
           const res = await axios.post(
-            "/api/appuser/placeorder",
+            "https://atom-creations-backend.vercel.app/api/appuser/placeorder",
             {
               address,
               city,
