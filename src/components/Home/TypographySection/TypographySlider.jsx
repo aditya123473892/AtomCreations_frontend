@@ -34,7 +34,7 @@ const TypographySlider = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "https://atom-creations-backend.vercel.app/api/products/",
+          "http://localhost:8080/api/products/",
           {
             params: {
               type: "typography",
@@ -83,9 +83,9 @@ const TypographySlider = () => {
       >
         {products.map((item, itemIndex) => (
           <SwiperSlide key={item.title}>
-            <div className="relative bg-white overflow-hidden">
+            <div className="relative font-base bg-transparent overflow-hidden">
               <div
-                className="aspect-w-1 aspect-h-1 overflow-hidden cursor-pointer"
+                className="aspect-w-1 aspect-h-1 bg-[#e5e1da] rounded-[20px] overflow-hidden cursor-pointer"
                 onMouseEnter={() => handleMouseEnter(itemIndex)} // Call handleMouseEnter with itemIndex
                 onMouseLeave={handleMouseLeave} // Call handleMouseLeave
                 onClick={() => handleBuyNowClick(item)}
@@ -132,7 +132,7 @@ const TypographySlider = () => {
                   </div>
                   <div className="flex items-center">
                     <button
-                      className="px-4 py-2 bg-transparent text-gray-800 text-sm font-semibold border border-gray-800 rounded-none hover:bg-gray-800 hover:text-white transition duration-300 mr-2"
+                      className="px-6 py-2 bg-black text-white text-sm border border-[#e5e1da] rounded-[50px] hover:bg-[#e5e1da] hover:text-black transition duration-300 mr-2"
                       onClick={() => handleBuyNowClick(item)}
                     >
                       Buy Now

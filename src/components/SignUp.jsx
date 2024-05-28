@@ -42,7 +42,7 @@ const SignupPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/user/send-otp",
+          "http://localhost:8080/api/user/send-otp",
           {
             name,
             email,

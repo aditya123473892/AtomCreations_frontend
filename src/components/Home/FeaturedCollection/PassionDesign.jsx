@@ -6,8 +6,8 @@ const ExploreYourPassion = () => {
   return (
     <div className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Explore Your Passion</h2>
-        <div className="flex flex-wrap -mx-4">
+        <h2 className="text-3xl font-bold text-center font-base mb-8">Explre Your Passion</h2>
+        <div className="flex flex-wrap -mx-4 px-3">
           <div className="w-full md:w-1/2 px-4 mb-8">
             <img
               src={leftImage}
@@ -19,7 +19,7 @@ const ExploreYourPassion = () => {
             <img
               src={rightImage}
               alt="Right Image"
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto shadow-lg"
             />
           </div>
         </div>

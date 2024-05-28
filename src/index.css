@@ -16,6 +16,9 @@
   /* font-style: normal; */
   font-weight: 400; 
 }
+body {
+  background-color: #fbf9f1;
+}
 .sans-regular {
   font-family: sans-regular;
 }

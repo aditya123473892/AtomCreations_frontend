@@ -64,7 +64,7 @@ const Navbar = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4"
+      className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4 border-b-2 border-[#e5e1da]"
     >
       <div className="flex items-center justify-start flex-grow">
         <Link to="/">

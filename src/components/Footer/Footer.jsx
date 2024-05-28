@@ -6,7 +6,7 @@ import feature3 from "../../assets/footer1.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-black">
+    <footer className="bg-white text-black bg-[#fbf9f1]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12 px-4 sm:px-8 md:px-12">
         <div className="flex flex-col items-center justify-center">
           <img src={feature1} alt="Feature 1" className="w-24 h-24 scale-[0.8] sm:w-32 sm:h-32 mb-4" />
@@ -23,7 +23,7 @@ const Footer = () => {
             Free Delivery
           </h2>
           <p className="text-sm sm:text-base text-center">
-            Free delivery on COD on orders above ₹ 1499
+            Free delivery on all prepaid orders
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">

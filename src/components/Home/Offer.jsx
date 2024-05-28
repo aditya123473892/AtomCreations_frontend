@@ -47,15 +47,16 @@ const OfferCarousel = () => {
       >
         {offerImages.map((image, index) => (
           <SwiperSlide key={index}>
-            <div className="w-full h-full relative">
+            <div className="w-full h-full relative p-2 rounded-[20px]">
               <img
                 src={image}
                 alt={`Offer ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-[20px]"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-white text-center">
-                  {/* Additional content */}
+              <div className="absolute inset-0 flex flex-col items-start justify-start m-20">
+                <div className="">
+                  <span className='text-white font-base text-8xl block'>FLAT</span>
+                  <span className='text-white font-base font-bold text-9xl block'>30% OFF</span>
                 </div>
               </div>
             </div>
