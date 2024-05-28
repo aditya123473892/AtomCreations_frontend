@@ -36,7 +36,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `https://atom-creations-backend.vercel.app/appuser/applyCoupon/${orderId}`,
+        `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
@@ -85,7 +85,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       // console.log(orderId);
       if (orderId) {
         const res = await axios.put(
-          "https://atom-creations-backend.vercel.app/api/appuser/confirmOrder",
+          "http://localhost:8080/api/appuser/confirmOrder",
           {
             orderId: orderId,
           },
@@ -117,12 +117,14 @@ const ConfirmationPage = ({ selectedItem }) => {
       // }, 4000);
       const {
         data: { key },
-      } = await axios.get("https://atom-creations-backend.vercel.app/api/payment/getkey");
+      } = await axios.get(
+        "http://localhost:8080/api/payment/getkey"
+      );
 
       const {
         data: { order },
       } = await axios.post(
-        "https://atom-creations-backend.vercel.app/api/payment/checkout",
+        "http://localhost:8080/api/payment/checkout",
         {
           amount: parseInt(totalPrice),
         },
@@ -142,7 +144,7 @@ const ConfirmationPage = ({ selectedItem }) => {
         description: "Atom Creations Payment",
         image: icon,
         order_id: order.id,
-        callback_url: `https://atom-creations-backend.vercel.app/api/payment/paymentverification/${orderId}`,
+        callback_url: `http://localhost:8080/api/payment/paymentverification/${orderId}`,
         prefill: {
           name: orderDetails.shippingInfo.name,
           email: orderDetails.shippingInfo.email,
@@ -186,7 +188,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `https://atom-creations-backend.vercel.app/api/appuser/getorder/${orderId}`,
+          `http://localhost:8080/api/appuser/getorder/${orderId}`,
 
           {
             headers: {
@@ -281,7 +283,7 @@ const ConfirmationPage = ({ selectedItem }) => {
           Shipping Charges: ₹50 (added in your order){" "}
         </p>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="couponCode" className="block mb-2 font-bold">
             Coupon Code:
           </label>
@@ -307,7 +309,7 @@ const ConfirmationPage = ({ selectedItem }) => {
               {discountPercentage}% discount applied!
             </p>
           )}
-        </div>
+        </div> */}
 
         <div className="mb-4">
           {orderDetails.paymentInfo && (
