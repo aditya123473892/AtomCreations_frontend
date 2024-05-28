@@ -36,7 +36,7 @@ const ConfirmationPage = ({ selectedItem }) => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:8080/api/appuser/applyCoupon/${orderId}`,
+        `https://atom-creations-backend.vercel.app/appuser/applyCoupon/${orderId}`,
         {
           couponCode,
         },
