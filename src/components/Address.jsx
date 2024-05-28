@@ -69,7 +69,7 @@ const AddressManagement = () => {
 
     try {
       const res = await axios.put(
-        "http://localhost:8080/api/appuser/deleteAddress",
+        "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/deleteAddress",
         {
           addressId: id,
         },
@@ -103,7 +103,7 @@ const AddressManagement = () => {
 
     const getAddress = async () => {
       const res = await axios.get(
-        "http://localhost:8080/api/appuser/getaddress",
+        "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/getaddress",
         {
           headers: {
             Authorization: `Bearer ${token}`,

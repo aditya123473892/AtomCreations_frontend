@@ -76,7 +76,7 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.post(
-            "http://localhost:8080/api/appuser/placeorder",
+            "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/placeorder",
             {
               address,
               email,
@@ -116,7 +116,7 @@ const CheckoutPage = () => {
         }));
         try {
           const res = await axios.post(
-            "http://localhost:8080/api/appuser/placeorder",
+            "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/placeorder",
             {
               address,
               city,
@@ -188,7 +188,7 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.get(
-            `http://localhost:8080/api/products/${itemId}`
+            `https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/products/${itemId}`
           );
 
           setItem(res.data);
@@ -203,7 +203,7 @@ const CheckoutPage = () => {
           const YOUR_TOKEN = localStorage.getItem("token");
           if (YOUR_TOKEN) {
             const myCart = await axios.get(
-              "http://localhost:8080/api/appuser/getcartitem",
+              "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/getcartitem",
               {
                 headers: {
                   Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token
