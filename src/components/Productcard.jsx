@@ -32,7 +32,7 @@ const ProductCard = ({ product, id }) => {
 
       try {
         const res = await axios.post(
-          "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app//api/appuser/addtocart",
+          "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/addtocart",
           {
             productId: id,
           },
