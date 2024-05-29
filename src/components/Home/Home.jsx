@@ -9,25 +9,26 @@ import UpcomingDesign from "./FeaturedCollection/UpcomingDesign";
 import bgimage from "../../assets/hero121.jpg"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
 import Typography from "./TypographySection/Typography";
-
+import { images } from "../constants/imagesData";
+import ExploreYourPassion from "./FeaturedCollection/PassionDesign";
 export const Home = () => {
   return (
     <>
       <section
-        className="flex flex-col relative"
+        className="flex flex-col relative bg-center bg-cover min-h-[40vh] md:min-h-[70vh] lg:min-h-[90vh]  w-[100%]"
         style={{
-          backgroundImage: `url(${bgimage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          minHeight: "90vh",
-          width: "100%",
+          backgroundImage: `url(${images.bg_image_hero})`,
+          // minHeight: "90vh",
+          // width: "100%",
         }}
       >
         <div className="absolute text-center flex justify-center items-center h-full w-full"></div>
       </section>
 
       <Collections />
+
       <FeaturedProducts />
+
       <Typography />
       <Offer />
       <UpcomingDesign />

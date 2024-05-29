@@ -15,6 +15,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./ContextProvider/AuthContext";
+import { sizeChart } from "./constants/ProductDetailsdata";
 const ProductDetails = () => {
   // const { id } = useParams();
   const location = useLocation();
@@ -37,7 +38,7 @@ const ProductDetails = () => {
       try {
         // const data = await getProductById(id);
         const getMyProduct = await axios.get(
-          `https://atom-creations-backend.vercel.app/api/products/${id}`
+          `https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/products/${id}`
         );
         // console.log(getMyProduct.data);
         setProduct(() => getMyProduct.data);
@@ -90,7 +91,7 @@ const ProductDetails = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/appuser/addToWishList",
+          "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/addToWishList",
           {
             productId: id,
           },
@@ -146,7 +147,7 @@ const ProductDetails = () => {
 
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
+          "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/addtocart",
           {
             productId: id,
             size: selectedSize,
@@ -214,19 +215,19 @@ const ProductDetails = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white"
+      className="bg-custom-bg-color"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row">
           <ToastContainer />
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 mb-8 md:mb-0"
+            className="md:w-1/2 flex flex-col gap-2 mb-8 md:mb-0"
           >
             <div className="relative">
-              <div className="image-container w-[600px] h-[650px] relative bg-gray-200 rounded-lg">
+              <div className="image-container w-full m-auto md:w-[400px] lg:w-[500px] xl:w-[600px] h-[500px] xl:h-[650px] relative md:sticky bg-gray-200 rounded-lg">
                 <button
                   className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
                     isFavorite ? "text-red-500" : ""
@@ -240,7 +241,7 @@ const ProductDetails = () => {
                   alt={title}
                   className="w-full h-full object-cover rounded-lg shadow-lg bg-gray-300"
                 />
-                <div
+                {/* <div
                   className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
                   onClick={handlePrevImage}
                 >
@@ -251,17 +252,17 @@ const ProductDetails = () => {
                   onClick={handleNextImage}
                 >
                   <FaChevronRight className="text-white" size={24} />
-                </div>
+                </div> */}
               </div>
             </div>
 
-            <div className="flex mt-4">
+            <div className="flex pt-4 lg:pl-10 md:gap-2">
               {images.map((image, index) => (
                 <motion.img
                   key={index}
                   src={image}
                   alt={`${name} ${index + 1}`}
-                  className={`bg-gray-200 w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
+                  className={`bg-gray-200 w-20 h-24 lg:w-24 lg:h-30 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
                     index === currentImageIndex ? "border-2 border-black" : ""
                   }`}
                   onClick={() => setCurrentImageIndex(index)}
@@ -275,7 +276,7 @@ const ProductDetails = () => {
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 md:pl-8"
+            className="md:w-1/2 md:pl-8 md:h-screen hide-scrollbar md:overflow-scroll"
           >
             <motion.h2
               initial={{ y: -20, opacity: 0 }}
@@ -313,7 +314,7 @@ const ProductDetails = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="text-gray-900 font-bold text-3xl mb-6"
+              className="text-gray-900 font-bold text-3xl mb-4"
             >
               ₹{price}
             </motion.p>
@@ -321,7 +322,7 @@ const ProductDetails = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="mb-6"
+              className="mb-4"
             >
               <p className="text-gray-600 mb-2">Select Size:</p>
               <div className="flex flex-wrap">
@@ -395,7 +396,9 @@ const ProductDetails = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.1 }}
             >
-              <h3 className="text-lg font-semibold mb-2">Product Details</h3>
+              <h3 className="text-xl sans-regular font-semibold mb-2">
+                Product Details
+              </h3>
               <ul className="list-disc pl-4">
                 {/* <li>Material: 100% Cotton</li>
                 <li>Fit Type: Regular Fit</li>
@@ -409,9 +412,53 @@ const ProductDetails = () => {
 
               <ul className="list-none pl-4">
                 {Object.entries(description).map(([key, value]) => (
-                  <li key={key}>{`${formatKey(key)} : ${value}`}</li>
+                  <>
+                    <li className="py-2 sans-regular" key={key}>{`${formatKey(
+                      key
+                    )} : ${value}`}</li>
+                    <hr />
+                  </>
                 ))}
               </ul>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.1 }}
+            >
+              <h3 className="text-xl text-center mt-6 sans-regular font-semibold mb-2">
+                Size Chart
+              </h3>
+              <table className="table-fixed border-collapse border w-full border-spacing-2 border-[#E5E1DA] p-4">
+                <thead className="border-[#E5E1DA] border py-2">
+                  <th className="border-[#E5E1DA] border py-2">Size</th>
+                  <th className="border-[#E5E1DA] border">Chest(inch)</th>
+                  <th className="border-[#E5E1DA] border">Length(inch)</th>
+                </thead>
+                <tbody>
+                  {sizeChart.map((item, index) => (
+                    <tr  key={index} className="text-center">
+                      {item.map((data, subIndex) => (
+                        <td className="border-[#E5E1DA] border py-2" key={subIndex}>
+                          {data}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+
+                 
+                </tbody>
+              </table>
+
+              {/* <ul className="list-none pl-4">
+                {Object.entries(description).map(([key, value]) => (
+                  <>
+                  <li className="py-2 sans-regular" key={key}>{`${formatKey(key)} : ${value}`}</li>
+                  <hr />
+                  </>
+                  
+                ))}
+              </ul> */}
             </motion.div>
           </motion.div>
         </div>

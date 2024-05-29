@@ -1,6 +1,6 @@
 import React from 'react';
 import leftImage from '../../../assets/passion_1.jpg';
-import rightImage from './assets/p2.jpg';
+import rightImage from '../../../assets/p2.jpg';
 
 const ExploreYourPassion = () => {
   return (
