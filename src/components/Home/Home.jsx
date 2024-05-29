@@ -15,7 +15,7 @@ export const Home = () => {
   return (
     <>
       <section
-        className="flex flex-col relative bg-center bg-cover min-h-[40vh] md:min-h-[70vh] lg:min-h-[90vh]  w-[100%]"
+        className="flex flex-col relative bg-center bg-cover min-h-[30vh] md:min-h-[70vh] lg:min-h-[90vh]  w-[100%]"
         style={{
           backgroundImage: `url(${images.bg_image_hero})`,
           // minHeight: "90vh",
