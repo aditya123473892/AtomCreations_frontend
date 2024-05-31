@@ -16,6 +16,7 @@ import { ShoppingCart } from "lucide-react";
 import { Search } from "lucide-react";
 import { User } from "lucide-react";
 import { Menu } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 const links = [
   { name: "About Us", to: "/aboutus" },
@@ -89,12 +90,12 @@ const Navbar = () => {
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-white text-black"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#e5e1da] text-black"
               >
                 {logindata.name && (
                   <Avatar
                     style={{
-                      background: "white",
+                      background: "#e5e1da",
                       fontWeight: "bold",
                       textTransform: "capitalize",
                       color: "black",
@@ -111,9 +112,9 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLogOut}
-              className="text-black font-semibold py-2 px-4 rounded-md border border-black transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
+              className="text-black font-semibold p-2 rounded-full duration-75 hover:bg-[#e5e1da] hover:text-black"
             >
-              Log Out
+              <LogOut size={26} strokeWidth={1.7} />
             </motion.button>
           ) : null}
           <Link to="/explore" className="relative button-link">

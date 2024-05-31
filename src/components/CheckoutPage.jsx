@@ -4,20 +4,18 @@ import { collectionData } from "../../src/components/constants/HomeCollectionDat
 import { motion } from "framer-motion";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-// import { FaArrowRight } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
+
 const CheckoutPage = () => {
-  // const { itemId } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const itemId = searchParams.get("id");
   const size = searchParams.get("size");
   const cart = searchParams.get("cart");
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState(null);
   const [cartItem, setCartItem] = useState([]);
   const [TotalPrice, setTotalPrice] = useState("");
   const [orderDetails, setOrderDetails] = useState(null);
-  // const item = collectionData.find((item) => item.id === itemId);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -37,7 +35,6 @@ const CheckoutPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // setFormData({ ...formData, [e.target.name]: e.target.value });
     setFormData(() => {
       return {
         ...formData,
@@ -60,23 +57,20 @@ const CheckoutPage = () => {
       phoneNo,
       paymentMethod,
     } = formData;
-    // console.log(formData);
-    // console.log(paymentMethod);
 
     if (phoneNo.length !== 10) {
       toast.warning("Phone Number must be of 10 digits", {
         position: "top-center",
       });
     } else if (!email.includes("@")) {
-      toast.warning("email must include @", {
+      toast.warning("Email must include @", {
         position: "top-center",
       });
     } else {
-      // Process the form submission (e.g., send data to server)
       if (itemId) {
         try {
           const res = await axios.post(
-            "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/placeorder",
+            "https://atom-creations-backend.vercel.app/api/appuser/placeorder",
             {
               address,
               email,
@@ -101,7 +95,6 @@ const CheckoutPage = () => {
             }
           );
           setOrderPlaced(true);
-
           navigate(`/confirmation/?id=${res.data.data._id}&m=${paymentMethod}`);
         } catch (error) {
           console.log(error);
@@ -116,7 +109,7 @@ const CheckoutPage = () => {
         }));
         try {
           const res = await axios.post(
-            "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/placeorder",
+            "https://atom-creations-backend.vercel.app/api/appuser/placeorder",
             {
               address,
               city,
@@ -136,9 +129,6 @@ const CheckoutPage = () => {
           );
           setOrderPlaced(true);
           setOrderDetails(res.data);
-          // console.log(res);
-          // console.log(res.data.data._id);
-
           navigate(`/confirmation/?id=${res.data.data._id}`);
         } catch (error) {
           console.log(error);
@@ -147,8 +137,6 @@ const CheckoutPage = () => {
 
       setDiscountPercentage(0);
     }
-
-    // setOrderPlaced(true);
   };
 
   const handleApplyCoupon = () => {
@@ -168,18 +156,8 @@ const CheckoutPage = () => {
     navigate("/");
   };
 
-  if (!item) {
-    return <div>Item not found.</div>;
-  }
-  // const handleRazorpayPayment = () => {
-  //   // Implement Razorpay payment logic here
-  //   // You can use the Razorpay API or SDK to create an order and proceed with the payment
-  //   // Once the payment is successful, you can update the order status and display a success message
-  //   console.log("Initiating Razorpay payment...");
-  //   // ...
-  // };
-
-  const discountedPrice = item.price - (item.price * discountPercentage) / 100;
+  const discountedPrice =
+    item?.price - (item?.price * discountPercentage) / 100;
   const shippingCharges = formData.paymentMethod === "cashOnDelivery" ? 50 : 0;
   const totalPrice = discountedPrice + shippingCharges;
 
@@ -188,9 +166,8 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.get(
-            `https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/products/${itemId}`
+            `https://atom-creations-backend.vercel.app/api/products/${itemId}`
           );
-
           setItem(res.data);
           setTotalPrice(res.data.price);
         } catch (error) {
@@ -203,18 +180,16 @@ const CheckoutPage = () => {
           const YOUR_TOKEN = localStorage.getItem("token");
           if (YOUR_TOKEN) {
             const myCart = await axios.get(
-              "https://atom-creations-backend-git-main-adityas-projects-a14514f1.vercel.app/api/appuser/getcartitem",
+              "https://atom-creations-backend.vercel.app/api/appuser/getcartitem",
               {
                 headers: {
-                  Authorization: `Bearer ${YOUR_TOKEN}`, // Assuming the token is a bearer token
+                  Authorization: `Bearer ${YOUR_TOKEN}`,
                 },
               }
             );
             if (myCart) {
               setCartItem(myCart.data.cartItems);
               setTotalPrice(myCart.data.totalprice);
-              // console.log(myCart.data.totalprice);
-              // console.log(TotalPrice);
             }
           }
         } catch (error) {
@@ -230,72 +205,30 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-black py-12 ">
+    <div className="relative sticky min-h-screen bg-[#fbf9f1] text-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ToastContainer />
-
-        {/* {orderDetails ? (
-          <PaymentComponent orderDetails={orderDetails} selectedItem={item} />
-        ) : ( */}
         <>
           <>
             <motion.h1
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl font-extrabold text-left mb-8"
+              className="text-4xl font-base font-extrabold text-left mb-8"
             >
               Checkout
             </motion.h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* {item && (
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="bg-white-900 rounded-lg p-8 shadow-2xl"
-                >
-                  <h2 className="text-2xl font-bold mb-4">Item Details</h2>
-
-                  <div className="flex items-center mb-4">
-                    {item.images && (
-                      <>
-                        <img
-                          src={item.images[0]}
-                          alt={item.title}
-                          className="w-32 h-32 object-cover mr-4"
-                        />
-                      </>
-                    )}
-
-                    <div>
-                      <h3 className="text-xl font-bold">{item.title}</h3>
-                      {discountPercentage > 0 ? (
-                        <div>
-                          <p className="text-lg text-gray-500 line-through">
-                            ₹{item.price}
-                          </p>
-                          <p className="text-lg text-green-500">
-                            ₹{discountedPrice.toFixed(2)}
-                          </p>
-                        </div>
-                      ) : (
-                        <p className="text-lg">₹{item.price}</p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              )} */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-base">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-gray-200 rounded-lg p-8 shadow-2xl"
+                className="bg-[#e5e1da] rounded-[20px] p-8 h-fit sticky top-24"
               >
                 <h2 className="text-2xl font-bold mb-4">Item Details</h2>
 
                 {itemId && (
-                  <div className="flex items-center mb-4">
+                  <div className="relative flex items-center mb-4">
                     {item.images && (
                       <>
                         <img
@@ -326,44 +259,47 @@ const CheckoutPage = () => {
 
                 {cartItem &&
                   cartItem.map((item) => (
-                    <>
-                      <div className="flex items-center mb-4">
-                        {item.productDetails.images && (
+                    <div
+                      key={item.productId}
+                      className="flex items-center mb-4 bg-[#fbf9f1] rounded-[14px] p-2"
+                    >
+                      {item.productDetails.images && (
+                        <>
+                          <img
+                            src={item.productDetails.images[0]}
+                            alt={item.name}
+                            className="h-32 aspect-[4/3] rounded-lg bg-[#e5e1da] object-cover mr-4"
+                          />
+                        </>
+                      )}
+
+                      <div>
+                        <h3 className="text-xl font-bold">
+                          {item.productDetails.title}
+                        </h3>
+                        {discountPercentage > 0 ? (
+                          <div>
+                            <p className="text-lg text-gray-500 line-through">
+                              ₹{item.productDetails.price}
+                            </p>
+
+                            <p className="text-lg text-green-500">
+                              ₹{discountedPrice.toFixed(2)}
+                            </p>
+                          </div>
+                        ) : (
                           <>
-                            <img
-                              src={item.productDetails.images[0]}
-                              alt={item.name}
-                              className="w-32 h-32 object-cover mr-4"
-                            />
+                            <p className="text-lg">
+                              Price : ₹{item.productDetails.price}
+                            </p>
+                            <p className="text-lg">Size : {item.size}</p>
+                            <p className="text-lg">
+                              Quantity : {item.quantity}
+                            </p>
                           </>
                         )}
-
-                        <div>
-                          <h3 className="text-xl font-bold">
-                            {item.productDetails.title}
-                          </h3>
-                          {discountPercentage > 0 ? (
-                            <div>
-                              <p className="text-lg text-gray-500 line-through">
-                                ₹{item.productDetails.price}
-                              </p>
-
-                              <p className="text-lg text-green-500">
-                                ₹{discountedPrice.toFixed(2)}
-                              </p>
-                            </div>
-                          ) : (
-                            <>
-                              <p className="text-lg">
-                                ₹{item.productDetails.price}
-                              </p>
-                              <p className="text-lg">{item.size}</p>
-                              <p className="text-lg">{item.quantity}</p>
-                            </>
-                          )}
-                        </div>
                       </div>
-                    </>
+                    </div>
                   ))}
               </motion.div>
 
@@ -371,10 +307,10 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-gray-200 rounded-lg p-8 shadow-2xl max-h-[600px] overflow-y-auto"
+                className="bg-[#e5e1da] rounded-[20px] p-8 h-fit"
               >
                 <h2 className="text-2xl font-bold mb-4">Billing Information</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <label htmlFor="name" className="block mb-2 font-bold">
                       Full Name:
@@ -386,7 +322,7 @@ const CheckoutPage = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                      className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div className="mb-4">
@@ -400,7 +336,7 @@ const CheckoutPage = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div className="mb-4">
@@ -414,7 +350,7 @@ const CheckoutPage = () => {
                       value={formData.address}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-4">
@@ -429,7 +365,7 @@ const CheckoutPage = () => {
                         value={formData.city}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -443,7 +379,7 @@ const CheckoutPage = () => {
                         value={formData.state}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -459,12 +395,12 @@ const CheckoutPage = () => {
                         value={formData.pinCode}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
                       <label htmlFor="phoneNo" className="block mb-2 font-bold">
-                        phoneNo:
+                        Phone No:
                       </label>
                       <input
                         type="text"
@@ -473,7 +409,7 @@ const CheckoutPage = () => {
                         value={formData.phoneNo}
                         onChange={handleChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-200 bg-white text-white-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-200 bg-[#fbf9f1] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -491,24 +427,20 @@ const CheckoutPage = () => {
                       />
                       <label
                         htmlFor="razorpay"
-                        className="text-lg text-gray-400 relative"
+                        className="text-lg text-black font-bold relative"
                       >
                         UPI
-                        {/* <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                          UPI
-                        </span> */}
                       </label>
                     </div>
                   </div>
                   <div className="mb-4">
                     <p className="text-xl font-bold">
-                      Total Price: ₹ {TotalPrice}
+                      Total Price: ₹ {totalPrice}
                     </p>
                   </div>
                   <button
                     type="submit"
-                    onClick={handleSubmit}
-                    className="px-6 py-2 text-black text-lg font-semibold bg-white rounded-full border border-gray-300 transition duration-75"
+                    className="px-6 py-2 text-black text-lg font-semibold bg-[#fbf9f1] rounded-full hover:bg-black hover:text-white transition duration-75"
                   >
                     Place Order
                   </button>
