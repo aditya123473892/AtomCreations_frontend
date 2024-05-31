@@ -184,53 +184,24 @@ const ProductDetails = () => {
       transition={{ duration: 0.5 }}
       className="bg-[#fbf9f1]"
     >
-      <div className="max-w-7xl mx-6 font-base px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto font-base px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row">
           <ToastContainer />
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 mb-8 md:mb-0"
+            className="md:w-1/2 mb-8 md:mb-0 flex"
           >
-            <div className="sticky top-28">
-              <div className="relative">
-                <div className="image-container w-full md:w-[400px] aspect-[3/4] relative bg-gray-200 rounded-[20px] overflow-hidden flex items-center justify-center">
-                  <button
-                    className={`absolute top-4 right-4 z-10 text-white hover:text-red-500 focus:outline-none ${
-                      isFavorite ? "text-red-500" : ""
-                    }`}
-                    onClick={handleFavoriteClick}
-                  >
-                    <FaHeart size={24} />
-                  </button>
-                  <img
-                    src={images[currentImageIndex]}
-                    alt={title}
-                    className="w-full rounded-[20px] shadow-lg bg-[#e5e1da]"
-                  />
-                  <div
-                    className="absolute top-1/2 left-2 transform -translate-y-1/2 p-2 bg-[#fbf9f1] rounded-full cursor-pointer hover:bg-[#e5e1da] transition-colors duration-300"
-                    onClick={handlePrevImage}
-                  >
-                    <FaChevronLeft className="text-black" size={18} />
-                  </div>
-                  <div
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2 p-2 bg-[#fbf9f1] rounded-full cursor-pointer hover:bg-[#e5e1da] transition-colors duration-300"
-                    onClick={handleNextImage}
-                  >
-                    <FaChevronRight className="text-black" size={18} />
-                  </div>
-                </div>
-              </div>
-              <div className="md:absolute md:top-0 md:h-[530px] md:pl-2 md:overflow-x-scroll hide-scrollbar md:flex md:flex-col">
-                <div className="block mt-4 md:mt-0 flex overflow-x-scroll hide-scrollbar">
+            <div className="sticky top-28 flex">
+              <div className="h-[530px] overflow-y-auto pr-2 mr-4">
+                <div className="flex flex-col gap-2">
                   {images.map((image, index) => (
                     <motion.img
                       key={index}
                       src={image}
                       alt={`${title} ${index + 1}`}
-                      className={`bg-[#e5e1da] w-20 my-4 aspect-[3/4] object-cover rounded-[10px] shadow-md mr-2 cursor-pointer ${
+                      className={`w-20 h-20 md:w-24 md:h-24 object-cover rounded-[10px] shadow-md cursor-pointer ${
                         index === currentImageIndex
                           ? "border-2 border-[#e5e1da]"
                           : ""
@@ -243,12 +214,41 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
+            <div className="image-container w-[400px] h-[500px] relative bg-gray-200 rounded-[20px] overflow-hidden flex items-center justify-center">
+              <button
+                className={`absolute top-4 right-4 z-10 text-white hover:text-red-500 focus:outline-none ${
+                  isFavorite ? "text-red-500" : ""
+                }`}
+                onClick={handleFavoriteClick}
+              >
+                <FaHeart size={24} />
+              </button>
+              <div className="aspect-w-4 aspect-h-3 w-full">
+                <img
+                  src={images[currentImageIndex]}
+                  alt={title}
+                  className="object-cover w-full h-full rounded-[20px] shadow-lg bg-[#e5e1da]"
+                />
+              </div>
+              <div
+                className="absolute top-1/2 left-2 transform -translate-y-1/2 p-2 bg-[#fbf9f1] rounded-full cursor-pointer hover:bg-[#e5e1da] transition-colors duration-300"
+                onClick={handlePrevImage}
+              >
+                <FaChevronLeft className="text-black" size={18} />
+              </div>
+              <div
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 p-2 bg-[#fbf9f1] rounded-full cursor-pointer hover:bg-[#e5e1da] transition-colors duration-300"
+                onClick={handleNextImage}
+              >
+                <FaChevronRight className="text-black" size={18} />
+              </div>
+            </div>
           </motion.div>
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 md:pl-8 -m-10"
+            className="md:w-1/2 md:pl-8"
           >
             <motion.h2
               initial={{ y: -20, opacity: 0 }}
@@ -258,6 +258,32 @@ const ProductDetails = () => {
             >
               {title}
             </motion.h2>
+            <motion.p
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-gray-600 text-lg md:text-xl mb-4"
+            >
+              {producer}
+            </motion.p>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex items-center mb-6"
+            >
+              <div className="flex items-center">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <FaStar
+                    key={index}
+                    className={`mr-1 ${
+                      index < rating ? "text-yellow-500" : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-gray-600 ml-2">{reviews} reviews</span>
+            </motion.div>
             <motion.p
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
