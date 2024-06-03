@@ -160,7 +160,7 @@ const LoginPage = () => {
             <div className="mb-6">
               <button
                 onClick={sendPasswordMail}
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                className="w-full bg-custom-dark text-black sans-regular hover:bg-black hover:text-white py-2 px-4 rounded "
               >
                 Send Password Reset Email
               </button>
