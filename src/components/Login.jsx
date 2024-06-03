@@ -48,6 +48,9 @@ const LoginPage = () => {
             email,
           }
         );
+        setEmailInput(false);
+        console.log(emailInput);
+       
       } catch (error) {
         toast.warning("Something went wrong", {
           position: "top-center",
