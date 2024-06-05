@@ -143,7 +143,7 @@ const Navbar = () => {
           <motion.div
             initial={false}
             animate={isOpen ? "open" : "closed"}
-            className="text-3xl cursor-pointer md:text-2xl flex items-center justify-center w-10 h-10 bg-white text-black"
+            className="text-3xl cursor-pointer md:text-2xl flex items-center justify-center w-10 h-10 bg-custom-bg-color text-black"
             onClick={cycleOpen}
             // whileHover={{ scale: 1.1 }}
             // whileTap={{ scale: 0.9 }}
