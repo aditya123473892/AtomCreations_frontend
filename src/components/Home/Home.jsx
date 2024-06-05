@@ -9,6 +9,7 @@ import UpcomingDesign from "./FeaturedCollection/UpcomingDesign";
 import bgimage from "../../assets/hero121.jpg"; // Import your background image
 import { FaArrowRight } from "react-icons/fa";
 import Typography from "./TypographySection/Typography";
+import Solids from "./SolidsSection/Solids";
 
 export const Home = () => {
   return (
@@ -21,11 +22,13 @@ export const Home = () => {
         />
       </section>
 
-      <Collections />
+      
+      <Solids/>
       <FeaturedProducts />
       <Typography />
       <Offer />
-      <UpcomingDesign />
+      {/* <UpcomingDesign /> */}
+      <Collections />
     </>
   );
 };
