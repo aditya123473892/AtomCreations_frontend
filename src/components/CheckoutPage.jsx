@@ -201,9 +201,9 @@ const CheckoutPage = () => {
     getProduct();
   }, [itemId, cart]);
 
-  if (!item || !cartItem) {
-    return <div>Item not found.</div>;
-  }
+  // if (!item || !cartItem) {
+  //   return <div>Item not found.</div>;
+  // }
 
   return (
     <div className="relative sticky min-h-screen bg-[#fbf9f1] text-black py-12">
@@ -228,7 +228,7 @@ const CheckoutPage = () => {
               >
                 <h2 className="text-2xl font-bold mb-4">Item Details</h2>
 
-                {itemId && (
+                {itemId && item && (
                   <div className="relative flex items-center mb-4">
                     {item.images && (
                       <>
