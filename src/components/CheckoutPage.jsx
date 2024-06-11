@@ -200,9 +200,9 @@ const CheckoutPage = () => {
     getProduct();
   }, [itemId, cart]);
 
-  if (!item) {
-    return <div>Item not found.</div>;
-  }
+  // if (!item) {
+  //   return <div>Item not found.</div>;
+  // }
 
   return (
     <div className="relative sticky min-h-screen bg-[#fbf9f1] text-black py-12">
