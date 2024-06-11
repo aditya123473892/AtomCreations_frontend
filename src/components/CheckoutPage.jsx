@@ -189,7 +189,9 @@ const CheckoutPage = () => {
             );
             if (myCart) {
               setCartItem(myCart.data.cartItems);
-              setTotalPrice(parseFloat(myCart.data.totalprice));
+              setTotalPrice(Number(myCart.data.totalprice));
+              console.log(myCart.data.totalprice)
+              console.log(TotalPrice) 
              
             }
           }
@@ -436,7 +438,7 @@ const CheckoutPage = () => {
                   </div>
                   <div className="mb-4">
                     <p className="text-xl font-bold">
-                      Total Price: ₹ {totalPrice}
+                      Total Price: ₹ {TotalPrice}
                     </p>
                   </div>
                   <button
