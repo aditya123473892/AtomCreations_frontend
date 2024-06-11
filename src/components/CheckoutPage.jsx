@@ -190,8 +190,8 @@ const CheckoutPage = () => {
             if (myCart) {
               setCartItem(myCart.data.cartItems);
               setTotalPrice(Number(myCart.data.totalprice));
-              console.log(myCart.data.totalprice)
-              console.log(TotalPrice) 
+              // console.log(myCart.data.totalprice)
+              // console.log(TotalPrice) 
              
             }
           }
