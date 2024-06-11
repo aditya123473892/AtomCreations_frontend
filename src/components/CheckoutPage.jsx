@@ -189,7 +189,8 @@ const CheckoutPage = () => {
             );
             if (myCart) {
               setCartItem(myCart.data.cartItems);
-              setTotalPrice(myCart.data.totalprice);
+              setTotalPrice(parseFloat(myCart.data.totalprice));
+             
             }
           }
         } catch (error) {
