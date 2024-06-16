@@ -159,7 +159,10 @@ const Cart = () => {
                 <p className="text-gray-400 text-center">Your cart is empty.</p>
               ) : (
                 cartItems.map((item, index) => (
-                  <div key={index} className="flex sm:items-center flex-col sm:flex-row mb-8 bg-[#fbf9f1] rounded-[13px] p-2">
+                  <div
+                    key={index}
+                    className="flex sm:items-center flex-col sm:flex-row mb-8 bg-[#fbf9f1] rounded-[13px] p-2"
+                  >
                     <img
                       src={item.productDetails.images[0]}
                       alt={item.productDetails.title}

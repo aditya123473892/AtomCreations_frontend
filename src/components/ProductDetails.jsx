@@ -15,6 +15,47 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./ContextProvider/AuthContext";
 
+const SizeChart = () => {
+  return (
+    <div className="mb-6">
+      <p className="text-gray-600 mb-2">Size Chart:</p>
+      <table className="w-full border-collapse border border-gray-300 text-left">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 px-4 py-2">Size</th>
+            <th className="border border-gray-300 px-4 py-2">Chest (inches)</th>
+            <th className="border border-gray-300 px-4 py-2">
+              Height (inches)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">Small</td>
+            <td className="border border-gray-300 px-4 py-2">34-36</td>
+            <td className="border border-gray-300 px-4 py-2">28-30</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">Medium</td>
+            <td className="border border-gray-300 px-4 py-2">38-40</td>
+            <td className="border border-gray-300 px-4 py-2">32-34</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">Large</td>
+            <td className="border border-gray-300 px-4 py-2">42-44</td>
+            <td className="border border-gray-300 px-4 py-2">36-38</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">X-Large</td>
+            <td className="border border-gray-300 px-4 py-2">46-48</td>
+            <td className="border border-gray-300 px-4 py-2">40-42</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 const ProductDetails = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -317,6 +358,8 @@ const ProductDetails = () => {
                 ))}
               </div>
             </motion.div>
+            {/* Add SizeChart component here */}
+            <SizeChart />
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
