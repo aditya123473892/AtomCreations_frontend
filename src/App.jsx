@@ -1,5 +1,4 @@
-// App.js
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Contact from "./components/Contact";
@@ -33,6 +32,8 @@ import ResetPassword from "./components/ResetPassword";
 import ConfirmationPage from "./components/Conformation";
 import PaymentSuccess from "./components/PaymentSuccess";
 import ReactGA from "react-ga";
+import DownImage from "./assets/down.jpeg"; // Import your image here
+
 const TRACKING_ID = import.meta.env.VITE_TRACKING_ID;
 
 const ScrollToTop = () => {
@@ -44,15 +45,74 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
+  const [isDown, setIsDown] = useState(true); // Set this to true when under maintenance
+  const [isMobile, setIsMobile] = useState(false); // State to check if it's mobile
+
   useEffect(() => {
-    
-    
     ReactGA.initialize(TRACKING_ID);
     ReactGA.pageview(window.location.pathname + window.location.search);
+
+    // Check if the device is mobile
+    const checkMobile = () => {
+      if (window.innerWidth <= 768) { // You can adjust this breakpoint
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
+
   window.dataLayer.push({
     event: "pageview",
   });
+
+  if (isDown) {
+    if (isMobile) {
+      return (
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          textAlign: "center",
+          color: "#000",
+          padding: "20px",
+        }}>
+          <h1>We are currently down for maintenance. Please check back later.</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div style={{
+          width: "90vw",
+          height: "90vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundImage: `url(${DownImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          textAlign: "center",
+          color: "#fff",
+          margin: "5vh auto",
+          borderRadius: "10px",
+          maxWidth: "1200px",
+          maxHeight: "90vh",
+        }}>
+          <h1>We are currently under maintenance. Please check back later.</h1>
+        </div>
+      );
+    }
+  }
+
   return (
     <AuthProvider>
       <CartProvider>
@@ -65,7 +125,6 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/verify-otp" element={<Verification />} />
-          {/* <Route path="/profile" element={<UserProfile />} /> */}
           <Route path="/" element={<ExploreSection />} />
           <Route path="/product" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
