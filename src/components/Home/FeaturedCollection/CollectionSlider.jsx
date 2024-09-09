@@ -34,7 +34,7 @@ const CollectionSlider = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "https://atom-creations-backend-rc06amtad-adityas-projects-a14514f1.vercel.app//api/products/",
+          "https://atom-creations-backend-rc06amtad-adityas-projects-a14514f1.vercel.app/api/products/",
           {
             params: {
               type: "featured",
