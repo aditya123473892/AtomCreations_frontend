@@ -20,7 +20,7 @@ const Cart = () => {
   const removeFromCart = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/removefromcart",
+      "https://atom-creations-backend-rc06amtad-adityas-projects-a14514f1.vercel.app//api/appuser/removefromcart",
       {
         productId: id,
         size: size,
@@ -41,7 +41,7 @@ const Cart = () => {
   const clearCart = async () => {
     const YOUR_TOKEN = localStorage.getItem("token");
     const res = await fetch(
-      "https://atom-creations-backend.vercel.app/api/appuser/emptycart",
+      "https://atom-creations-backend-rc06amtad-adityas-projects-a14514f1.vercel.app//api/appuser/emptycart",
       {
         method: "POST",
         headers: {
@@ -71,7 +71,7 @@ const Cart = () => {
   const incrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/incquantity",
+      "https://atom-creations-backend..app/api/appuser/incquantity",
       {
         productId: id,
         size: size,
@@ -95,7 +95,7 @@ const Cart = () => {
   const decrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/decquantity",
+      "https://atom-creations-backend-rc06amtad-adityas-projects-a14514f1.vercel.app//api/appuser/decquantity",
       {
         productId: id,
         size: size,
@@ -127,7 +127,7 @@ const Cart = () => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const myCart = await axios.get(
-            "https://atom-creations-backend.vercel.app/api/appuser/getcartitem",
+            "https://atom-creations-backend-rc06amtad-adityas-projects-a14514f1.vercel.app//api/appuser/getcartitem",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`,
