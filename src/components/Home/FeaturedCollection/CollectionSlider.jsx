@@ -34,7 +34,7 @@ const CollectionSlider = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "https://atom-creations-backend.vercel.app/api/products/",
+          "https://atom-creations-backend-re.vercel.app/api/products/",
           {
             params: {
               type: "featured",
@@ -94,7 +94,7 @@ const CollectionSlider = () => {
                   src={
                     hoverIndex === itemIndex && item.images.length > 1
                       ? item.images[(itemIndex + 1) % item.images.length] // Show next image if hovering
-                      : item.images[0] // Show first image if not hovering
+                      : item.images[0] // Show first image if not hoveringy
                   }
                   alt={item.title}
                   style={{

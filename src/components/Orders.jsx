@@ -63,7 +63,7 @@ const Orders = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get(
-          "https://atom-creations-backend.vercel.app/api/appuser/getuserorders",
+          "https://atom-creations-backend-re.vercel.app/api/appuser/getuserorders",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -34,7 +34,7 @@ const TypographySlider = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "https://atom-creations-backend.vercel.app/api/products/",
+          "https://atom-creations-backend-re.vercel.app/api/products/",
           {
             params: {
               type: "typography",

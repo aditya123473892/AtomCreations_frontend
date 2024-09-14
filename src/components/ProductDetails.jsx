@@ -76,7 +76,7 @@ const ProductDetails = () => {
       setIsLoading(true);
       try {
         const getMyProduct = await axios.get(
-          `https://atom-creations-backend.vercel.app/api/products/${id}`
+          `https://atom-creations-backend-re.vercel.app/api/products/${id}`
         );
         setProduct(getMyProduct.data);
         setSelectedColor(getMyProduct.data.color[0]);
@@ -123,7 +123,7 @@ const ProductDetails = () => {
     } else {
       try {
         await axios.post(
-          "https://atom-creations-backend.vercel.app/api/appuser/addToWishList",
+          "https://atom-creations-backend-re.vercel.app/api/appuser/addToWishList",
           {
             productId: id,
           },
@@ -167,7 +167,7 @@ const ProductDetails = () => {
 
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
+          "https://atom-creations-backend-re.vercel.app/api/appuser/addtocart",
           {
             productId: id,
             size: selectedSize,

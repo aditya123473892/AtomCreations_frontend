@@ -70,7 +70,7 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.post(
-            "https://atom-creations-backend.vercel.app/api/appuser/placeorder",
+            "https://atom-creations-backend-re.vercel.app/api/appuser/placeorder",
             {
               address,
               email,
@@ -109,7 +109,7 @@ const CheckoutPage = () => {
         }));
         try {
           const res = await axios.post(
-            "https://atom-creations-backend.vercel.app/api/appuser/placeorder",
+            "https://atom-creations-backend-re.vercel.app/api/appuser/placeorder",
             {
               address,
               city,
@@ -166,7 +166,7 @@ const CheckoutPage = () => {
       if (itemId) {
         try {
           const res = await axios.get(
-            `https://atom-creations-backend.vercel.app/api/products/${itemId}`
+            `https://atom-creations-backend-re.vercel.app/api/products/${itemId}`
           );
           setItem(res.data);
           setTotalPrice(res.data.price);
@@ -180,7 +180,7 @@ const CheckoutPage = () => {
           const YOUR_TOKEN = localStorage.getItem("token");
           if (YOUR_TOKEN) {
             const myCart = await axios.get(
-              "https://atom-creations-backend.vercel.app/api/appuser/getcartitem",
+              "https://atom-creations-backend-re.vercel.app/api/appuser/getcartitem",
               {
                 headers: {
                   Authorization: `Bearer ${YOUR_TOKEN}`,

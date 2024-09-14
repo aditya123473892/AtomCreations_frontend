@@ -43,7 +43,7 @@ const LoginPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/user/forgot-password-token",
+          "https://atom-creations-backend-re.vercel.app/api/user/forgot-password-token",
           {
             email,
           }
@@ -72,7 +72,7 @@ const LoginPage = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/user/login",
+          "https://atom-creations-backend-re.vercel.app/api/user/login",
           {
             email,
             password,
