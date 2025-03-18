@@ -72,15 +72,11 @@ const Navbar = () => {
           <img src={icon} alt="Company Icon" className="h-8 w-auto" />
         </Link>
         <a
-  href="https://scontent.whatsapp.net/v/t39.8562-34/420077459_703742575180618_3955965302853713788_n.png?ccb=1-7&_nc_sid=73b08c&_nc_ohc=o-aubLzKYUUQ7kNvgFnSSpL&_nc_oc=AdmXuSjAks-4d9HxyElQvmPJLDKr-5yXzbLr0nXY7g_ev1LbAg1ChW8TlGQ0YObj8GU&_nc_zt=3&_nc_ht=scontent.whatsapp.net&_nc_gid=xYP3khJhTGPiFVsfGvo1xQ&oh=01_Q5AaIWbIV92Q225smaWL9nPQuLSCWX-hPUZ7maNXRJZPEOKf&oe=67DF88A8"
+  href="https://wa.me/919971665564?text=Hi%20I%20want%20to%20order!"
   target="_blank"
   rel="noopener noreferrer"
 >
-  <img
-    src="https://scontent.whatsapp.net/v/t39.8562-34/420077459_703742575180618_3955965302853713788_n.png?ccb=1-7&_nc_sid=73b08c&_nc_ohc=o-aubLzKYUUQ7kNvgFnSSpL&_nc_oc=AdmXuSjAks-4d9HxyElQvmPJLDKr-5yXzbLr0nXY7g_ev1LbAg1ChW8TlGQ0YObj8GU&_nc_zt=3&_nc_ht=scontent.whatsapp.net&_nc_gid=xYP3khJhTGPiFVsfGvo1xQ&oh=01_Q5AaIWbIV92Q225smaWL9nPQuLSCWX-hPUZ7maNXRJZPEOKf&oe=67DF88A8"
-    alt="Custom Image"
-    className="w-full h-auto"
-  />
+  Want to order in bulk
 </a>
 
       </div>
