@@ -68,10 +68,21 @@ const Navbar = () => {
       className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4 border-b-2 border-[#e5e1da]"
     >
       <div className="flex items-center justify-start flex-grow">
-        <span className="mr-4 text-xl font-bold text-black">Your Custom Text</span>
         <Link to="/">
           <img src={icon} alt="Company Icon" className="h-8 w-auto" />
         </Link>
+        <a
+  href="https://scontent.whatsapp.net/v/t39.8562-34/420077459_703742575180618_3955965302853713788_n.png?ccb=1-7&_nc_sid=73b08c&_nc_ohc=o-aubLzKYUUQ7kNvgFnSSpL&_nc_oc=AdmXuSjAks-4d9HxyElQvmPJLDKr-5yXzbLr0nXY7g_ev1LbAg1ChW8TlGQ0YObj8GU&_nc_zt=3&_nc_ht=scontent.whatsapp.net&_nc_gid=xYP3khJhTGPiFVsfGvo1xQ&oh=01_Q5AaIWbIV92Q225smaWL9nPQuLSCWX-hPUZ7maNXRJZPEOKf&oe=67DF88A8"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="https://scontent.whatsapp.net/v/t39.8562-34/420077459_703742575180618_3955965302853713788_n.png?ccb=1-7&_nc_sid=73b08c&_nc_ohc=o-aubLzKYUUQ7kNvgFnSSpL&_nc_oc=AdmXuSjAks-4d9HxyElQvmPJLDKr-5yXzbLr0nXY7g_ev1LbAg1ChW8TlGQ0YObj8GU&_nc_zt=3&_nc_ht=scontent.whatsapp.net&_nc_gid=xYP3khJhTGPiFVsfGvo1xQ&oh=01_Q5AaIWbIV92Q225smaWL9nPQuLSCWX-hPUZ7maNXRJZPEOKf&oe=67DF88A8"
+    alt="Custom Image"
+    className="w-full h-auto"
+  />
+</a>
+
       </div>
       <div className="flex items-center text-white space-x-2">
         <div className="hidden md:flex items-center space-x-2">
