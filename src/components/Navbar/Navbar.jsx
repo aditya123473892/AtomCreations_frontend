@@ -71,12 +71,13 @@ const Navbar = () => {
         <Link to="/">
           <img src={icon} alt="Company Icon" className="h-8 w-auto" />
         </Link>
+
         <a
   href="https://wa.me/919971665564?text=Hi%20I%20want%20to%20order!"
   target="_blank"
   rel="noopener noreferrer"
 >
-  Want to order in bulk
+  <h2>Want to order in bulk</h2>
 </a>
 
       </div>
