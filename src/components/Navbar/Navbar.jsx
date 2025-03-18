@@ -67,7 +67,7 @@ const Navbar = () => {
       transition={{ duration: 0.6 }}
       className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4 border-b-2 border-[#e5e1da]"
     >
-      <div className="flex items-center flex-grow space-x-4">
+      <div className="flex items-center flex-grow space-x-8">
         <Link to="/">
           <img src={icon} alt="Company Icon" className="h-8 w-auto" />
         </Link>
@@ -79,7 +79,7 @@ const Navbar = () => {
           rel="noopener noreferrer"
           className="text-black font-semibold"
         >
-          <h2 style={{ color: "red" }}>Want to order in bulk?</h2>
+          <p style={{ color: "red" }}>Want to order in bulk?</p>
 
         </a>
       </div>
