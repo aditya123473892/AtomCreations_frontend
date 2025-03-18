@@ -79,7 +79,7 @@ const Navbar = () => {
           rel="noopener noreferrer"
           className="text-black font-semibold"
         >
-          <h1 style={{ color: "red" }}>Want to order in bulk?</h1>
+          <h2 style={{ color: "red" }}>Want to order in bulk?</h2>
 
         </a>
       </div>
