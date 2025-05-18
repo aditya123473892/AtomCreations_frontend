@@ -33,6 +33,9 @@ import ConfirmationPage from "./components/Conformation";
 import PaymentSuccess from "./components/PaymentSuccess";
 import ReactGA from "react-ga";
 import DownImage from "./assets/down.jpeg"; // Import your image here
+import Blog from "./components/Blog";            // Blog listing page
+import BlogDetail from "./components/BlogDetail"; // Individual blog page
+
 
 const TRACKING_ID = import.meta.env.VITE_TRACKING_ID;
 
@@ -80,6 +83,9 @@ const App = () => {
           <Route path="addresses" element={<AddressManagement />} />
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/blogs/:slug" element={<BlogDetail />} />
+
         </Routes>
         <Footer />
       </CartProvider>
