@@ -92,6 +92,10 @@ const JoinUs = () => {
           >
             Join Now
           </a>
+          <a href="/blogs" className="mt-4 inline-block bg-transparent border border-black text-black rounded-lg py-2 px-4 hover:bg-black hover:text-white">
+          Read Our Blog
+          </a>
+
         </motion.div>
       </div>
     </div>
