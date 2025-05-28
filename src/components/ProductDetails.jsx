@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { getProductById } from "./api";
+import axios from "axios";
 import {
   FaStar,
   FaHeart,
@@ -11,12 +11,52 @@ import {
 import { CartContext } from "./CartContext";
 import LoadingSpinner from "./LoadingSpinner";
 import { motion } from "framer-motion";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./ContextProvider/AuthContext";
+
+const SizeChart = () => {
+  return (
+    <div className="mb-6">
+      <p className="text-gray-600 mb-2">Size Chart:</p>
+      <table className="w-full border-collapse border border-gray-300 text-left">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 px-4 py-2">Size</th>
+            <th className="border border-gray-300 px-4 py-2">Chest (inches)</th>
+            <th className="border border-gray-300 px-4 py-2">
+              Height (inches)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">Small</td>
+            <td className="border border-gray-300 px-4 py-2">34-36</td>
+            <td className="border border-gray-300 px-4 py-2">28-30</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">Medium</td>
+            <td className="border border-gray-300 px-4 py-2">38-40</td>
+            <td className="border border-gray-300 px-4 py-2">32-34</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">Large</td>
+            <td className="border border-gray-300 px-4 py-2">42-44</td>
+            <td className="border border-gray-300 px-4 py-2">36-38</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 px-4 py-2">X-Large</td>
+            <td className="border border-gray-300 px-4 py-2">46-48</td>
+            <td className="border border-gray-300 px-4 py-2">40-42</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 const ProductDetails = () => {
-  // const { id } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
@@ -30,23 +70,16 @@ const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
   const [isAdded, setIsAdded] = useState(false);
   const { logindata } = useContext(AuthContext);
+
   useEffect(() => {
-    console.log(id);
     const fetchProduct = async () => {
       setIsLoading(true);
       try {
-        // const data = await getProductById(id);
         const getMyProduct = await axios.get(
-          `https://atom-creations-backend.vercel.app/api/products/${id}`
+          `https://atom-creations-backend-re.vercel.app/api/products/${id}`
         );
-        // console.log(getMyProduct.data);
-        setProduct(() => getMyProduct.data);
-
-        // console.log(getMyProduct.data);
-        // console.log(getMyProduct.data.color);
-        // setSelectedSize(getMyProduct.data.size[0]);
+        setProduct(getMyProduct.data);
         setSelectedColor(getMyProduct.data.color[0]);
-        // setSelectedSize("")
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -89,8 +122,8 @@ const ProductDetails = () => {
       });
     } else {
       try {
-        const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/appuser/addToWishList",
+        await axios.post(
+          "https://atom-creations-backend-re.vercel.app/api/appuser/addToWishList",
           {
             productId: id,
           },
@@ -100,10 +133,10 @@ const ProductDetails = () => {
             },
           }
         );
+        setIsFavorite(!isFavorite);
       } catch (error) {
         console.log(error);
       }
-      setIsFavorite(!isFavorite);
     }
   };
 
@@ -119,18 +152,6 @@ const ProductDetails = () => {
     );
   };
 
-  // const handleAddToCart = () => {
-  //   const cartItem = {
-  //     id: product.id,
-  //     title: product.title,
-  //     price: product.price,
-  //     image: product.images,
-  //     size: selectedSize,
-  //     color: selectedColor,
-  //     quantity: 1,
-  //   };
-  //   addToCart(cartItem);
-  // };
   const handleAddToCart = async (event) => {
     event.stopPropagation();
     if (!logindata) {
@@ -146,7 +167,7 @@ const ProductDetails = () => {
 
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/appuser/addtocart",
+          "https://atom-creations-backend-re.vercel.app/api/appuser/addtocart",
           {
             productId: id,
             size: selectedSize,
@@ -163,27 +184,16 @@ const ProductDetails = () => {
           toast.warning("Product already exists", {
             position: "top-center",
           });
-          // alert(message);
         } else {
           setIsAdded(true);
           setTimeout(() => {
             setIsAdded(false);
           }, 1500);
         }
-        // setLoginData(res.data)
       } catch (error) {
         console.log(error);
       }
     }
-
-    // const cartItem = {
-    //   id: product._id,
-    //   title: product.title,
-    //   price: product.price,
-    //   image: product.images[0],
-    //   quantity: 1,
-    // };
-    // addToCart(cartItem);
   };
 
   const handleBuyNow = () => {
@@ -196,12 +206,11 @@ const ProductDetails = () => {
         position: "top-center",
       });
     } else {
-      // navigate(`/checkout/${id}`);
       navigate(`/checkout/?id=${id}&size=${selectedSize}`);
     }
   };
+
   const formatKey = (key) => {
-    // Split the key by uppercase letters and join with space
     return key
       .split(/(?=[A-Z])/)
       .join(" ")
@@ -214,61 +223,66 @@ const ProductDetails = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white"
+      className="bg-[#fbf9f1]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto font-base px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row">
           <ToastContainer />
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 mb-8 md:mb-0"
+            className="md:w-1/2 mb-8 md:mb-0 flex"
           >
-            <div className="relative">
-              <div className="image-container w-[600px] h-[650px] relative bg-gray-200 rounded-lg">
-                <button
-                  className={`absolute top-4 right-4 z-10 text-gray-500 hover:text-red-500 focus:outline-none ${
-                    isFavorite ? "text-red-500" : ""
-                  }`}
-                  onClick={handleFavoriteClick}
-                >
-                  <FaHeart size={24} />
-                </button>
-                <img
-                  src={images[currentImageIndex]}
-                  alt={title}
-                  className="w-full h-full object-cover rounded-lg shadow-lg bg-gray-300"
-                />
-                <div
-                  className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
-                  onClick={handlePrevImage}
-                >
-                  <FaChevronLeft className="text-white" size={24} />
-                </div>
-                <div
-                  className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-500 rounded-full p-2 cursor-pointer hover:bg-gray-700 transition-colors duration-300"
-                  onClick={handleNextImage}
-                >
-                  <FaChevronRight className="text-white" size={24} />
+            <div className="sticky top-28 flex">
+              <div className="h-[530px] overflow-y-auto pr-2 mr-4">
+                <div className="flex flex-col gap-2">
+                  {images.map((image, index) => (
+                    <motion.img
+                      key={index}
+                      src={image}
+                      alt={`${title} ${index + 1}`}
+                      className={`w-20 h-20 md:w-24 md:h-24 object-cover rounded-[10px] shadow-md cursor-pointer ${
+                        index === currentImageIndex
+                          ? "border-2 border-[#e5e1da]"
+                          : ""
+                      }`}
+                      onClick={() => setCurrentImageIndex(index)}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
-
-            <div className="flex mt-4">
-              {images.map((image, index) => (
-                <motion.img
-                  key={index}
-                  src={image}
-                  alt={`${name} ${index + 1}`}
-                  className={`bg-gray-200 w-16 h-16 object-cover rounded-lg shadow-md mr-2 cursor-pointer ${
-                    index === currentImageIndex ? "border-2 border-black" : ""
-                  }`}
-                  onClick={() => setCurrentImageIndex(index)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+            <div className="image-container w-[400px] h-[500px] relative bg-gray-200 rounded-[20px] overflow-hidden flex items-center justify-center">
+              <button
+                className={`absolute top-4 right-4 z-10 text-white hover:text-red-500 focus:outline-none ${
+                  isFavorite ? "text-red-500" : ""
+                }`}
+                onClick={handleFavoriteClick}
+              >
+                <FaHeart size={24} />
+              </button>
+              <div className="aspect-w-4 aspect-h-3 w-full">
+                <img
+                  src={images[currentImageIndex]}
+                  alt={title}
+                  className="object-cover w-full h-full rounded-[20px] shadow-lg bg-[#e5e1da]"
                 />
-              ))}
+              </div>
+              <div
+                className="absolute top-1/2 left-2 transform -translate-y-1/2 p-2 bg-[#fbf9f1] rounded-full cursor-pointer hover:bg-[#e5e1da] transition-colors duration-300"
+                onClick={handlePrevImage}
+              >
+                <FaChevronLeft className="text-black" size={18} />
+              </div>
+              <div
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 p-2 bg-[#fbf9f1] rounded-full cursor-pointer hover:bg-[#e5e1da] transition-colors duration-300"
+                onClick={handleNextImage}
+              >
+                <FaChevronRight className="text-black" size={18} />
+              </div>
             </div>
           </motion.div>
           <motion.div
@@ -281,39 +295,41 @@ const ProductDetails = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-3xl font-semibold mb-2"
+              className="text-3xl md:text-5xl capitalize font-semibold mb-2 mt-12"
             >
               {title}
             </motion.h2>
-            {/* <motion.p
+            <motion.p
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-gray-500 mb-4"
+              className="text-gray-600 text-lg md:text-xl mb-4"
             >
-              {producer} - {type}
-            </motion.p> */}
-            {/* <motion.div
+              {producer}
+            </motion.p>
+            <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex items-center mb-4"
+              className="flex items-center mb-6"
             >
-              {[...Array(5)].map((_, index) => (
-                <FaStar
-                  key={index}
-                  className={`text-yellow-500 ${
-                    index < rating ? "fill-current" : "text-gray-300"
-                  }`}
-                />
-              ))}
-              <span className="ml-2 text-gray-600">{reviews} reviews</span>
-            </motion.div> */}
+              <div className="flex items-center">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <FaStar
+                    key={index}
+                    className={`mr-1 ${
+                      index < rating ? "text-yellow-500" : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-gray-600 ml-2">{reviews} reviews</span>
+            </motion.div>
             <motion.p
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="text-gray-900 font-bold text-3xl mb-6"
+              className="text-gray-900 font-bold text-2xl md:text-4xl mb-6"
             >
               ₹{price}
             </motion.p>
@@ -328,12 +344,12 @@ const ProductDetails = () => {
                 {size.map((size) => (
                   <motion.button
                     key={size}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`px-4 py-2 mr-2 mb-2 rounded-full font-semibold ${
+                    className={`px-4 py-2 mr-2 mb-2 bg-[#e5e1da] text-black rounded-full font-semibold ${
                       selectedSize === size
-                        ? "bg-black text-white"
-                        : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                        ? "text-white bg-black"
+                        : "text-black hover:bg-black hover:text-white"
                     }`}
                     onClick={() => handleSizeClick(size)}
                   >
@@ -342,6 +358,8 @@ const ProductDetails = () => {
                 ))}
               </div>
             </motion.div>
+            {/* Add SizeChart component here */}
+            <SizeChart />
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -358,7 +376,7 @@ const ProductDetails = () => {
                     className={`w-8 h-8 rounded-full mr-2 cursor-pointer border-2 ${
                       selectedColor === color
                         ? "border-black"
-                        : "border-gray-300"
+                        : "border-[#e5e1da]"
                     }`}
                     style={{ backgroundColor: color }}
                     onClick={() => handleColorClick(color)}
@@ -373,18 +391,18 @@ const ProductDetails = () => {
               className="flex items-center mb-8"
             >
               <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex items-center bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 mr-4 focus:outline-none"
+                className="flex items-center bg-[#e5e1da] text-black px-6 py-3 rounded-full font-semibold hover:bg-black hover:text-white mr-4 focus:outline-none"
                 onClick={handleAddToCart}
               >
                 <FaShoppingCart className="mr-2" />
                 Add to Cart
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex items-center bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 focus:outline-none"
+                className="flex items-center bg-[#e5e1da] text-black px-10 py-3 rounded-full font-semibold hover:bg-black hover:text-white focus:outline-none"
                 onClick={handleBuyNow}
               >
                 Buy Now
@@ -395,21 +413,15 @@ const ProductDetails = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.1 }}
             >
-              <h3 className="text-lg font-semibold mb-2">Product Details</h3>
-              <ul className="list-disc pl-4">
-                {/* <li>Material: 100% Cotton</li>
-                <li>Fit Type: Regular Fit</li>
-                <li>Care Instructions: Machine wash cold, tumble dry low</li>
-                <li>Imported</li> */}
-
-                {/* {Object.entries(description).map(([key, value]) => (
-                  <li key={key}>{`${key}: ${value}`}</li>
-                ))} */}
-              </ul>
-
-              <ul className="list-none pl-4">
+              <h3 className="text-3xl font-semibold mb-2">Product Details</h3>
+              <ul className="list-none text-lg md:text-xl pl-4">
                 {Object.entries(description).map(([key, value]) => (
-                  <li key={key}>{`${formatKey(key)} : ${value}`}</li>
+                  <li
+                    className="pl-2 pt-3 pb-2 border-b-2 border-[#e5e1da]"
+                    key={key}
+                  >
+                    {`${formatKey(key)}: ${value}`}
+                  </li>
                 ))}
               </ul>
             </motion.div>

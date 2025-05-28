@@ -20,7 +20,7 @@ const Cart = () => {
   const removeFromCart = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/removefromcart",
+      "https://atom-creations-backend-re.vercel.app/api/appuser/removefromcart",
       {
         productId: id,
         size: size,
@@ -41,7 +41,7 @@ const Cart = () => {
   const clearCart = async () => {
     const YOUR_TOKEN = localStorage.getItem("token");
     const res = await fetch(
-      "https://atom-creations-backend.vercel.app/api/appuser/emptycart",
+      "https://atom-creations-backend-re.vercel.app/api/appuser/emptycart",
       {
         method: "POST",
         headers: {
@@ -71,7 +71,7 @@ const Cart = () => {
   const incrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/incquantity",
+      "https://atom-creations-backend..app/api/appuser/incquantity",
       {
         productId: id,
         size: size,
@@ -95,7 +95,7 @@ const Cart = () => {
   const decrementQuantity = async (id, size) => {
     const token = localStorage.getItem("token");
     const res = await axios.put(
-      "https://atom-creations-backend.vercel.app/api/appuser/decquantity",
+      "https://atom-creations-backend-re.vercel.app/api/appuser/decquantity",
       {
         productId: id,
         size: size,
@@ -127,7 +127,7 @@ const Cart = () => {
         const YOUR_TOKEN = localStorage.getItem("token");
         if (YOUR_TOKEN) {
           const myCart = await axios.get(
-            "https://atom-creations-backend.vercel.app/api/appuser/getcartitem",
+            "https://atom-creations-backend-re.vercel.app/api/appuser/getcartitem",
             {
               headers: {
                 Authorization: `Bearer ${YOUR_TOKEN}`,
@@ -147,24 +147,26 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-gray-200 text-black py-12">
+    <div className="min-h-screen bg-[#fbf9f1] text-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-center mb-8 text-black">
+        <h1 className="text-5xl font-base font-bold text-center mb-8 text-black ">
           My Cart
         </h1>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 font-base">
           <div className="lg:col-span-8">
-            <div className="bg-white rounded-lg p-6 mb-8 shadow-2xl">
+            <div className="bg-[#e5e1da] rounded-[20px] p-6 mb-8">
               {cartItems.length === 0 ? (
                 <p className="text-gray-400 text-center">Your cart is empty.</p>
               ) : (
                 cartItems.map((item, index) => (
-                  <div key={index} className="flex items-center mb-8">
+                  <div
+                    key={index}
+                    className="flex sm:items-center flex-col sm:flex-row mb-8 bg-[#fbf9f1] rounded-[13px] p-2"
+                  >
                     <img
                       src={item.productDetails.images[0]}
                       alt={item.productDetails.title}
-                      className="w-48 h-48 object-cover rounded-lg shadow-lg mr-6 transition duration-300 ease-in-out transform hover:scale-105"
+                      className="h-48 w-full sm:aspect-[4/3] sm:w-auto object-cover rounded-lg bg-[#e5e1da] mr-6 transition duration-300 ease-in-out transform hover:scale-105"
                     />
                     <div>
                       <h2 className="text-2xl font-semibold text-black-400">
@@ -173,15 +175,15 @@ const Cart = () => {
                       <p className="text-black-400 mb-2">
                         Price: ₹{item.productDetails.price}
                       </p>
-                      <p className="text-black-400 mb-4">Size: {item.size}</p>
+                      <p className="text-black-400 mb-2">Size: {item.size}</p>
                       <div className="flex items-center mb-4">
                         <button
-                          className="text-black hover:text-dark-800    rounded-full px-3 py-1"
+                          className="text-black hover:text-dark-800 rounded-full px-3 py-1"
                           onClick={() =>
                             decrementQuantity(item.productId, item.size)
                           }
                         >
-                          <FaMinus className="w-5 h-5" />
+                          <FaMinus className="w-8 h-5 rounded-full bg-black p-1 text-white" />
                         </button>
                         <span className="mx-2 text-xl">{item.quantity}</span>
                         <button
@@ -190,11 +192,11 @@ const Cart = () => {
                             incrementQuantity(item.productId, item.size)
                           }
                         >
-                          <FaPlus className="w-5 h-5" />
+                          <FaPlus className="w-8 h-5 rounded-full bg-black p-1 text-white" />
                         </button>
                       </div>
                       <button
-                        className="text-black-600 hover:text-black-800 focus:outline-black border border-black bg-white hover:bg-white-300 rounded-full px-4 py-2"
+                        className="text-black bg-[#e5e1da] rounded-full px-8 py-2 hover:bg-black hover:text-white transition duration-75"
                         onClick={() =>
                           removeFromCart(item.productId, item.size)
                         }
@@ -208,7 +210,7 @@ const Cart = () => {
             </div>
           </div>
           <div className="lg:col-span-4">
-            <div className="bg-white rounded-lg p-6 sticky top-8 shadow-2xl">
+            <div className="bg-[#e5e1da] rounded-[20px] p-6 sticky top-52">
               <h2 className="text-2xl font-semibold mb-4 text-black">
                 Order Summary
               </h2>
@@ -217,13 +219,13 @@ const Cart = () => {
                 <p>₹{TotalPrice}</p>
               </div>
               <button
-                className="bg-white-600 text-black rounded-full py-3 px-6 mt-6 w-full focus:outline-black border border-black shadow-lg"
+                className="bg-[#fbf9f1] text-black rounded-full py-3 px-6 mt-6 w-full hover:bg-black hover:text-white transition duration-[0.2s]"
                 onClick={handleCheckout}
               >
                 Proceed to Checkout
               </button>
               <button
-                className="flex items-center justify-center bg-white-600 tbg-white-600 text-black rounded-full py-3 px-6 mt-6 w-full focus:outline-black border border-black shadow-lg"
+                className="flex items-center justify-center bg-[#fbf9f1] text-black rounded-full py-3 px-6 mt-6 w-full hover:bg-black hover:text-white transition duration-[0.2s]"
                 onClick={clearCart}
               >
                 <FaTrash className="mr-2 w-4 h-4" /> Clear Cart

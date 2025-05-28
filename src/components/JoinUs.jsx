@@ -25,7 +25,7 @@ const JoinUs = () => {
             <p className="text-black sans-regular mb-4">
               Join our vibrant community of fashion enthusiasts and be the first to know about new arrivals, exclusive promotions, and insider tips. By signing up for our newsletter, you'll gain access to a world of style inspiration and special perks.
             </p>
-            <form className="mt-6">
+            <!-- <form className="mt-6">
               <div className="flex flex-col md:flex-row items-center">
                 <div className="flex items-center w-full mb-4 md:mb-0 md:w-auto">
                   <FaEnvelope className="text-black mr-2" />
@@ -44,6 +44,7 @@ const JoinUs = () => {
                 </button>
               </div>
             </form>
+             -->
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -86,11 +87,12 @@ const JoinUs = () => {
             Ready to take your fashion game to the next level? Join our exclusive insider community and unlock a world of privileges, including early access to new collections, invitations to special events, and personalized style advice from our experts.
           </p>
           <a
-            href="#"
+            href="/blogs"
             className="bg-black text-white rounded-lg py-2 px-4 sans-regular hover:bg-[#E5E1DA] hover:text-black focus:outline-none focus:ring-2 focus:ring-black"
           >
-            Join Now
+            Read Our Blog
           </a>
+
         </motion.div>
       </div>
     </div>

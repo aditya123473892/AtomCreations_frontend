@@ -1,5 +1,4 @@
-// App.js
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Contact from "./components/Contact";
@@ -33,6 +32,11 @@ import ResetPassword from "./components/ResetPassword";
 import ConfirmationPage from "./components/Conformation";
 import PaymentSuccess from "./components/PaymentSuccess";
 import ReactGA from "react-ga";
+import DownImage from "./assets/down.jpeg"; // Import your image here
+import Blog from "./components/Blog";            // Blog listing page
+import BlogDetail from "./components/BlogDetail"; // Individual blog page
+
+
 const TRACKING_ID = import.meta.env.VITE_TRACKING_ID;
 
 const ScrollToTop = () => {
@@ -44,15 +48,6 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  useEffect(() => {
-    
-    
-    ReactGA.initialize(TRACKING_ID);
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
-  window.dataLayer.push({
-    event: "pageview",
-  });
   return (
     <AuthProvider>
       <CartProvider>
@@ -65,7 +60,6 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/verify-otp" element={<Verification />} />
-          {/* <Route path="/profile" element={<UserProfile />} /> */}
           <Route path="/" element={<ExploreSection />} />
           <Route path="/product" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
@@ -89,6 +83,9 @@ const App = () => {
           <Route path="addresses" element={<AddressManagement />} />
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/blogs/:slug" element={<BlogDetail />} />
+
         </Routes>
         <Footer />
       </CartProvider>

@@ -43,11 +43,13 @@ const LoginPage = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/user/forgot-password-token",
+          "https://atom-creations-backend-re.vercel.app/api/user/forgot-password-token",
           {
             email,
           }
         );
+        setEmailInput(false);
+        console.log(emailInput);
       } catch (error) {
         toast.warning("Something went wrong", {
           position: "top-center",
@@ -70,7 +72,7 @@ const LoginPage = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://atom-creations-backend.vercel.app/api/user/login",
+          "https://atom-creations-backend-re.vercel.app/api/user/login",
           {
             email,
             password,
@@ -160,7 +162,7 @@ const LoginPage = () => {
             <div className="mb-6">
               <button
                 onClick={sendPasswordMail}
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                className="w-full bg-custom-dark text-black sans-regular hover:bg-black hover:text-white py-2 px-4 rounded "
               >
                 Send Password Reset Email
               </button>

@@ -16,6 +16,7 @@ import { ShoppingCart } from "lucide-react";
 import { Search } from "lucide-react";
 import { User } from "lucide-react";
 import { Menu } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 const links = [
   { name: "About Us", to: "/aboutus" },
@@ -64,13 +65,25 @@ const Navbar = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4"
+      className="bg-custom-bg-color flex justify-between items-center px-8 sticky top-0 z-50 py-2 md:py-4 border-b-2 border-[#e5e1da]"
     >
-      <div className="flex items-center justify-start flex-grow">
+      <div className="flex items-center flex-grow space-x-8">
         <Link to="/">
           <img src={icon} alt="Company Icon" className="h-8 w-auto" />
         </Link>
+
+        {/* "Want to order in bulk?" text with WhatsApp link */}
+        <a
+          href="https://wa.me/919971665564?text=Hi%20I%20want%20to%20order!"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-black font-semibold"
+        >
+          <p style={{ color: "red" }}>Want to order in bulk?</p>
+
+        </a>
       </div>
+
       <div className="flex items-center text-white space-x-2">
         <div className="hidden md:flex items-center space-x-2">
           {!logindata ? (
@@ -89,12 +102,12 @@ const Navbar = () => {
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-white text-black"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#e5e1da] text-black"
               >
                 {logindata.name && (
                   <Avatar
                     style={{
-                      background: "white",
+                      background: "#e5e1da",
                       fontWeight: "bold",
                       textTransform: "capitalize",
                       color: "black",
@@ -111,9 +124,9 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLogOut}
-              className="text-black font-semibold py-2 px-4 rounded-md border border-black transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
+              className="text-black font-semibold p-2 rounded-full duration-75 hover:bg-[#e5e1da] hover:text-black"
             >
-              Log Out
+              <LogOut size={26} strokeWidth={1.7} />
             </motion.button>
           ) : null}
           <Link to="/explore" className="relative button-link">
@@ -142,7 +155,7 @@ const Navbar = () => {
           <motion.div
             initial={false}
             animate={isOpen ? "open" : "closed"}
-            className="text-3xl cursor-pointer md:text-2xl flex items-center justify-center w-10 h-10 bg-white text-black"
+            className="text-3xl cursor-pointer md:text-2xl flex items-center justify-center w-10 h-10 bg-custom-bg-color text-black"
             onClick={cycleOpen}
             // whileHover={{ scale: 1.1 }}
             // whileTap={{ scale: 0.9 }}

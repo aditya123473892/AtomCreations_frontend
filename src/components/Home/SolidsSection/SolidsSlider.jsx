@@ -9,7 +9,7 @@ import { FaArrowRight, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const TypographySlider = () => {
+const SolidsSlider = () => {
   const [products, setProducts] = useState([]);
   const [imageHeight, setImageHeight] = useState({
     mobile: 300,
@@ -37,7 +37,7 @@ const TypographySlider = () => {
           "https://atom-creations-backend-re.vercel.app/api/products/",
           {
             params: {
-              type: "typography",
+              type: "solids",
             },
           }
         );
@@ -116,7 +116,7 @@ const TypographySlider = () => {
                   LATEST COLLECTION, OVERSIZED T-SHIRT
                 </h3>
                 <h3
-                  className="text-s font-Roboto font-semibold text-gray-800 mb-4 cursor-pointer"
+                  className="text-s capitalize font-Roboto font-semibold text-gray-800 mb-4 cursor-pointer"
                   onClick={() => handleBuyNowClick(item)}
                 >
                   {item.title}
@@ -157,4 +157,4 @@ const TypographySlider = () => {
   );
 };
 
-export default TypographySlider;
+export default SolidsSlider;

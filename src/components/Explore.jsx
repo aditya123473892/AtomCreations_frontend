@@ -49,7 +49,7 @@ const ExploreSection = () => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          "https://atom-creations-backend.vercel.app/api/products"
+          "https://atom-creations-backend-re.vercel.app/api/products"
         );
 
         // console.log(response.data);
@@ -91,7 +91,7 @@ const ExploreSection = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12">
+    <div className="bg-gray-100 min-h-screen py-12 bg-[#fbf9f1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -114,7 +114,7 @@ const ExploreSection = () => {
               onChange={handleSearchChange}
               onKeyPress={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Search products..."
-              className="w-full px-4 py-2 border border-grey-300 font-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-full px-4 py-2 border border-grey-300 font-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {suggestions.length > 0 && (
               <motion.ul
@@ -141,12 +141,9 @@ const ExploreSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSearch}
-            className="pl-8 text-white text-2xl font-base bg-black rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center"
+            className="px-10 py-2 text-black text-2xl font-base bg-[#e5e2da] rounded-full hover:scale-[1.05] transition duration-300 animate-slide-up flex items-center"
           >
             Search
-            <div className="h-12 w-12 ml-4 bg-white text-black m-1 rounded-full flex justify-center items-center hover:rotate-0 transition duratuion-75">
-              <FaSearch className="text-2xl" />
-            </div>
           </motion.button>
         </div>
         {searchResults.length > 0 ? (
