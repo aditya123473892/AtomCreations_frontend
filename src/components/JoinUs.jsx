@@ -12,7 +12,7 @@ const JoinUs = () => {
           transition={{ duration: 0.8 }}
           className="text-4xl font-extrabold text-left mb-8"
         >
-          Join Our Community
+          Join Our 
         </motion.h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
