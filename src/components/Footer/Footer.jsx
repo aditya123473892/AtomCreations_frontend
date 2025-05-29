@@ -15,10 +15,10 @@ const Footer = () => {
             className="w-24 h-24 scale-[0.8] sm:w-32 sm:h-32 mb-4"
           />
           <h2 className="text-xl sm:text-2xl font-base text-center mb-2">
-            Shipping within 48 hours
+            Shipping within 24 hours
           </h2>
           <p className="text-sm sm:text-base text-center">
-            Your order will be shipped within 48 hours from the time since order
+            Your order will be shipped within 24 hours from the time since order
             is placed
           </p>
         </div>
@@ -51,7 +51,7 @@ const Footer = () => {
       </div>
       <ItemsContainer />
       <div className="flex justify-center py-4 text-gray-400 text-sm">
-        <span>© 2024 Appy. All rights reserved.</span>
+        <span>© 2024 Apply. All rights reserved.</span>
       </div>
     </footer>
   );
