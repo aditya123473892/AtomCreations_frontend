@@ -87,7 +87,7 @@ const JoinUs = () => {
             Ready to take your fashion game to the next level? Join our exclusive insider community and unlock a world of privileges, including early access to new collections, invitations to special events, and personalized style advice from our experts.
           </p>
           <a
-            href="/blogs"
+            href="/blog"
             className="bg-black text-white rounded-lg py-2 px-4 sans-regular hover:bg-[#E5E1DA] hover:text-black focus:outline-none focus:ring-2 focus:ring-black"
           >
             Read Our Blog
